@@ -1,10 +1,9 @@
 FactoryGirl.define do
   factory :employer do
-    email "MyString"
-password_digest "MyString"
-name "MyString"
-description "MyText"
-website "MyString"
+    email "ceo@boeing.com"
+    password_digest "password"
+    name "Boeing"
+    description "An aerospace company."
+    website "http://www.boeing.com"
   end
-
 end
