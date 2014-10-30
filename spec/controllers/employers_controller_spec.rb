@@ -9,9 +9,13 @@ RSpec.describe EmployersController, :type => :controller do
   end
 
   describe "creating a new employer" do
-    it "responds to create" do
-      post :create
-      expect(response).to be_success
+    it "creates the new employer" do
+      expect{ post :create, employer: FactoryGirl.attributes_for(:employer) }.to change(Employer,:count).by(1)
+    end
+
+    it "redirects to home page upon save" do
+      post :create, employer: FactoryGirl.attributes_for(:employer)
+      expect(response).to redirect_to root_url
     end
   end
 end
