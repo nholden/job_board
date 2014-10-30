@@ -13,5 +13,10 @@ RSpec.describe EmployersController, :type => :controller do
       post :create
       expect(response).to be_success
     end
+
+    describe "factory" do
+      factory = FactoryGirl.create(:employer) 
+      factory.name.should equal('Boeing')
+    end
   end
 end
