@@ -7,4 +7,11 @@ RSpec.describe EmployersController, :type => :controller do
       expect(response).to render_template("new")
     end
   end
+
+  describe "creating a new employer" do
+    it "responds to create" do
+      post :create
+      expect(response).to be_success
+    end
+  end
 end

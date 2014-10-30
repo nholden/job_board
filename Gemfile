@@ -11,6 +11,7 @@ gem 'rails-html-sanitizer', '1.0.1'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bourbon'
 gem 'neat'
+gem 'factory_girl'
 
 group :development, :test do
   gem 'sqlite3'
