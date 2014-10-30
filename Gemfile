@@ -18,6 +18,11 @@ group :development, :test do
   gem 'capybara'
 end
 
+group :test do
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
+end
+
 group :production do
   gem 'pg'
 end
