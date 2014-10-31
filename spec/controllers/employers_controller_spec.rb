@@ -17,20 +17,5 @@ RSpec.describe EmployersController, :type => :controller do
       post :create, employer: FactoryGirl.attributes_for(:employer)
       expect(response).to redirect_to root_url
     end
-
-    def try_password(password)
-      post :create, employer: FactoryGirl.attributes_for(:employer)
-      Employer.find_by(name: 'Boeing').try(:authenticate, 'password')
-    end
-
-    it "does not reject a valid password" do
-      try_password("password")
-      expect(response).to be_truthy
-    end
-
-    it "rejects an invalid password" do
-      try_password("not_password")
-      expect(response).to be_false
-    end
   end
 end
