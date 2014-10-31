@@ -9,8 +9,8 @@ class EmployersController < ApplicationController
       flash[:notice] = "Created employer account."
       redirect_to root_url
     else
-      flash[:alert] = "Did not create employer account."
-      redirect_to 'employers#new'
+      flash[:error] = @employer.errors.full_messages[0]
+      render :action => 'new'
     end
   end
 
