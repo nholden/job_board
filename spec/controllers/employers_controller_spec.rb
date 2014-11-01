@@ -27,7 +27,6 @@ RSpec.describe EmployersController, :type => :controller do
                                           :password_confirmation => "loremipsu",
                                           :name =>                  "x",
                                           :website =>               "y",
-                                          :description =>           "z" 
         }}.to change(Employer,:count).by(0)
       end
 
@@ -36,8 +35,7 @@ RSpec.describe EmployersController, :type => :controller do
                                   :password =>              "password",
                                   :password_confirmation => "loremipsum",
                                   :name =>                  "x", 
-                                  :website =>               "y",
-                                  :description =>           "z" }
+                                  :website =>               "y" }
         expect(response).not_to redirect_to root_url 
       end
     end
@@ -49,7 +47,6 @@ RSpec.describe EmployersController, :type => :controller do
                                           :password_confirmation => "password",
                                           :name =>                  "x",
                                           :website =>               "y",
-                                          :description =>           "z", 
         }}.to change(Employer,:count).by(0)
       end
 
@@ -58,8 +55,7 @@ RSpec.describe EmployersController, :type => :controller do
                                   :password =>              "password",
                                   :password_confirmation => "password",
                                   :name =>                  "x", 
-                                  :website =>               "y",
-                                  :description =>           "z" }
+                                  :website =>               "y" }
         expect(response).not_to redirect_to root_url 
       end
     end
@@ -71,7 +67,6 @@ RSpec.describe EmployersController, :type => :controller do
                                           :password_confirmation => "password",
                                           :name =>                  "",
                                           :website =>               "y",
-                                          :description =>           "z", 
         }}.to change(Employer,:count).by(0)
       end
 
@@ -80,8 +75,7 @@ RSpec.describe EmployersController, :type => :controller do
                                   :password =>              "password",
                                   :password_confirmation => "password",
                                   :name =>                  "", 
-                                  :website =>               "y",
-                                  :description =>           "z" }
+                                  :website =>               "y" }
         expect(response).not_to redirect_to root_url 
       end
     end

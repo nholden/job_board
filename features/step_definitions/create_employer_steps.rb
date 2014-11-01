@@ -8,7 +8,6 @@ When(/^he submits the create employer form$/) do
   fill_in('employer_password', :with => 'password')
   fill_in('employer_password_confirmation', :with => 'password')
   fill_in('employer_name', :with => 'Boeing')
-  fill_in('employer_description', :with => 'Aerospace company')
   fill_in('employer_website', :with => 'http://www.boeing.com')
   click_button('Create account')
 end
@@ -19,7 +18,6 @@ When(/^he submits the create employer form without valid password confirmation$/
   fill_in('employer_password', :with => 'password')
   fill_in('employer_password_confirmation', :with => 'different_password')
   fill_in('employer_name', :with => 'Boeing')
-  fill_in('employer_description', :with => 'Aerospace company')
   fill_in('employer_website', :with => 'http://www.boeing.com')
   click_button('Create account')
 end

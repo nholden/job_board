@@ -1,17 +1,15 @@
 <h1>This is the new employer signup page</h1>
 <br />
 <%= form_for @employer, url: {action: "create"} do |f| %>
+  <%= label_tag(:name, "Company name:") %>
+  <%= f.text_field :name %><br />
+  <%= label_tag(:website, "Company website:") %>
+  <%= f.text_field :website %><br />
   <%= label_tag(:email, "Email:") %>
   <%= f.text_field :email %><br />
   <%= label_tag(:password, "Password:") %>
   <%= f.password_field :password  %><br />
   <%= label_tag(:password_confirmation, "Confirm:") %>
   <%= f.password_field :password_confirmation %><br />
-  <%= label_tag(:name, "Company name:") %>
-  <%= f.text_field :name %><br />
-  <%= label_tag(:website, "Company website:") %>
-  <%= f.text_field :website %><br />
-  <%= label_tag(:description, "Company description:") %>
-  <%= f.text_area(:description, size: "24x6") %><br />
   <%= submit_tag("Create account") %>
 <% end %>
