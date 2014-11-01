@@ -13,6 +13,7 @@ gem 'bourbon'
 gem 'neat'
 gem 'factory_girl_rails'
 gem 'bcrypt'
+gem 'devise'
 
 group :development, :test do
   gem 'sqlite3'
