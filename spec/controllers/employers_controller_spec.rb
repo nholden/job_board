@@ -20,18 +20,68 @@ RSpec.describe EmployersController, :type => :controller do
       end
     end
 
-    context "with invalid information" do
+    context "with non-mathing passwords" do
       it "does not create a new employer" do
         expect{ post :create, employer: { :email =>                 "a@b.com",
                                           :password =>              "password",
-                                          :password_confirmation => "loremipsum"
+                                          :password_confirmation => "loremipsu",
+                                          :name =>                  "x",
+                                          :website =>               "y",
+                                          :description =>           "z" 
         }}.to change(Employer,:count).by(0)
       end
 
       it "does not redirect to the homepage" do
-        post :create, employer: { :email => "a@b.com",
-                                  :password => "password",
-                                  :password_confirmation => "loremipsum" }
+        post :create, employer: { :email =>                 "a@b.com",
+                                  :password =>              "password",
+                                  :password_confirmation => "loremipsum",
+                                  :name =>                  "x", 
+                                  :website =>               "y",
+                                  :description =>           "z" }
+        expect(response).not_to redirect_to root_url 
+      end
+    end
+
+    context "with invalid email" do
+      it "does not create a new employer" do
+        expect{ post :create, employer: { :email =>                 "a@b..com",
+                                          :password =>              "password",
+                                          :password_confirmation => "password",
+                                          :name =>                  "x",
+                                          :website =>               "y",
+                                          :description =>           "z", 
+        }}.to change(Employer,:count).by(0)
+      end
+
+      it "does not redirect to the homepage" do
+        post :create, employer: { :email =>                 "a@b..com",
+                                  :password =>              "password",
+                                  :password_confirmation => "password",
+                                  :name =>                  "x", 
+                                  :website =>               "y",
+                                  :description =>           "z" }
+        expect(response).not_to redirect_to root_url 
+      end
+    end
+
+    context "without a company name" do
+      it "does not create a new employer" do
+        expect{ post :create, employer: { :email =>                 "a@b.com",
+                                          :password =>              "password",
+                                          :password_confirmation => "password",
+                                          :name =>                  "",
+                                          :website =>               "y",
+                                          :description =>           "z", 
+        }}.to change(Employer,:count).by(0)
+      end
+
+      it "does not redirect to the homepage" do
+        post :create, employer: { :email =>                 "a@b.com",
+                                  :password =>              "password",
+                                  :password_confirmation => "password",
+                                  :name =>                  "", 
+                                  :website =>               "y",
+                                  :description =>           "z" }
         expect(response).not_to redirect_to root_url 
       end
     end
