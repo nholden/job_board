@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :employers
+  devise_for :employers, controllers:  { sessions: "employers/sessions", registrations: "employers/registrations" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :jobs
-  resources :employers
 
   # Example resource route with options:
   #   resources :products do
