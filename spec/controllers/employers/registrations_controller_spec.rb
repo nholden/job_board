@@ -1,6 +1,12 @@
 require 'rails_helper'
+require 'devise'
 
-RSpec.describe EmployersController, :type => :controller do
+RSpec.configure do |config|
+  config.include Devise::TestHelpers, :type => :controller
+end
+
+RSpec.describe Employers::RegistrationsController, :type => :controller do
+
   describe "GET #new" do
     it "renders the new template" do
       get :new
