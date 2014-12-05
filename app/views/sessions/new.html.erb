@@ -1,2 +1,9 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<h1>This is the employer login page</h1>
+<br />
+<%= form_for :session, url: login_path do |f| %>
+  <%= label_tag(:email, "Email:") %>
+  <%= f.text_field :email %><br />
+  <%= label_tag(:password, "Password:") %>
+  <%= f.password_field :password %><br />
+  <%= submit_tag("Login") %>
+<% end %>
