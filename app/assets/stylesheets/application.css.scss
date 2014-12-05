@@ -9,3 +9,13 @@ div.error {
 div.notice {
   @extend %flash-success;
 }
+
+#header, #footer {
+		
+                float:right;
+		padding:10px 0;
+		min-width:100%;
+                background:#FFFFFF;
+		color:#000000;
+		font:13px Helvetica,  Arial,  sans-serif;
+	}
