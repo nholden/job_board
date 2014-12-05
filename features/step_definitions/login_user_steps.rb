@@ -13,5 +13,5 @@ When(/^he submits the login form with bad credentials$/) do
 end
 
 When(/^he visits the signup page$/) do
-  visit('employers/new')
+  visit('users/new')
 end

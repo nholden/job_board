@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe EmployersController, :type => :controller do
+RSpec.describe UsersController, :type => :controller do
   describe "GET #new" do
     it "renders the new template" do
       get :new
@@ -10,28 +10,28 @@ RSpec.describe EmployersController, :type => :controller do
 
   describe "POST #create" do
     context "with valid information" do
-      it "creates a new employer" do
-        expect{ post :create, employer: FactoryGirl.attributes_for(:employer) }.to change(Employer,:count).by(1)
+      it "creates a new user" do
+        expect{ post :create, user: FactoryGirl.attributes_for(:user) }.to change(User,:count).by(1)
       end
 
       it "redirects to the homepage" do
-        post :create, employer: FactoryGirl.attributes_for(:employer)
+        post :create, user: FactoryGirl.attributes_for(:user)
         expect(response).to redirect_to root_url
       end
     end
 
     context "with non-mathing passwords" do
-      it "does not create a new employer" do
-        expect{ post :create, employer: { :email =>                 "a@b.com",
+      it "does not create a new user" do
+        expect{ post :create, user:     { :email =>                 "a@b.com",
                                           :password =>              "password",
                                           :password_confirmation => "loremipsu",
                                           :name =>                  "x",
                                           :website =>               "y",
-        }}.to change(Employer,:count).by(0)
+        }}.to change(User,:count).by(0)
       end
 
       it "does not redirect to the homepage" do
-        post :create, employer: { :email =>                 "a@b.com",
+        post :create, user:     { :email =>                 "a@b.com",
                                   :password =>              "password",
                                   :password_confirmation => "loremipsum",
                                   :name =>                  "x", 
@@ -41,17 +41,17 @@ RSpec.describe EmployersController, :type => :controller do
     end
 
     context "with invalid email" do
-      it "does not create a new employer" do
-        expect{ post :create, employer: { :email =>                 "a@b..com",
+      it "does not create a new user" do
+        expect{ post :create, user:     { :email =>                 "a@b..com",
                                           :password =>              "password",
                                           :password_confirmation => "password",
                                           :name =>                  "x",
                                           :website =>               "y",
-        }}.to change(Employer,:count).by(0)
+        }}.to change(User,:count).by(0)
       end
 
       it "does not redirect to the homepage" do
-        post :create, employer: { :email =>                 "a@b..com",
+        post :create, user:     { :email =>                 "a@b..com",
                                   :password =>              "password",
                                   :password_confirmation => "password",
                                   :name =>                  "x", 
@@ -61,17 +61,17 @@ RSpec.describe EmployersController, :type => :controller do
     end
 
     context "without a company name" do
-      it "does not create a new employer" do
-        expect{ post :create, employer: { :email =>                 "a@b.com",
+      it "does not create a new user" do
+        expect{ post :create, user:     { :email =>                 "a@b.com",
                                           :password =>              "password",
                                           :password_confirmation => "password",
                                           :name =>                  "",
                                           :website =>               "y",
-        }}.to change(Employer,:count).by(0)
+        }}.to change(User,:count).by(0)
       end
 
       it "does not redirect to the homepage" do
-        post :create, employer: { :email =>                 "a@b.com",
+        post :create, user:     { :email =>                 "a@b.com",
                                   :password =>              "password",
                                   :password_confirmation => "password",
                                   :name =>                  "", 

@@ -1,6 +1,6 @@
 <h1>This is the new employer signup page</h1>
 <br />
-<%= form_for @employer, url: {action: "create"} do |f| %>
+<%= form_for @user, url: {action: "create"} do |f| %>
   <%= label_tag(:name, "Company name:") %>
   <%= f.text_field :name %><br />
   <%= label_tag(:website, "Company website:") %>

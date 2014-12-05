@@ -3,8 +3,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    employer = Employer.find_by(email: params[:session][:email].downcase)
-    if employer && employer.authenticate(params[:session][:password])
+    user = User.find_by(email: params[:session][:email].downcase)
+    if user && user.authenticate(params[:session][:password])
       # Log in
     else
       flash.now[:error] = "Email and password combination not recognized."
