@@ -3,7 +3,12 @@ class JobsController < ApplicationController
   end
 
   def new
-    @job = Job.new
+    if logged_in?
+      @job = Job.new
+    else
+      flash[:error] = "You must be logged in to create a job."
+      redirect_to '/login'
+    end
   end
 
   def create

@@ -16,3 +16,8 @@ When(/^he submits the create job form$/) do
   fill_in('job_salary', :with => '$20/hour')
   click_button('Create job')
 end
+
+When(/^he visits the create job page$/) do
+  visit('/jobs/new')
+end
+

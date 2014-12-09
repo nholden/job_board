@@ -9,14 +9,33 @@ RSpec.describe JobsController, :type => :controller do
   end
 
   describe "GET #new" do
-    it "renders the new template" do
-      get :new
-      expect(response).to render_template("new")
+    context "when not logged in" do
+
+      it "redirects to the login page" do
+        get :new
+        expect(response).to redirect_to('/login')
+      end
+
+      it "sends a flash message" do
+        get :new
+        expect(flash[:error]).to eql("You must be logged in to create a job.")
+      end
     end
 
-    it "assigns @job" do
-      get :new
-      expect(assigns(:job)).to_not be_nil
+    context "when logged in" do
+      before(:each) do
+        allow(controller).to receive_messages(:logged_in? => true)
+      end
+
+      it "renders the new template" do
+        get :new
+        expect(response).to render_template("new")
+      end
+
+      it "assigns @job" do
+        get :new
+        expect(assigns(:job)).to_not be_nil
+      end
     end
   end
 
