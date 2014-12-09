@@ -3,8 +3,8 @@
 <%= form_for @job, url: {action: "create"} do |f| %>
   <%= label_tag(:title, "Position title:") %>
   <%= f.text_field :title %><br />
-  <%= label_tag(:type, "Type of position:") %>
-  <%= f.select(:type, options_for_select([['Internship', 'Internship'],
+  <%= label_tag(:term, "Position term:") %>
+  <%= f.select(:term, options_for_select([['Internship', 'Internship'],
                             ['Full time permanent', 'Full time permanent'],
                             ['Part time permanent', 'Part time permanent'],
                             ['Full time temporary', 'Full time temporary'],

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :job do
     title "Aerospace engineer intern"
-    type "Internship"
+    term "Internship"
     location "Seattle, WA"
     experience "Some college"
     majors "Aerospace engineering"

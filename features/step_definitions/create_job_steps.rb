@@ -1,7 +1,7 @@
 When(/^he submits the create job form$/) do
   visit('/jobs/new')
   fill_in('job_title', :with => 'Aerospace engineer intern')
-  select('Internship', :from => 'job_type')
+  select('Internship', :from => 'job_term')
   fill_in('job_location', :with => 'Seattle, WA')
   select('Some college', :from => 'job_experience')
   fill_in('job_majors', :with => 'Aero/Astro')

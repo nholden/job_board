@@ -5,8 +5,8 @@ RSpec.describe Job, :type => :model do
     expect(FactoryGirl.build(:job, title: nil)).to_not be_valid
   end
 
-  it "is invalid with a non-provided type" do
-    expect(FactoryGirl.build(:job, type: "Awesome job")).to_not be_valid
+  it "is invalid with a non-provided term" do
+    expect(FactoryGirl.build(:job, term: "Awesome job")).to_not be_valid
   end
 
   it "is invalid without a location" do
