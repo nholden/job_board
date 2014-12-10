@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def new
+    if logged_in?
+      flash[:error] = "Already logged in."
+      redirect_to root_url
+    end
   end
 
   def create

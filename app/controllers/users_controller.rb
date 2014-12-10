@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
+    if logged_in?
+      flash[:error] = "Already logged in."
+      redirect_to root_url
+    else
+      @user = User.new
+    end
   end
 
   def create

@@ -2,6 +2,10 @@ Given(/^the user is not logged in$/) do
   expect(@current_user).to be_nil
 end
 
+When(/^he visits the create employer page$/) do
+  visit('users/new')
+end
+
 When(/^he submits the create employer form$/) do
   visit('/users/new')
   fill_in('user_email', :with => 'ceo@boeing.com')

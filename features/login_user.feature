@@ -21,6 +21,11 @@ Feature: Login employer
     Then he should not see "Log out"
     Then he should not see "Post new job"
 
+  Scenario: Already logged in
+    Given the user is logged in
+    When he visits the login form
+    Then he should see "Already logged in."
+
   Scenario: Logout successfully
     Given the user is logged in
     When he visits the jobs page

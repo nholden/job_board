@@ -5,6 +5,10 @@ When(/^he submits the login form$/) do
   click_button('Login')
 end
 
+When(/^he visits the login form$/) do
+  visit('login')
+end
+
 When(/^he submits the login form with bad credentials$/) do
   visit('login')
   fill_in('session_email', :with => 'ceo@boeing.com')

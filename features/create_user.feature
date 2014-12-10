@@ -1,4 +1,4 @@
-Feature: Create employer
+Feature: Create user
   As an employer
   In order to save my information
   I want to create an account
@@ -12,3 +12,8 @@ Feature: Create employer
     Given the user is not logged in
     When he submits the create employer form without valid password confirmation
     Then he should see "Password confirmation doesn't match" 
+
+  Scenario: Already logged in
+    Given the user is logged in
+    When he visits the create employer page
+    Then he should see "Already logged in."
