@@ -11,11 +11,12 @@
 <div id="header">
   <%= link_to "Home", root_url %> |
   <% if current_user.present? %>
+    <%= link_to "Post new job", new_job_path, method: :get %> |
     <%= link_to "Log out", logout_path, method: :delete %>
   <% else %>
-    <%= link_to "Log in", login_path %>
+    <%= link_to "Log in", login_path %> |
+    <%= link_to "Sign up", 'signup' %>
   <% end %>
-  | <%= link_to "Sign up", 'signup' %>
 </div>
 
 <% flash.each do |name, msg| -%>
