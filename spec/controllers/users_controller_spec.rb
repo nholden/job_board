@@ -1,4 +1,5 @@
 require 'rails_helper'
+include SessionsHelper
 
 RSpec.describe UsersController, :type => :controller do
   describe "GET #new" do
@@ -35,6 +36,11 @@ RSpec.describe UsersController, :type => :controller do
       it "redirects to the homepage" do
         post :create, user: FactoryGirl.attributes_for(:user)
         expect(response).to redirect_to root_url
+      end
+
+      it "logs the user in" do
+        post :create, user: FactoryGirl.attributes_for(:user)
+        expect(logged_in?).to eql(true)
       end
     end
 

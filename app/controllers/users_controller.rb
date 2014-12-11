@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = "Created employer account."
+      log_in(@user)
       redirect_to root_url
     else
       flash[:error] = @user.errors.full_messages[0]

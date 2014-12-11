@@ -34,3 +34,7 @@ Then(/^he should not see "(.*?)"$/) do |text|
   page.should_not have_content(text)
 end
 
+When(/^he logs out$/) do
+  click_link("Log out")
+end
+
