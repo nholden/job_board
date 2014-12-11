@@ -6,6 +6,11 @@ RSpec.describe JobsController, :type => :controller do
       get :index
       expect(response).to render_template("index")
     end
+
+    it "should assign @jobs" do
+      get :index
+      expect(:jobs).to_not be_nil
+    end 
   end
 
   describe "GET #new" do
