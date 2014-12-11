@@ -21,6 +21,10 @@ RSpec.describe Job, :type => :model do
     expect(FactoryGirl.build(:job, description: nil)).to_not be_valid
   end
 
+  it "is invalid without a user" do
+    expect(FactoryGirl.build(:job, user: nil)).to_not be_valid
+  end
+
   subject { FactoryGirl.create(:job) }
   its(:title) { should == 'Aerospace engineer intern' }
 end

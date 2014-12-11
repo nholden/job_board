@@ -12,7 +12,7 @@ FactoryGirl.define do
     instructions "Send all applications directly to ceo@boeing.com"
     deadline "2015-12-01"
     salary "$20/hour"
-    user nil
+    user
   end
 
 end

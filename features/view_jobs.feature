@@ -8,3 +8,4 @@ Feature: View all jobs
     Given the user is not logged in
     When he visits the jobs page
     Then he should see "Aerospace engineer intern"
+    Then he should see "Boeing"
