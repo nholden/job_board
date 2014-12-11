@@ -7,6 +7,7 @@ Feature: Create user
     Given the user is not logged in 
     When he submits the create employer form
     Then he should see "Created employer account."
+    Then he should see "Log out."
 
   Scenario: Attempt to create employer without valid password confirmation
     Given the user is not logged in

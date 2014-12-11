@@ -15,7 +15,6 @@ gem 'neat'
 gem 'factory_girl_rails'
 gem 'bcrypt'
 gem 'unicorn'
-gem 'rails_12factor'
 
 group :development, :test do
   gem 'sqlite3'
@@ -31,4 +30,5 @@ end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
