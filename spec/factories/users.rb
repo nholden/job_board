@@ -6,5 +6,11 @@ FactoryGirl.define do
     name "Boeing"
     description "An aerospace company."
     website "http://www.boeing.com"
+
+    factory :user_with_job do
+      after(:create) do |user|
+        create(:job, user: user)
+      end
+    end
   end
 end

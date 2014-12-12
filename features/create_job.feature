@@ -7,6 +7,8 @@ Feature: Post a job
     Given the user is logged in   
     When he submits the create job form
     Then he should see "Created job."
+    Then he should see "Aerospace engineer intern"
+    Then he should see "Boeing"
 
   Scenario: Not logged in
     Given the user is not logged in

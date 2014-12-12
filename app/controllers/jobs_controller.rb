@@ -14,6 +14,7 @@ class JobsController < ApplicationController
 
   def create
     @job = Job.new(job_params)
+    @job.user_id = current_user.id if logged_in?
     if @job.save
       flash[:notice] = "Created job."
       redirect_to root_url

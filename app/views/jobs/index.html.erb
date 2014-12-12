@@ -2,12 +2,14 @@
 <table>
   <tr>
     <th>Job title</th>
+    <th>Employer</th>
     <th>Experience level</th>
     <th>Deadline</th>
   </tr>
   <% @jobs.each do |job| %>
     <tr>  
       <td><%= job.title %></td>
+      <td><%= job.user.name %></td>
       <td><%= job.experience %></td>
       <td><%= job.deadline %></td>
     </tr>

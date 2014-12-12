@@ -46,8 +46,15 @@ RSpec.describe JobsController, :type => :controller do
 
   describe "POST #create" do
     context "with valid information" do
+      before(:each) do
+        @user = FactoryGirl.build(:user_with_job)
+        @user.save
+      end
+
       it "creates a new job" do
-        expect{ post :create, job: FactoryGirl.attributes_for(:job) }.to change(Job, :count).by(1)
+        @user.jobs.each do |job|
+          expect{ post :create, job: job}.to change(Job, :count).by(1)
+        end
       end
     end
   end

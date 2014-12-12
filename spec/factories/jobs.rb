@@ -14,5 +14,4 @@ FactoryGirl.define do
     salary "$20/hour"
     user
   end
-
 end
