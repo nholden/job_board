@@ -13,6 +13,18 @@ RSpec.describe JobsController, :type => :controller do
     end 
   end
 
+  describe "GET #show" do
+    before(:each) do
+      @user = FactoryGirl.build(:user_with_job)
+      @user.save
+    end
+
+    it "renders the show template" do
+      get :show, id: @user.jobs.first.id
+      expect(response).to render_template("show")
+    end
+  end
+
   describe "GET #new" do
     context "when not logged in" do
 

@@ -9,7 +9,7 @@ FactoryGirl.define do
 
     factory :user_with_job do
       after(:create) do |user|
-        create(:job, user: user)
+        create_list(:job, user: user)
       end
     end
   end
