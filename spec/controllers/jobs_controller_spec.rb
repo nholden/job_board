@@ -15,13 +15,17 @@ RSpec.describe JobsController, :type => :controller do
 
   describe "GET #show" do
     before(:each) do
-      @user = FactoryGirl.build(:user_with_job)
-      @user.save
+      @user = FactoryGirl.create(:user_with_jobs)
     end
 
     it "renders the show template" do
       get :show, id: @user.jobs.first.id
       expect(response).to render_template("show")
+    end
+
+    it "should assign @job" do
+      get :show, id: @user.jobs.first.id
+      expect(:job).to_not be_nil
     end
   end
 
@@ -59,7 +63,7 @@ RSpec.describe JobsController, :type => :controller do
   describe "POST #create" do
     context "with valid information" do
       before(:each) do
-        @user = FactoryGirl.build(:user_with_job)
+        @user = FactoryGirl.build(:user_with_jobs)
         @user.save
       end
 

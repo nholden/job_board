@@ -7,9 +7,13 @@ FactoryGirl.define do
     description "An aerospace company."
     website "http://www.boeing.com"
 
-    factory :user_with_job do
-      after(:create) do |user|
-        create_list(:job, user: user)
+    factory :user_with_jobs do
+      transient do
+        jobs_count 1
+      end
+
+      after(:create) do |user, evaluator|
+        create_list(:job, evaluator.jobs_count, user: user)
       end
     end
   end
