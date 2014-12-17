@@ -12,6 +12,9 @@ class JobsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def create
     @job = Job.new(job_params)
     @job.user_id = current_user.id if logged_in?
