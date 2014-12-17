@@ -29,17 +29,35 @@ RSpec.describe JobsController, :type => :controller do
   end
 
   describe "GET #edit" do
-    before(:each) do
-      @user = FactoryGirl.create(:user_with_jobs)
-      get :edit, id: @user.jobs.first.id
+    context "when not logged in" do
+      before(:each) do
+        @user = FactoryGirl.create(:user_with_jobs)
+        get :edit, id: @user.jobs.first.id
+      end
+
+      it "redirects to the login page" do
+        expect(response).to redirect_to('/login')
+      end
+
+      it "sends a flash message" do
+        expect(flash[:error]).to eql("You must be logged in to create a job.")
+      end
     end
 
-    it "renders the edit template" do
-      expect(response).to render_template("edit")
-    end
+    context "when logged in as correct user" do
+      before(:each) do
+        @user = FactoryGirl.create(:user_with_jobs)
+        get :edit, id: @user.jobs.first.id
+        allow(controller).to receive_messages(:current_user => @user)
+      end
 
-    it "should assign @job" do
-      expect(:job).to_not be_nil
+      it "renders the edit template" do
+        expect(response).to render_template("edit")
+      end
+
+      it "should assign @job" do
+        expect(:job).to_not be_nil
+      end
     end
   end
 
