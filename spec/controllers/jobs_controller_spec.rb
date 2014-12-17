@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe JobsController, :type => :controller do
   describe "GET #index" do
+    before(:each) { get :index }
+
     it "renders the index template" do
-      get :index
       expect(response).to render_template("index")
     end
 
     it "should assign @jobs" do
-      get :index
       expect(:jobs).to_not be_nil
     end 
   end
@@ -16,29 +16,43 @@ RSpec.describe JobsController, :type => :controller do
   describe "GET #show" do
     before(:each) do
       @user = FactoryGirl.create(:user_with_jobs)
+      get :show, id: @user.jobs.first.id
     end
 
     it "renders the show template" do
-      get :show, id: @user.jobs.first.id
       expect(response).to render_template("show")
     end
 
     it "should assign @job" do
-      get :show, id: @user.jobs.first.id
+      expect(:job).to_not be_nil
+    end
+  end
+
+  describe "GET #edit" do
+    before(:each) do
+      @user = FactoryGirl.create(:user_with_jobs)
+      get :edit, id: @user.jobs.first.id
+    end
+
+    it "renders the edit template" do
+      expect(response).to render_template("edit")
+    end
+
+    it "should assign @job" do
       expect(:job).to_not be_nil
     end
   end
 
   describe "GET #new" do
+
     context "when not logged in" do
+      before(:each) { get :new }
 
       it "redirects to the login page" do
-        get :new
         expect(response).to redirect_to('/login')
       end
 
       it "sends a flash message" do
-        get :new
         expect(flash[:error]).to eql("You must be logged in to create a job.")
       end
     end
@@ -46,15 +60,14 @@ RSpec.describe JobsController, :type => :controller do
     context "when logged in" do
       before(:each) do
         allow(controller).to receive_messages(:logged_in? => true)
+        get :new
       end
 
       it "renders the new template" do
-        get :new
         expect(response).to render_template("new")
       end
 
       it "assigns @job" do
-        get :new
         expect(assigns(:job)).to_not be_nil
       end
     end

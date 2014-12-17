@@ -8,7 +8,11 @@
   </tr>
   <% @jobs.each do |job| %>
     <tr>  
-      <td><%= link_to job.title, job_path(job) %></td>
+      <td><%= link_to job.title, job_path(job) %>
+        <% if current_user == job.user %> 
+          <%= link_to "(Edit)", edit_job_path(job) %>
+        <% end %>
+      </td>
       <td><%= job.user.name %></td>
       <td><%= job.experience %></td>
       <td><%= job.deadline %></td>
