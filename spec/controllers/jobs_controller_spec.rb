@@ -47,8 +47,8 @@ RSpec.describe JobsController, :type => :controller do
     context "when logged in as correct user" do
       before(:each) do
         @user = FactoryGirl.create(:user_with_jobs)
-        get :edit, id: @user.jobs.first.id
         allow(controller).to receive_messages(:current_user => @user)
+        get :edit, id: @user.jobs.first.id
       end
 
       it "renders the edit template" do

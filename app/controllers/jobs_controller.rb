@@ -14,7 +14,7 @@ class JobsController < ApplicationController
 
   def edit
     job = Job.find(params[:id])
-    if current_user == @job.user
+    if current_user == job.user
       @job = job
     else
       flash[:error] = "You must be logged in to create a job."
