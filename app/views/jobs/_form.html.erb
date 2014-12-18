@@ -1,4 +1,4 @@
-<%= form_for job, url: {action: "create"} do |f| %>
+<%= form_for job do |f| %>
   <%= label_tag(:title, "Position title:") %>
   <%= f.text_field :title %><br />
   <%= label_tag(:term, "Position term:") %>

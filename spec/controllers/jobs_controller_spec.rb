@@ -105,4 +105,20 @@ RSpec.describe JobsController, :type => :controller do
       end
     end
   end
+
+  describe "PATCH #update" do
+    context "with valid information" do
+      before(:each) do
+        @user = FactoryGirl.create(:user_with_jobs)
+        @user.save
+        @job = @user.jobs.first
+      end
+
+      it "updates the job" do
+        patch :update, :id => @job.id, :job => { :title => "Astronaut" }
+        @job.reload
+        @job.title.should == "Astronaut"
+      end
+    end
+  end
 end
