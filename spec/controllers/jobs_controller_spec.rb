@@ -40,7 +40,7 @@ RSpec.describe JobsController, :type => :controller do
       end
 
       it "sends a flash message" do
-        expect(flash[:error]).to eql("You must be logged in to create a job.")
+        expect(flash[:error]).to eql("You must be logged in to edit a job.")
       end
     end
 
@@ -114,10 +114,36 @@ RSpec.describe JobsController, :type => :controller do
         @job = @user.jobs.first
       end
 
-      it "updates the job" do
-        patch :update, :id => @job.id, :job => { :title => "Astronaut" }
-        @job.reload
-        @job.title.should == "Astronaut"
+      context "when logged in as the correct user" do
+        before(:each) do
+          allow(controller).to receive_messages(:current_user => @user)
+          patch :update, :id => @job.id, :job => { :title => "Astronaut" }
+          @job.reload
+        end
+
+        it "updates the job" do
+          expect(@job.title).to eql("Astronaut")
+        end
+
+        it "redirects to the jobs page" do
+          expect(response).to redirect_to(root_url)
+        end
+      end
+
+      context "when not logged in" do
+        before(:each) do
+          allow(controller).to receive_messages(:current_user => nil)
+          patch :update, :id => @job.id, :job => { :title => "Astronaut" }
+          @job.reload
+        end
+
+        it "does not update the job" do
+          expect(@job.title).to eql("Aerospace engineer intern")
+        end
+
+        it "redirects to the login page" do
+          expect(response).to redirect_to('/login')
+        end
       end
     end
   end

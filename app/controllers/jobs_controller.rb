@@ -17,7 +17,20 @@ class JobsController < ApplicationController
     if current_user == job.user
       @job = job
     else
-      flash[:error] = "You must be logged in to create a job."
+      flash[:error] = "You must be logged in to edit a job."
+      redirect_to '/login'
+    end
+  end
+
+  def update
+    job = Job.find(params[:id])
+    if current_user == job.user
+      if job.update!(job_params)
+        flash[:notice] = "Updated job."
+        redirect_to root_url
+      end
+    else
+      flash[:error] = "You must be logged in to edit a job."
       redirect_to '/login'
     end
   end
