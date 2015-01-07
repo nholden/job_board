@@ -61,6 +61,39 @@ RSpec.describe JobsController, :type => :controller do
     end
   end
 
+  describe "DELETE #destroy" do
+    context "when not logged in" do
+      before(:each) do
+        @user = FactoryGirl.create(:user_with_jobs)
+        delete :destroy, id: @user.jobs.first.id
+      end
+
+      it "redirects to the login page" do
+        expect(response).to redirect_to('/login')
+      end
+
+      it "sends a flash message" do
+        expect(flash[:error]).to eql("You must be logged in to delete a job.")
+      end
+    end
+
+    context "when logged in as correct user" do
+      before(:each) do
+        @user = FactoryGirl.create(:user_with_jobs)
+        allow(controller).to receive_messages(:current_user => @user)
+        delete :destroy, id: @user.jobs.first.id
+      end
+
+      it "redirect to the jobs page" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "should assign @job" do
+        expect(:job).to_not be_nil
+      end
+    end
+  end
+
   describe "GET #new" do
 
     context "when not logged in" do

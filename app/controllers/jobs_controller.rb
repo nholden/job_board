@@ -35,6 +35,19 @@ class JobsController < ApplicationController
     end
   end
 
+  def destroy
+    job = Job.find(params[:id])
+    if current_user == job.user
+      if job.destroy
+        flash[:notice] = "Deleted job."
+        redirect_to root_url
+      end
+    else
+      flash[:error] = "You must be logged in to delete a job."
+      redirect_to '/login'
+    end
+  end
+
   def create
     @job = Job.new(job_params)
     @job.user_id = current_user.id if logged_in?
