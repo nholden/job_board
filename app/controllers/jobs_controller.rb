@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
   def index
-    @jobs = Job.all
+    @filter = Job.ransack(params[:q])
+    @jobs = @filter.result(distinct: true)
   end
 
   def new

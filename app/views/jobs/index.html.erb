@@ -1,13 +1,16 @@
 <h1>Home</h1>
 
-<%= form_tag jobs_path, method: "get" do %>
-  <%= select_tag(:term, options_for_select([['', ''],
+<%= search_form_for @filter do |f| %>
+  <%= f.label :term_eq %>
+  <%= f.select(:term_eq, options_for_select([
+                            ['', ''],
                             ['Internship', 'Internship'],
                             ['Full time permanent', 'Full time permanent'],
                             ['Part time permanent', 'Part time permanent'],
                             ['Full time temporary', 'Full time temporary'],
-                            ['Part time temporary', 'Part time temporary']])) %>
-  <%= submit_tag("Filter", name: nil) %>
+                            ['Part time temporary', 'Part time temporary']],
+                            @filter.term_eq)) %>
+  <%= f.submit :name => nil %>
 <% end %>
 
 <table>
