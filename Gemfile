@@ -14,6 +14,7 @@ gem 'neat'
 gem 'factory_girl_rails'
 gem 'bcrypt'
 gem 'unicorn'
+gem 'ransack'
 
 group :development, :test do
   gem 'sqlite3'
