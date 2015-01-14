@@ -4,3 +4,16 @@ When(/^he filters for full time jobs$/) do
   click_button('Search')
 end
 
+When(/^he filters for graduate degree jobs$/) do
+  visit('/')
+  select('Graduate degree', :from => 'q_experience_eq')
+  click_button('Search')
+end
+
+When(/^he filters for internships requiring some college$/) do
+  visit('/')
+  select('Internship', :from => 'q_term_eq')
+  select('Some college', :from => 'q_experience_eq')
+  click_button('Search')
+end
+
