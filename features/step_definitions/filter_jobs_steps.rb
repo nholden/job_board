@@ -13,7 +13,7 @@ end
 When(/^he filters for internships requiring some college$/) do
   visit('/')
   select('Internship', :from => 'q_term_eq')
-  select('Some college', :from => 'q_experience_eq')
+  select('Some college', :from => 'q_experience_id_eq')
   click_button('Search')
 end
 

@@ -18,7 +18,13 @@ Feature: Filter jobs
     Then he should not see "Aerospace engineer intern"
 
   Scenario: Successful filter for both term and experience
-    Given I still need to work on this feature
+    Given the user is logged in
+    When he submits the create job form
+    Then he should see "Aerospace engineer intern"
+    When he filters for graduate degree jobs
+    Then he should not see "Aerospace engineer intern"
+    When he filters for internships requiring some college
+    Then he should see "Aerospace engineer intern"
 
   Scenario: Successfully remove filters
     Given the user is logged in
