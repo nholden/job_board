@@ -12,5 +12,6 @@ FactoryGirl.define do
     deadline "2015-12-01"
     salary "$20/hour"
     user
+    experience
   end
 end

@@ -6,7 +6,7 @@ end
 
 When(/^he filters for graduate degree jobs$/) do
   visit('/')
-  select('Graduate degree', :from => 'q_experience_eq')
+  select('Graduate degree', :from => 'q_experience_id_eq')
   click_button('Search')
 end
 
@@ -17,3 +17,8 @@ When(/^he filters for internships requiring some college$/) do
   click_button('Search')
 end
 
+When(/^he removes all filters$/) do
+  select('', :from => 'q_term_eq')
+  select('', :from => 'q_experience_id_eq')
+  click_button('Search')
+end

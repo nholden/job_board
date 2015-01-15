@@ -10,6 +10,8 @@
                             ['Full time temporary', 'Full time temporary'],
                             ['Part time temporary', 'Part time temporary']],
                             @filter.term_eq)) %>
+  <%= f.label :experience_id_eq %>
+  <%= f.collection_select(:experience_id_eq, Experience.all, :id, :label) %>
   <%= f.submit :name => nil %>
 <% end %>
 
@@ -30,7 +32,7 @@
         <% end %>
       </td>
       <td><%= job.user.name %></td>
-      <td><%= job.experience %></td>
+      <td><%= job.experience.label %></td>
       <td><%= job.deadline %></td>
     </tr>
   <% end %>

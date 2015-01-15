@@ -21,6 +21,10 @@ RSpec.describe Job, :type => :model do
     expect(FactoryGirl.build(:job, user: nil)).to_not be_valid
   end
 
+  it "is invalid without an experience" do
+    expect(FactoryGirl.build(:job, experience: nil)).to_not be_valid
+  end
+
   it "should belong_to experience" do
     expect(Job.reflect_on_association(:experience).macro).to eq(:belongs_to)
   end
