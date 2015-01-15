@@ -2,12 +2,7 @@
   <%= label_tag(:title, "Position title:") %>
   <%= f.text_field :title %><br />
   <%= label_tag(:term, "Position term:") %>
-  <%= f.select(:term, options_for_select([['Internship', 'Internship'],
-                            ['Full time permanent', 'Full time permanent'],
-                            ['Part time permanent', 'Part time permanent'],
-                            ['Full time temporary', 'Full time temporary'],
-                            ['Part time temporary', 'Part time temporary']])) %>
-  <br />
+  <%= f.collection_select(:term_id, Term.all, :id, :label) %>
   <%= label_tag(:location, "Location:") %>
   <%= f.text_field :location %><br />
   <%= label_tag(:experience, "Experience:") %>
