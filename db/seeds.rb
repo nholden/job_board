@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Experience.create([
+  { label: 'Some college' },
+  { label: 'Undergraduate degree' },
+  { label: 'Graduate degree' },
+  { label: 'Some professional experience' },
+  { label: '5+ years of professional experience' }])
