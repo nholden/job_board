@@ -11,7 +11,7 @@
                             ['Part time temporary', 'Part time temporary']],
                             @filter.term_eq)) %>
   <%= f.label :experience_id_eq %>
-  <%= f.collection_select(:experience_id_eq, Experience.all, :id, :label) %>
+  <%= f.collection_select(:experience_id_eq, Experience.all, :id, :label, :include_blank => '') %>
   <%= f.submit :name => nil %>
 <% end %>
 
