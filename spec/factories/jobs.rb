@@ -3,7 +3,6 @@ FactoryGirl.define do
     title "Aerospace engineer intern"
     term "Internship"
     location "Seattle, WA"
-    experience "Some college"
     majors "Aerospace engineering"
     description "The aerospace engineer intern will most of his effort 
                  designing prototypes for Boeing's next really awesome

@@ -10,15 +10,6 @@
                             ['Full time temporary', 'Full time temporary'],
                             ['Part time temporary', 'Part time temporary']],
                             @filter.term_eq)) %>
-  <%= f.label :experience_eq %>
-  <%= f.select(:experience_eq, options_for_select([
-      ['', ''],
-      ['Some college', 'Some college'],
-      ['Undergraduate degree', 'Undergraduate degree'],
-      ['Graduate degree', 'Graduate degree'],
-      ['Some professional experience', 'Some professional experience'],
-      ['5+ years of professional experience', '5+ years of professional experience']],
-      @filter.experience_eq)) %>
   <%= f.submit :name => nil %>
 <% end %>
 

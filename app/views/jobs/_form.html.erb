@@ -10,14 +10,6 @@
   <br />
   <%= label_tag(:location, "Location:") %>
   <%= f.text_field :location %><br />
-  <%= label_tag(:experience, "Experience:") %>
-  <%= f.select(:experience, options_for_select([
-      ['Some college', 'Some college'],
-      ['Undergraduate degree', 'Undergraduate degree'],
-      ['Graduate degree', 'Graduate degree'],
-      ['Some professional experience', 'Some professional experience'],
-      ['5+ years of professional experience', '5+ years of professional experience']])) %>
-  <br />
   <%= label_tag(:majors, "Majors:") %>
   <%= f.text_field :majors  %><br />
   <%= label_tag(:description, "Description:") %>

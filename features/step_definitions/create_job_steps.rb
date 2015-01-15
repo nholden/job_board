@@ -3,7 +3,6 @@ When(/^he submits the create job form$/) do
   fill_in('job_title', :with => 'Aerospace engineer intern')
   select('Internship', :from => 'job_term')
   fill_in('job_location', :with => 'Seattle, WA')
-  select('Some college', :from => 'job_experience')
   fill_in('job_majors', :with => 'Aero/Astro')
   fill_in('job_description', :with => 'This is a great position in which the
                                    intern will build some incredible stuff
