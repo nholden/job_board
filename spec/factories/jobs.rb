@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :job do
     title "Aerospace engineer intern"
-    term "Internship"
     location "Seattle, WA"
     majors "Aerospace engineering"
     description "The aerospace engineer intern will most of his effort 
@@ -13,5 +12,6 @@ FactoryGirl.define do
     salary "$20/hour"
     user
     experience
+    term
   end
 end
