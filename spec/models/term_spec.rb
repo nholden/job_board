@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Term, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should have many jobs" do
+    expect(Experience.reflect_on_association(:jobs).macro).to eq(:has_many)
+  end
 end

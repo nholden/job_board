@@ -5,10 +5,6 @@ RSpec.describe Job, :type => :model do
     expect(FactoryGirl.build(:job, title: nil)).to_not be_valid
   end
 
-  it "is invalid with a non-provided term" do
-    expect(FactoryGirl.build(:job, term: "Awesome job")).to_not be_valid
-  end
-
   it "is invalid without a location" do
     expect(FactoryGirl.build(:job, location: nil)).to_not be_valid
   end
@@ -25,8 +21,16 @@ RSpec.describe Job, :type => :model do
     expect(FactoryGirl.build(:job, experience: nil)).to_not be_valid
   end
 
+  it "is invalid without a term" do
+    expect(FactoryGirl.build(:job, term: nil)).to_not be_valid
+  end
+
   it "should belong_to experience" do
     expect(Job.reflect_on_association(:experience).macro).to eq(:belongs_to)
+  end
+
+  it "should belong_to term" do
+    expect(Job.reflect_on_association(:term).macro).to eq(:belongs_to)
   end
 
   subject { FactoryGirl.create(:job) }
