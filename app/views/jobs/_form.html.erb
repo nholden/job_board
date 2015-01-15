@@ -10,6 +10,8 @@
   <br />
   <%= label_tag(:location, "Location:") %>
   <%= f.text_field :location %><br />
+  <%= label_tag(:experience, "Experience:") %>
+  <%= f.collection_select(:experience_id, Experience.all, :id, :label) %>
   <%= label_tag(:majors, "Majors:") %>
   <%= f.text_field :majors  %><br />
   <%= label_tag(:description, "Description:") %>
