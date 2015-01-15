@@ -12,3 +12,10 @@ Experience.create([
   { label: 'Graduate degree' },
   { label: 'Some professional experience' },
   { label: '5+ years of professional experience' }])
+
+Term.create([
+  { label: 'Internship' },
+  { label: 'Full time permanent' },
+  { label: 'Part time permanent' },
+  { label: 'Full time temporary' },
+  { label: 'Part time temporary' }])

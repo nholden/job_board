@@ -1,15 +1,8 @@
 <h1>Home</h1>
 
 <%= search_form_for @filter do |f| %>
-  <%= f.label :term_eq %>
-  <%= f.select(:term_eq, options_for_select([
-                            ['', ''],
-                            ['Internship', 'Internship'],
-                            ['Full time permanent', 'Full time permanent'],
-                            ['Part time permanent', 'Part time permanent'],
-                            ['Full time temporary', 'Full time temporary'],
-                            ['Part time temporary', 'Part time temporary']],
-                            @filter.term_eq)) %>
+  <%= f.label :term_id_eq %>
+  <%= f.collection_select(:term_id_eq, Term.all, :id, :label, :include_blank => '') %>
   <%= f.label :experience_id_eq %>
   <%= f.collection_select(:experience_id_eq, Experience.all, :id, :label, :include_blank => '') %>
   <%= f.submit :name => nil %>
