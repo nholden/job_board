@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :experience do
-    label "MyText"
+    label "Experience"
   end
-
 end

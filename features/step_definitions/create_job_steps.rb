@@ -1,9 +1,9 @@
 When(/^he submits the create job form$/) do
   visit('/jobs/new')
   fill_in('job_title', :with => 'Aerospace engineer intern')
-  select('Internship', :from => 'job_term_id')
+  select('Term A', :from => 'job_term_id')
   fill_in('job_location', :with => 'Seattle, WA')
-  select('Some college', :from => 'job_experience_id')
+  select('Experience A', :from => 'job_experience_id')
   fill_in('job_majors', :with => 'Aero/Astro')
   fill_in('job_description', :with => 'This is a great position in which the
                                    intern will build some incredible stuff
@@ -21,3 +21,17 @@ When(/^he visits the create job page$/) do
   visit('/jobs/new')
 end
 
+Given(/^job terms and experiences exist$/) do
+  FactoryGirl.create(:term, label: 'Term A')
+  FactoryGirl.create(:term, label: 'Term B')
+  FactoryGirl.create(:experience, label: 'Experience A')
+  FactoryGirl.create(:experience, label: 'Experience B')
+end
+
+Then(/^he should see the job title$/) do
+  page.should have_content("Aerospace engineer intern")
+end
+
+Then(/^he should not see the job title$/) do
+  page.should_not have_content("Aerospace engineer intern")
+end

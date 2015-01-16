@@ -5,6 +5,7 @@ Feature: Delete job
 
   Scenario: Successful delete
     Given the user is logged in
+    Given job terms and experiences exist
     When he submits the create job form
     Then he should see "Aerospace engineer intern"
     When he clicks "Delete"

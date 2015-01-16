@@ -5,6 +5,7 @@ Feature: View single job
 
   Scenario: Sucessfully view a job
     Given the user is logged in
+    Given job terms and experiences exist
     When he submits the create job form
     When he clicks "Aerospace engineer intern"
     Then he should see "This is a great position in which"

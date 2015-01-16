@@ -4,12 +4,13 @@ Feature: Post a job
   I want to post a job listing
 
   Scenario: Successful posting
-    Given the user is logged in   
+    Given the user is logged in
+    Given job terms and experiences exist
     When he submits the create job form
     Then he should see "Created job."
     Then he should see "Aerospace engineer intern"
     Then he should see "Boeing"
-    Then he should see "Some college"
+    Then he should see "Experience A"
 
   Scenario: Not logged in
     Given the user is not logged in

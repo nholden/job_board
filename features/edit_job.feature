@@ -5,6 +5,7 @@ Feature: Edit job
 
   Scenario: Successful edit
     Given the user is logged in
+    Given job terms and experiences exist
     When he submits the create job form
     When he clicks "Edit"
     When he submits the edit job form
