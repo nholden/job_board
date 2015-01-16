@@ -7,9 +7,9 @@ Feature: Delete job
     Given the user is logged in
     Given job terms and experiences exist
     When he submits the create job form
-    Then he should see "Aerospace engineer intern"
+    Then he should see the job title
     When he clicks "Delete"
-    Then he should not see "Aerospace engineer intern"
+    Then he should not see the job title
 
   Scenario: Not logged in
     Given the user is not logged in
