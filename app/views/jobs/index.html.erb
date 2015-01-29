@@ -1,12 +1,26 @@
 <h1>Home</h1>
 
 <%= search_form_for @filter do |f| %>
-  <%= f.label :term_id_eq %>
-  <%= f.collection_select(:term_id_eq, Term.all, :id, :label, :include_blank => '') %>
-  <%= f.label :experience_id_eq %>
-  <%= f.collection_select(:experience_id_eq, Experience.all, :id, :label, :include_blank => '') %>
-  <%= f.submit :name => nil %>
+  <div class="search-tools">
+    <div class="filter">
+      <label><%= f.label :experience_id_eq %></label>
+      <div>
+        <ol>
+          <% Experience.all.each do |experience| %>
+            <li>
+              <%= check_box_tag("experience_#{experience.id}") %>
+              <%= label_tag("experience_#{experience.id}", experience.label) %>
+            </li>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+    <div class="trigger">
+      <button>Update</button>
+    </div>
+  </div>
 <% end %>
+
 
 <table>
   <tr>
