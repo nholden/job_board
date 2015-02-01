@@ -11,15 +11,31 @@
               <%= check_box_tag("q[experience_id_eq_any][]",
                   experience.id,
                   @checked_experiences.include?(experience.id.to_s),
-                  id: experience.id) %>
-              <%= label_tag(experience.id, experience.label) %>
+                  id: "experience_#{experience.id}") %>
+              <%= label_tag("experience_#{experience.id}", experience.label) %>
+            </li>
+          <% end %>
+        </ol>
+      </div>
+     </div>
+     <div class="filter">
+      <label><%= f.label :term_id_eq_any %></label>
+      <div>
+        <ol>
+          <% Term.all.each do |term| %>
+            <li>
+              <%= check_box_tag("q[term_id_eq_any][]",
+                  term.id,
+                  @checked_terms.include?(term.id.to_s),
+                  id: "term_#{term.id}") %>
+              <%= label_tag("term_#{term.id}", term.label) %>
             </li>
           <% end %>
         </ol>
       </div>
     </div>
     <div class="trigger">
-      <button>Update</button>
+      <button>Filter</button>
     </div>
   </div>
 <% end %>
