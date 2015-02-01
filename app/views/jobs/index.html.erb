@@ -8,7 +8,10 @@
         <ol>
           <% Experience.all.each do |experience| %>
             <li>
-              <%= check_box_tag("q[experience_id_eq_any][]", experience.id, false, id: experience.id) %>
+              <%= check_box_tag("q[experience_id_eq_any][]",
+                  experience.id,
+                  @checked_experiences.include?(experience.id.to_s),
+                  id: experience.id) %>
               <%= label_tag(experience.id, experience.label) %>
             </li>
           <% end %>
