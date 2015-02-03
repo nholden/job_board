@@ -1,11 +1,10 @@
 class JobsController < ApplicationController
   def index
-    if params[:q].nil?
-      @checked_experiences = []
-      @checked_terms = []
-    else
-      @checked_experiences = params[:q][:experience_id_eq_any]
-      @checked_terms = params[:q][:term_id_eq_any]
+    @checked_experiences = []
+    @checked_terms = []
+    unless params[:q].nil?
+      @checked_experiences = (params[:q][:experience_id_eq_any] || [])
+      @checked_terms = (params[:q][:term_id_eq_any] || [])
     end
     @filter = Job.ransack(params[:q])
     @jobs = @filter.result(distinct: true)

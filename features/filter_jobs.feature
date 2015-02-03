@@ -36,5 +36,5 @@ Feature: Filter jobs
     Then he should see the job title
     When he filters for another job term
     Then he should not see the job title
-    When he removes all filters
+    When he visits the jobs page
     Then he should see the job title
