@@ -1,18 +1,18 @@
 When(/^he filters for another job term$/) do
   visit('/')
-  check('term_2')
+  check('Term B')
   click_button('Filter')
 end
 
 When(/^he filters for another job experience$/) do
   visit('/')
-  check('experience_2')
+  check('Experience B')
   click_button('Filter')
 end
 
 When(/^he filters for the job term and experience$/) do
   visit('/')
-  check('term_1')
-  check('experience_1')
+  check('Term A')
+  check('Experience A')
   click_button('Filter')
 end
