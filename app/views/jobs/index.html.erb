@@ -1,9 +1,9 @@
-<h1>Home</h1>
-
+<h1>Job openings</h1>
+<br />
 <%= search_form_for @filter do |f| %>
   <div class="search-tools">
     <div class="filter">
-      <label><%= f.label :experience_id_eq_any %></label>
+      <label>Experience</label>
       <div>
         <ol>
           <% Experience.all.each do |experience| %>
@@ -17,9 +17,9 @@
           <% end %>
         </ol>
       </div>
-     </div>
-     <div class="filter">
-      <label><%= f.label :term_id_eq_any %></label>
+    </div>
+    <div class="filter">
+      <label>Term</label>
       <div>
         <ol>
           <% Term.all.each do |term| %>
