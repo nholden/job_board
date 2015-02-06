@@ -9,7 +9,7 @@
 <body>
 
 <div id="header">
-  <%= link_to "Home", root_url %> |
+  <%= link_to "Home", jobs_path, method: :get %> |
   <% if current_user.present? %>
     <%= link_to "Post new job", new_job_path, method: :get %> |
     <%= link_to "Log out", logout_path, method: :delete %>

@@ -86,5 +86,3 @@ Filter = (->
 $ ->
   Filter.enhance()
   return
-
-
