@@ -159,7 +159,7 @@ div.notice {
     width: 100%;
 
     @include media($large-screen) {
-      @include span-columns(1.5);
+      @include span-columns(2.5);
     }
 
     button {
