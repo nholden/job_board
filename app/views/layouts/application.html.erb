@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>JobBoard</title>
   <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
 
-<div id="header">
-  <%= link_to "Home", jobs_path, method: :get %> |
-  <% if current_user.present? %>
-    <%= link_to "Post new job", new_job_path, method: :get %> |
-    <%= link_to "Log out", logout_path, method: :delete %>
-  <% else %>
-    <%= link_to "Log in", login_path %> |
-    <%= link_to "Sign up", 'signup' %>
-  <% end %>
-</div>
+<header class="centered-navigation" role="banner">
+  <div class="centered-navigation-wrapper">
+    <a href="javascript:void(0)" id="js-centered-navigation-mobile-menu" class="centered-navigation-mobile-menu">MENU</a>
+    <nav role="navigation">
+      <ul id="js-centered-navigation-menu" class="centered-navigation-menu show">
+        <li class="nav-link"><%= link_to "Home", jobs_path, method: :get %></li>
+        <% if current_user.present? %>
+          <li class="nav-link">
+            <%= link_to "Post new job", new_job_path, method: :get %>
+          </li>
+          <li class="nav-link">
+            <%= link_to "Log out", logout_path, method: :delete %>
+          </li>
+        <% else %> 
+          <li class="nav-link">
+            <%= link_to "Log in", login_path, method: :get %>
+          </li>
+          <li class="nav-link">
+            <%= link_to "Sign up", 'signup', method: :get %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
 
 <% flash.each do |name, msg| -%>
   <%= content_tag :div, msg, class: name %>
-<% end -%>
+<% end %>
 
 <%= yield %>
 
