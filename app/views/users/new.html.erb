@@ -1,15 +1,29 @@
 <h1>Sign up</h1>
 <br />
 <%= form_for @user, url: {action: "create"} do |f| %>
-  <%= label_tag(:name, "Company name:") %>
-  <%= f.text_field :name %><br />
-  <%= label_tag(:website, "Company website:") %>
-  <%= f.text_field :website %><br />
-  <%= label_tag(:email, "Email:") %>
-  <%= f.text_field :email %><br />
-  <%= label_tag(:password, "Password:") %>
-  <%= f.password_field :password  %><br />
-  <%= label_tag(:password_confirmation, "Confirm:") %>
-  <%= f.password_field :password_confirmation %><br />
-  <%= submit_tag("Create account") %>
+  <div class="form">
+    <div class="field">
+      <%= label_tag(:name, "Company name:") %>
+      <%= f.text_field :name %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:website, "Company website:") %>
+      <%= f.text_field :website %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:email, "Email:") %>
+      <%= f.text_field :email %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:password, "Password:") %>
+      <%= f.password_field :password  %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:password_confirmation, "Confirm:") %>
+      <%= f.password_field :password_confirmation %><br />
+    </div>
+    <div class="trigger">
+      <%= submit_tag("Create account") %>
+    </div>
+  </div>
 <% end %>

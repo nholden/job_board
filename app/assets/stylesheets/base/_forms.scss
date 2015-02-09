@@ -28,7 +28,7 @@ label {
 
 textarea,
 #{$all-text-inputs},
-select[multiple=multiple] {
+select {
   @include box-sizing(border-box);
   @include transition(border-color);
   background-color: white;
@@ -40,6 +40,12 @@ select[multiple=multiple] {
   margin-bottom: $base-spacing / 2;
   padding: ($base-spacing / 3) ($base-spacing / 3);
   width: 100%;
+
+  &#job_deadline_1i,
+  &#job_deadline_2i,
+  &#job_deadline_3i {
+    float: left;
+  }
 
   &:hover {
     border-color: $form-border-color-hover;
@@ -54,6 +60,7 @@ select[multiple=multiple] {
 
 textarea {
   resize: vertical;
+  margin-bottom: $base-spacing * 1.5;
 }
 
 input[type="search"] {
@@ -72,7 +79,7 @@ input[type="file"] {
 }
 
 select {
-  margin-bottom: $base-spacing;
-  max-width: 100%;
+  margin-bottom: $base-spacing * 1.5;
   width: auto;
+  max-width: 100%;
 }

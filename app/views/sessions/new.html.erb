@@ -1,9 +1,17 @@
 <h1>Log in</h1>
 <br />
 <%= form_for :session, url: login_path do |f| %>
-  <%= label_tag(:email, "Email:") %>
-  <%= f.text_field :email %><br />
-  <%= label_tag(:password, "Password:") %>
-  <%= f.password_field :password %><br />
-  <%= submit_tag("Login") %>
+  <div class="form">
+    <div class="field">
+      <%= label_tag(:email, "Email:") %>
+      <%= f.text_field :email %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:password, "Password:") %>
+      <%= f.password_field :password %><br />
+    </div>
+    <div class="trigger">
+      <%= submit_tag("Login") %>
+    </div>
+  </div>
 <% end %>

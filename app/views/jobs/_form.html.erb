@@ -1,23 +1,47 @@
 <%= form_for job do |f| %>
-  <%= label_tag(:title, "Position title:") %>
-  <%= f.text_field :title %><br />
-  <%= label_tag(:term, "Position term:") %>
-  <%= f.collection_select(:term_id, Term.all, :id, :label) %>
-  <%= label_tag(:location, "Location:") %>
-  <%= f.text_field :location %><br />
-  <%= label_tag(:experience, "Experience:") %>
-  <%= f.collection_select(:experience_id, Experience.all, :id, :label) %>
-  <%= label_tag(:majors, "Majors:") %>
-  <%= f.text_field :majors  %><br />
-  <%= label_tag(:description, "Description:") %>
-  <%= f.text_area :description %><br />
-  <%= label_tag(:url, "URL:") %>
-  <%= f.text_field :url %><br />
-  <%= label_tag(:instructions, "Instructions:") %>
-  <%= f.text_area :instructions %><br />
-  <%= label_tag(:deadline, "Deadline:") %>
-  <%= f.date_select :deadline %><br />
-  <%= label_tag(:salary, "Salary:") %>
-  <%= f.text_field :salary %><br />
-  <%= submit_tag(submit_label) %>
+  <div class="form">
+    <div class="field">
+      <%= label_tag(:title, "Position title:") %>
+      <%= f.text_field :title %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:term, "Position term:") %>
+      <%= f.collection_select(:term_id, Term.all, :id, :label) %>
+    </div>
+    <div class="field">
+      <%= label_tag(:location, "Location:") %>
+      <%= f.text_field :location %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:experience, "Experience:") %>
+      <%= f.collection_select(:experience_id, Experience.all, :id, :label) %>
+    </div>
+    <div class="field">
+      <%= label_tag(:majors, "Majors:") %>
+      <%= f.text_field :majors  %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:description, "Description:") %>
+      <%= f.text_area :description %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:url, "URL:") %>
+      <%= f.text_field :url %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:instructions, "Instructions:") %>
+      <%= f.text_area :instructions %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:deadline, "Deadline:") %>
+      <%= f.date_select :deadline %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:salary, "Salary:") %>
+      <%= f.text_field :salary %><br />
+    </div>
+    <div class="trigger">
+      <%= submit_tag(submit_label) %>
+    </div>
+  </div>
 <% end %>

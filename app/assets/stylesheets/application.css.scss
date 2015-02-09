@@ -20,6 +20,30 @@ div.notice {
 		font:13px Helvetica,  Arial,  sans-serif;
 	}
 
+.form {
+
+  $login-form-border-color: $base-border-color;
+  $login-form-background: lighten($login-form-border-color, 10%);
+
+  @include clearfix;
+  @include outer-container;
+  background: $login-form-background;
+  border-radius: $base-border-radius;
+  border: 1px solid $login-form-border-color;
+  padding: $gutter / 2;
+  max-width: 600px;
+
+  .field {
+    @include span-columns(12);
+  }
+
+  .trigger {
+    @include span-columns(12);
+  }
+}
+  
+
+
 .search-tools {  
   ///////////////////////////////////////////////////////////////////////////////////
   $base-border-color: gainsboro !default;
