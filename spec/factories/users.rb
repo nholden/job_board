@@ -18,4 +18,14 @@ FactoryGirl.define do
       end
     end
   end
+
+  factory :admin, :class => 'User' do
+    email "jobboardguy@jobboard.com"
+    password "password"
+    password_confirmation "password"
+    name "Job Board"
+    description "The best place to post your jobs"
+    website "http://www.jobboard.com"
+    association :role, label: 'admin'
+  end
 end

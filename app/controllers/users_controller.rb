@@ -10,9 +10,17 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.role_id = Role.find_or_create_by(label: 'employer').id
+
+    if admin_exists?
+      @user.role_id = Role.find_or_create_by(label: 'employer').id
+      flash_role = "employer"
+    else
+      @user.role_id = Role.find_or_create_by(label: 'admin').id
+      flash_role = "administrator"
+    end
+
     if @user.save
-      flash[:notice] = "Created employer account."
+      flash[:notice] = "Created #{flash_role} account."
       log_in(@user)
       redirect_to root_url
     else

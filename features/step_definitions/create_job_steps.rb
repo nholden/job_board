@@ -28,6 +28,23 @@ Given(/^job terms and experiences exist$/) do
   FactoryGirl.create(:experience, label: 'Experience B')
 end
 
+Given(/^a job exists$/) do
+  FactoryGirl.create(:job,
+                     title: 'Aerospace engineer intern',
+                     location: 'Seattle, WA',
+                     experience: FactoryGirl.create(:experience),
+                     term: FactoryGirl.create(:term),
+                     majors: 'Aero/Astro',
+                     description: 'This is a great position in which the
+                                   intern will build some incredible stuff
+                                   for the first manned flight to Mars',
+                     url: 'http://www.boeing.com/jobs/intern.php',
+                     instructions: 'Send an email to ceo@boeing.com',
+                     deadline: '2016-01-01',
+                     salary: '$20/hour',
+                     user: FactoryGirl.create(:user))
+end
+
 Then(/^he should see the job title$/) do
   page.should have_content("Aerospace engineer intern")
 end

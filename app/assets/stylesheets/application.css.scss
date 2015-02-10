@@ -42,6 +42,11 @@ div.notice {
   padding: $gutter / 2;
   max-width: 600px;
 
+  .title {
+    @include span-columns(12);
+    margin-bottom: $base-spacing;
+  }
+
   .field {
     @include span-columns(12);
   }

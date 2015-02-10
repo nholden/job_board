@@ -1,5 +1,12 @@
 <%= form_for @user, url: {action: "create"} do |f| %>
   <div class="form">
+    <div class="title">
+    <% if admin_exists? %>
+      <h1>Create employer account</h1>
+    <% else %>
+      <h1>Create administrator account</h1>
+    <% end %>
+    </div>
     <div class="field">
       <%= label_tag(:name, "Company name:") %>
       <%= f.text_field :name %><br />

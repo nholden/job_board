@@ -2,11 +2,15 @@ Given(/^the user is not logged in$/) do
   expect(@current_user).to be_nil
 end
 
-When(/^he visits the create employer page$/) do
+Given(/^an administrator exists$/) do
+  FactoryGirl.build(:admin).save
+end
+
+When(/^he visits the create user page$/) do
   visit('users/new')
 end
 
-When(/^he submits the create employer form$/) do
+When(/^he submits the create user form$/) do
   visit('/users/new')
   fill_in('user_email', :with => 'ceo@boeing.com')
   fill_in('user_password', :with => 'password')
@@ -16,7 +20,7 @@ When(/^he submits the create employer form$/) do
   click_button('Create account')
 end
 
-When(/^he submits the create employer form without valid password confirmation$/) do
+When(/^he submits the create user form without valid password confirmation$/) do
   visit('/users/new')
   fill_in('user_email', :with => 'ceo@boeing.com')
   fill_in('user_password', :with => 'password')

@@ -21,7 +21,7 @@ class JobsController < ApplicationController
 
   def edit
     job = Job.find(params[:id])
-    if current_user == job.user
+    if current_user == job.user or is_admin?
       @job = job
     else
       flash[:error] = "You must be logged in to edit a job."
@@ -31,7 +31,7 @@ class JobsController < ApplicationController
 
   def update
     job = Job.find(params[:id])
-    if current_user == job.user
+    if current_user == job.user or is_admin?
       if job.update!(job_params)
         flash[:notice] = "Updated job."
         redirect_to root_url
@@ -44,7 +44,7 @@ class JobsController < ApplicationController
 
   def destroy
     job = Job.find(params[:id])
-    if current_user == job.user
+    if current_user == job.user or is_admin?
       if job.destroy
         flash[:notice] = "Deleted job."
         redirect_to root_url

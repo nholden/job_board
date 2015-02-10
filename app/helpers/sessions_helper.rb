@@ -12,6 +12,14 @@ module SessionsHelper
     !current_user.nil?
   end 
 
+  def is_admin?
+    if current_user.nil?
+      false
+    else
+      current_user.role.label == 'admin'
+    end
+  end
+
   def log_out
     session.delete(:user_id)
     @current_user = nil

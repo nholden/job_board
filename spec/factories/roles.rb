@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :role do
-    label "Role"
+    label 'employer'
   end
 end

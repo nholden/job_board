@@ -32,79 +32,91 @@ RSpec.describe UsersController, :type => :controller do
       @user_attributes = FactoryGirl.attributes_for(:user)
     end
 
-    context "with valid information" do
-      it "creates a new user" do
-        expect{ post :create, user: @user_attributes}.to change(User,:count).by(1)
-      end
-
-      it "redirects to the homepage" do
-        post :create, user: @user_attributes
-        expect(response).to redirect_to root_url
-      end
-
-      it "logs the user in" do
-        post :create, user: @user_attributes
-        expect(logged_in?).to eql(true)
+    context "when there is no admin acccount" do
+      it "creates a new admin" do
+        expect{ post :create, user: @user_attributes}.to change(Role.find_or_create_by(label: 'admin').users,:count).by(1)
       end
     end
 
-    context "with non-macthing passwords" do
-      it "does not create a new user" do
-        expect{ post :create, user:    { :email =>                 "a@b.com",
-                                         :password =>              "password",
-                                         :password_confirmation => "loremipsum",
-                                         :name =>                  "x", 
-                                         :website =>               "y"
-        }}.to change(User,:count).by(0)
+    context "when there is an admin account" do
+      before(:each) do
+        FactoryGirl.build(:admin).save
       end
 
-      it "does not redirect to the homepage" do
-        post :create, user:     { :email =>                 "a@b.com",
-                                  :password =>              "password",
-                                  :password_confirmation => "loremipsum",
-                                  :name =>                  "x", 
-                                  :website =>               "y" }
-        expect(response).not_to redirect_to root_url 
-      end
-    end
+      context "with valid information" do
+        it "creates a new employer" do
+          expect{ post :create, user: @user_attributes}.to change(Role.find_or_create_by(label: 'employer').users,:count).by(1)
+        end
 
-    context "with invalid email" do
-      it "does not create a new user" do
-        expect{ post :create, user:     { :email =>                 "a@b..com",
-                                          :password =>              "password",
-                                          :password_confirmation => "password",
-                                          :name =>                  "x",
-                                          :website =>               "y"
-        }}.to change(User,:count).by(0)
+        it "redirects to the homepage" do
+          post :create, user: @user_attributes
+          expect(response).to redirect_to root_url
+        end
+
+        it "logs the user in" do
+          post :create, user: @user_attributes
+          expect(logged_in?).to eql(true)
+        end
       end
 
-      it "does not redirect to the homepage" do
-        post :create, user:     { :email =>                 "a@b..com",
-                                  :password =>              "password",
-                                  :password_confirmation => "password",
-                                  :name =>                  "x", 
-                                  :website =>               "y" }
-        expect(response).not_to redirect_to root_url 
-      end
-    end
+      context "with non-macthing passwords" do
+        it "does not create a new user" do
+          expect{ post :create, user:    { :email =>                 "a@b.com",
+                                           :password =>              "password",
+                                           :password_confirmation => "loremipsum",
+                                           :name =>                  "x", 
+                                           :website =>               "y"
+          }}.to change(User,:count).by(0)
+        end
 
-    context "without a company name" do
-      it "does not create a new user" do
-        expect{ post :create, user:     { :email =>                 "a@b.com",
-                                          :password =>              "password",
-                                          :password_confirmation => "password",
-                                          :name =>                  "",
-                                          :website =>               "y" 
-        }}.to change(User,:count).by(0)
+        it "does not redirect to the homepage" do
+          post :create, user:     { :email =>                 "a@b.com",
+                                    :password =>              "password",
+                                    :password_confirmation => "loremipsum",
+                                    :name =>                  "x", 
+                                    :website =>               "y" }
+          expect(response).not_to redirect_to root_url 
+        end
       end
 
-      it "does not redirect to the homepage" do
-        post :create, user:     { :email =>                 "a@b.com",
-                                  :password =>              "password",
-                                  :password_confirmation => "password",
-                                  :name =>                  "", 
-                                  :website =>               "y" }
-        expect(response).not_to redirect_to root_url 
+      context "with invalid email" do
+        it "does not create a new user" do
+          expect{ post :create, user:     { :email =>                 "a@b..com",
+                                            :password =>              "password",
+                                            :password_confirmation => "password",
+                                            :name =>                  "x",
+                                            :website =>               "y"
+          }}.to change(User,:count).by(0)
+        end
+
+        it "does not redirect to the homepage" do
+          post :create, user:     { :email =>                 "a@b..com",
+                                    :password =>              "password",
+                                    :password_confirmation => "password",
+                                    :name =>                  "x", 
+                                    :website =>               "y" }
+          expect(response).not_to redirect_to root_url 
+        end
+      end
+
+      context "without a company name" do
+        it "does not create a new user" do
+          expect{ post :create, user:     { :email =>                 "a@b.com",
+                                            :password =>              "password",
+                                            :password_confirmation => "password",
+                                            :name =>                  "",
+                                            :website =>               "y" 
+          }}.to change(User,:count).by(0)
+        end
+
+        it "does not redirect to the homepage" do
+          post :create, user:     { :email =>                 "a@b.com",
+                                    :password =>              "password",
+                                    :password_confirmation => "password",
+                                    :name =>                  "", 
+                                    :website =>               "y" }
+          expect(response).not_to redirect_to root_url 
+        end
       end
     end
   end

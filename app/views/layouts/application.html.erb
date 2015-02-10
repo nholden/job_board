@@ -18,6 +18,11 @@
     <nav role="navigation">
       <ul id="js-centered-navigation-menu" class="centered-navigation-menu show">
         <li class="nav-link"><%= link_to "Home", jobs_path, method: :get %></li>
+        <% if is_admin? %>
+          <li class="nav-link">
+            <a>Manage users</a>
+          </li>
+        <% end %>
         <% if current_user.present? %>
           <li class="nav-link">
             <%= link_to "Post new job", new_job_path, method: :get %>
@@ -38,6 +43,9 @@
   </div>
 </header>
 
+<% unless admin_exists? %>
+  <div class="error">This job board has no administrator. Please <%= link_to "create an account.", 'signup', method: :get %></div>
+<% end %>
 <% flash.each do |name, msg| -%>
   <%= content_tag :div, msg, class: name %>
 <% end %>
