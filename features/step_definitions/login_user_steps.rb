@@ -24,7 +24,8 @@ Given(/^the user is logged in$/) do
   @user = User.new(:email    => "ceo@boeing.com",
                    :password => "password",
                    :name     => "Boeing",
-                   :website  => "www.boeing.com")
+                   :website  => "www.boeing.com",
+                   :role_id  => Role.find_or_create_by(label: 'employer').id)
   @user.save
   visit('login')
   fill_in('session_email', :with => 'ceo@boeing.com')

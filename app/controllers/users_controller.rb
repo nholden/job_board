@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.role_id = Role.find_or_create_by(label: 'employer').id
     if @user.save
       flash[:notice] = "Created employer account."
       log_in(@user)
@@ -22,6 +23,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :name, :website, :role_id)
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :website)
     end
 end

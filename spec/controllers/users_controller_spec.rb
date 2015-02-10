@@ -29,9 +29,7 @@ RSpec.describe UsersController, :type => :controller do
 
   describe "POST #create" do
     before(:each) do
-      @role = FactoryGirl.build(:role)
-      @role.save
-      @user_attributes = FactoryGirl.attributes_for(:user, role_id: @role.id)
+      @user_attributes = FactoryGirl.attributes_for(:user)
     end
 
     context "with valid information" do
@@ -56,8 +54,7 @@ RSpec.describe UsersController, :type => :controller do
                                          :password =>              "password",
                                          :password_confirmation => "loremipsum",
                                          :name =>                  "x", 
-                                         :website =>               "y",
-                                         :role_id =>               @role.id 
+                                         :website =>               "y"
         }}.to change(User,:count).by(0)
       end
 
@@ -66,8 +63,7 @@ RSpec.describe UsersController, :type => :controller do
                                   :password =>              "password",
                                   :password_confirmation => "loremipsum",
                                   :name =>                  "x", 
-                                  :website =>               "y",
-                                  :role_id =>               @role.id }
+                                  :website =>               "y" }
         expect(response).not_to redirect_to root_url 
       end
     end
@@ -78,8 +74,7 @@ RSpec.describe UsersController, :type => :controller do
                                           :password =>              "password",
                                           :password_confirmation => "password",
                                           :name =>                  "x",
-                                          :website =>               "y",
-                                          :role_id =>               @role.id
+                                          :website =>               "y"
         }}.to change(User,:count).by(0)
       end
 
@@ -88,8 +83,7 @@ RSpec.describe UsersController, :type => :controller do
                                   :password =>              "password",
                                   :password_confirmation => "password",
                                   :name =>                  "x", 
-                                  :website =>               "y",
-                                  :role_id =>               @role.id }
+                                  :website =>               "y" }
         expect(response).not_to redirect_to root_url 
       end
     end
@@ -100,8 +94,7 @@ RSpec.describe UsersController, :type => :controller do
                                           :password =>              "password",
                                           :password_confirmation => "password",
                                           :name =>                  "",
-                                          :website =>               "y",
-                                          :role_id =>               @role.id
+                                          :website =>               "y" 
         }}.to change(User,:count).by(0)
       end
 
@@ -110,8 +103,7 @@ RSpec.describe UsersController, :type => :controller do
                                   :password =>              "password",
                                   :password_confirmation => "password",
                                   :name =>                  "", 
-                                  :website =>               "y",
-                                  :role_id =>               @role.id }
+                                  :website =>               "y" }
         expect(response).not_to redirect_to root_url 
       end
     end
