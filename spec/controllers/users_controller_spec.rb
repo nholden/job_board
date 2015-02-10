@@ -44,7 +44,7 @@ RSpec.describe UsersController, :type => :controller do
       end
     end
 
-    context "with non-mathing passwords" do
+    context "with non-macthing passwords" do
       it "does not create a new user" do
         expect{ post :create, user:     { :email =>                 "a@b.com",
                                           :password =>              "password",

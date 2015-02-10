@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115191304) do
+ActiveRecord::Schema.define(version: 20150210133014) do
 
   create_table "experiences", force: true do |t|
     t.text     "label"
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 20150115191304) do
   add_index "jobs", ["user_id", "created_at"], name: "index_jobs_on_user_id_and_created_at"
   add_index "jobs", ["user_id"], name: "index_jobs_on_user_id"
 
+  create_table "roles", force: true do |t|
+    t.string   "label"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "terms", force: true do |t|
     t.text     "label"
     t.datetime "created_at"
@@ -54,6 +60,9 @@ ActiveRecord::Schema.define(version: 20150115191304) do
     t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "role_id"
   end
+
+  add_index "users", ["role_id"], name: "index_users_on_role_id"
 
 end

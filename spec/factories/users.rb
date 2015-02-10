@@ -6,6 +6,7 @@ FactoryGirl.define do
     name "Boeing"
     description "An aerospace company."
     website "http://www.boeing.com"
+    role
 
     factory :user_with_jobs do
       transient do
