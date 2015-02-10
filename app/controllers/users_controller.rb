@@ -29,6 +29,32 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    user = User.find(params[:id])
+    if current_user == user or is_admin?
+      @user = user
+    else
+      flash[:error] = "You must be logged in to your account to edit your profile."
+      redirect_to '/login'
+    end
+  end
+
+  def update
+    user = User.find(params[:id])
+    if user == current_user or is_admin?
+      if user.update(user_params)
+        flash[:notice] = "Updated profile."
+        redirect_to root_url
+      else
+        flash[:error] = user.errors.full_messages[0]
+        redirect_to "/users/#{user.id}/edit" 
+      end
+    else
+      flash[:error] = "You must be logged in to your account to edit your profile."
+      redirect_to '/login'
+    end
+  end
+
   private
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation, :name, :website)

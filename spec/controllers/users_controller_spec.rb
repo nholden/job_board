@@ -13,16 +13,102 @@ RSpec.describe UsersController, :type => :controller do
     context "when logged in" do
       before(:each) do
         allow(controller).to receive_messages(:logged_in? => true)
+        get :new
       end
 
       it "redirects to root_url" do
-        get :new
         expect(response).to redirect_to(root_url)
       end
 
       it "sends a flash message" do
-        get :new
         expect(flash[:error]).to eql("Already logged in.")
+      end
+    end
+  end
+
+  describe "GET #edit" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+    end
+
+    context "when logged in" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @user)
+        get :edit, id: @user.id
+      end
+
+      it "renders the edit template" do
+        expect(response).to render_template("edit")
+      end
+    end
+
+    context "when not logged in" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => nil)
+        get :edit, id: @user.id
+      end
+
+      it "redirects to login" do
+        expect(response).to redirect_to('/login')
+      end
+
+      it "sends a flash message" do
+        expect(flash[:error]).to eql("You must be logged in to your account to edit your profile.")
+      end
+    end
+  end
+
+  describe "PATCH #update" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+    end
+
+    context "when logged in as the correct user" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @user)
+      end
+
+      context "with mismatched passwords" do
+        before(:each) do
+          patch :update, :id => @user.id, :user => { :password => "password",
+                                        :password_confirmation => "loremips" }
+          @user.reload
+        end
+
+        it "sends a flash message" do
+          expect(flash[:error]).to eql("Password confirmation doesn't match Password")
+        end
+      end  
+      
+      context "with valid information" do
+        before(:each) do
+          patch :update, :id => @user.id, :user => { :name => "Lockheed Martin" }
+          @user.reload
+        end
+
+        it "updates the job" do
+          expect(@user.name).to eql("Lockheed Martin")
+        end
+
+        it "redirects to the homepage" do
+          expect(response).to redirect_to(root_url)
+        end
+      end
+    end
+ 
+    context "when not logged in" do
+      before (:each) do
+        allow(controller).to receive_messages(:current_user => nil)
+        patch :update, :id => @user.id, :job => { :name => "Lockheed Martin" }
+        @user.reload
+      end
+
+      it "does not update the user" do
+        expect(@user.name).to eql("Boeing")
+      end
+
+      it "redirects to the login page" do
+        expect(response).to redirect_to('/login')
       end
     end
   end

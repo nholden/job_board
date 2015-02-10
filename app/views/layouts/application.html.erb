@@ -28,6 +28,9 @@
             <%= link_to "Post new job", new_job_path, method: :get %>
           </li>
           <li class="nav-link">
+            <%= link_to "Edit profile", edit_user_path(current_user), method: :get %>
+          </li>
+          <li class="nav-link">
             <%= link_to "Log out", logout_path, method: :delete %>
           </li>
         <% else %> 

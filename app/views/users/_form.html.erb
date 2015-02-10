@@ -1,0 +1,34 @@
+<%= form_for user do |f| %>
+  <div class="form">
+    <div class="title">
+    <% if admin_exists? %>
+      <h1><%= title_label %> employer profile</h1>
+    <% else %>
+      <h1><%= title_label %> administrator profile</h1>
+    <% end %>
+    </div>
+    <div class="field">
+      <%= label_tag(:name, "Company name:") %>
+      <%= f.text_field :name %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:website, "Company website:") %>
+      <%= f.text_field :website %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:email, "Email:") %>
+      <%= f.text_field :email %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:password, "Password:") %>
+      <%= f.password_field :password  %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:password_confirmation, "Confirm:") %>
+      <%= f.password_field :password_confirmation %><br />
+    </div>
+    <div class="trigger">
+      <%= submit_tag(submit_label) %>
+    </div>
+  </div>
+<% end %>
