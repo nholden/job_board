@@ -28,29 +28,36 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "POST #create" do
+    before(:each) do
+      @role = FactoryGirl.build(:role)
+      @role.save
+      @user_attributes = FactoryGirl.attributes_for(:user, role_id: @role.id)
+    end
+
     context "with valid information" do
       it "creates a new user" do
-        expect{ post :create, user: FactoryGirl.attributes_for(:user) }.to change(User,:count).by(1)
+        expect{ post :create, user: @user_attributes}.to change(User,:count).by(1)
       end
 
       it "redirects to the homepage" do
-        post :create, user: FactoryGirl.attributes_for(:user)
+        post :create, user: @user_attributes
         expect(response).to redirect_to root_url
       end
 
       it "logs the user in" do
-        post :create, user: FactoryGirl.attributes_for(:user)
+        post :create, user: @user_attributes
         expect(logged_in?).to eql(true)
       end
     end
 
     context "with non-macthing passwords" do
       it "does not create a new user" do
-        expect{ post :create, user:     { :email =>                 "a@b.com",
-                                          :password =>              "password",
-                                          :password_confirmation => "loremipsu",
-                                          :name =>                  "x",
-                                          :website =>               "y",
+        expect{ post :create, user:    { :email =>                 "a@b.com",
+                                         :password =>              "password",
+                                         :password_confirmation => "loremipsum",
+                                         :name =>                  "x", 
+                                         :website =>               "y",
+                                         :role_id =>               @role.id 
         }}.to change(User,:count).by(0)
       end
 
@@ -59,7 +66,8 @@ RSpec.describe UsersController, :type => :controller do
                                   :password =>              "password",
                                   :password_confirmation => "loremipsum",
                                   :name =>                  "x", 
-                                  :website =>               "y" }
+                                  :website =>               "y",
+                                  :role_id =>               @role.id }
         expect(response).not_to redirect_to root_url 
       end
     end
@@ -71,6 +79,7 @@ RSpec.describe UsersController, :type => :controller do
                                           :password_confirmation => "password",
                                           :name =>                  "x",
                                           :website =>               "y",
+                                          :role_id =>               @role.id
         }}.to change(User,:count).by(0)
       end
 
@@ -79,7 +88,8 @@ RSpec.describe UsersController, :type => :controller do
                                   :password =>              "password",
                                   :password_confirmation => "password",
                                   :name =>                  "x", 
-                                  :website =>               "y" }
+                                  :website =>               "y",
+                                  :role_id =>               @role.id }
         expect(response).not_to redirect_to root_url 
       end
     end
@@ -91,6 +101,7 @@ RSpec.describe UsersController, :type => :controller do
                                           :password_confirmation => "password",
                                           :name =>                  "",
                                           :website =>               "y",
+                                          :role_id =>               @role.id
         }}.to change(User,:count).by(0)
       end
 
@@ -99,7 +110,8 @@ RSpec.describe UsersController, :type => :controller do
                                   :password =>              "password",
                                   :password_confirmation => "password",
                                   :name =>                  "", 
-                                  :website =>               "y" }
+                                  :website =>               "y",
+                                  :role_id =>               @role.id }
         expect(response).not_to redirect_to root_url 
       end
     end
