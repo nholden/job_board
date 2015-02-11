@@ -6,7 +6,8 @@ Feature: View users
   Scenario: View users successfully
     Given the admin is logged in
     Given an employer exists
-    When he visits the manage users page
+    When he visits the jobs page
+    When he clicks "Manage users"
     Then he should see "Boeing"
 
   Scenario: Non-logged in user attempts to access manage users page

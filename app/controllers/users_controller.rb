@@ -56,6 +56,12 @@ class UsersController < ApplicationController
   end
 
   def index
+    if !logged_in? or !is_admin?
+      flash[:error] = "You must be logged in as an administrator to manage users."
+      redirect_to '/login' and return unless logged_in?
+      redirect_to root_url
+    end
+    @users = User.all
   end
 
   private
