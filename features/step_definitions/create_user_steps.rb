@@ -6,6 +6,10 @@ Given(/^an administrator exists$/) do
   FactoryGirl.build(:admin).save
 end
 
+Given(/^an employer exists$/) do
+  FactoryGirl.build(:user).save
+end
+
 When(/^he visits the create user page$/) do
   visit('users/new')
 end

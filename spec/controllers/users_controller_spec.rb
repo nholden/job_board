@@ -113,6 +113,54 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
+  describe "GET #index" do
+    before(:each) do
+      @employer = FactoryGirl.create(:user)
+      @admin = FactoryGirl.create(:admin)
+    end
+
+    context "when logged in as an administrator" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @admin)
+        get :index
+      end
+   
+      it "renders the index template" do
+        expect(response).to render_template("index")
+      end
+    end
+
+    context "when logged in as an employer" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @employer)
+        get :index
+      end
+
+      it "redirects to the jobs page" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "sends a flash" do
+        expect(flash[:error]).to eql("You must be logged in as an administrator to manage users.")
+      end
+    end
+
+    context "when not logged in" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => nil)
+        get :index
+      end
+
+      it "redirects to the login page" do
+        expect(response).to redirect_to("/login")
+      end
+
+      it "sends a flash" do
+        expect(flash[:error]).to eql("You must be logged in as an administrator to manage users.")
+      end
+    end
+  end
+
   describe "POST #create" do
     before(:each) do
       @user_attributes = FactoryGirl.attributes_for(:user)

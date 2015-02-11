@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th>User</th>
+    <th>Role</th>
+    <th>Email</th>
+    <th>Number of jobs</th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>  
+      <td><%= user.name %></td>
+      <td><%= user.role.label %></td>
+      <td><%= user.email %></td>
+      <td><%= user.jobs.count %></td>
+    </tr>
+  <% end %>
+</table>
