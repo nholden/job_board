@@ -10,7 +10,7 @@ Feature: Delete an employer
     Then he should see "Aerospace engineer intern"
     When he visits the manage users page
     Then he should see "Boeing"
-    When he clicks "(Delete)"
+    When he clicks the delete button for Boeing
     Then he should not see "Boeing"
     When he visits the jobs page
     Then he should not see "Aerospace engineer intern"
