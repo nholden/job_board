@@ -64,6 +64,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def destroy
+    redirect_to '/users'
+  end
+
   private
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation, :name, :website)

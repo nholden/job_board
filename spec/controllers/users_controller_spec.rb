@@ -161,6 +161,74 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
+  describe "DELETE #destroy" do
+    before(:each) do
+      @employer = FactoryGirl.create(:user)
+      @admin = FactoryGirl.create(:admin)
+    end
+
+    context "when logged in as an administrator" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @admin)
+      end
+
+      it "deletes the user" do
+        expect{ delete :destroy, id: @employer.id}.to change(Role.find_or_create_by(label: 'employer').users,:count).by(1)
+      end
+
+      it "redirects to the users page" do
+        delete :destroy, id: @employer.id
+        expect(response).to redirect_to('/users')
+      end
+
+      it "sends a flash" do
+        delete :destroy, id: @employer.id
+        expect(flash[:notice]).to eql("User successfully deleted.")
+      end
+    end
+
+    context "when logged in as an employer" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @employer)
+      end
+
+      it "does not delete the user" do
+        expect{ delete :destroy, id: @employer.id}.to change(Role.find_or_create_by(label: 'employer').users,:count).by(0)
+      end
+
+      it "redirects to the jobs page" do
+        delete :destroy, id: @employer.id
+        expect(response).to redirect_to('/jobs')
+      end
+
+      it "sends a flash" do
+        delete :destroy, id: @employer.id
+        expect(flash[:error]).to eql("You must be logged in as an administrator to delete users.")
+      end
+    end
+
+    context "when not logged in" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => nil)
+        delete :destroy, id: @employer.id
+      end
+
+      it "does not delete the user" do
+        expect{ delete :destroy, id: @employer.id}.to change(Role.find_or_create_by(label: 'employer').users,:count).by(0)
+      end
+
+      it "redirects to the login page" do
+        delete :destroy, id: @employer.id
+        expect(response).to redirect_to('/login')
+      end
+
+      it "sends a flash" do
+        delete :destroy, id: @employer.id
+        expect(flash[:error]).to eql("You must be logged in as an administrator to delete users.")
+      end
+    end
+  end
+
   describe "POST #create" do
     before(:each) do
       @user_attributes = FactoryGirl.attributes_for(:user)
