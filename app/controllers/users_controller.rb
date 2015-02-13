@@ -65,7 +65,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    redirect_to '/users'
+    user = User.find(params[:id])
+    if !logged_in? or !is_admin?
+      flash[:error] = "You must be logged in as an administrator to delete users."
+      redirect_to '/login' and return unless logged_in?
+      redirect_to root_url and return
+    elsif user.destroy
+      flash[:notice] = "User deleted."
+      redirect_to '/users'
+    end
   end
 
   private

@@ -173,7 +173,7 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       it "deletes the user" do
-        expect{ delete :destroy, id: @employer.id}.to change(Role.find_or_create_by(label: 'employer').users,:count).by(1)
+        expect{ delete :destroy, id: @employer.id}.to change(Role.find_or_create_by(label: 'employer').users,:count).by(-1)
       end
 
       it "redirects to the users page" do
@@ -183,7 +183,7 @@ RSpec.describe UsersController, :type => :controller do
 
       it "sends a flash" do
         delete :destroy, id: @employer.id
-        expect(flash[:notice]).to eql("User successfully deleted.")
+        expect(flash[:notice]).to eql("User deleted.")
       end
     end
 
@@ -198,7 +198,7 @@ RSpec.describe UsersController, :type => :controller do
 
       it "redirects to the jobs page" do
         delete :destroy, id: @employer.id
-        expect(response).to redirect_to('/jobs')
+        expect(response).to redirect_to(root_url)
       end
 
       it "sends a flash" do
