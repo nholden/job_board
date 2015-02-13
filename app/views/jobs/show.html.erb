@@ -1,9 +1,9 @@
 <h1><%= @job.title %></h1>
 <br />
 <p>Employer: <%= @job.user.name %></p>
-<p>Position term: <%= @job.term %></p>
+<p>Position term: <%= @job.term.label %></p>
 <p>Location: <%= @job.location %></p>
-<p>Experience: <%= @job.experience %></p>
+<p>Experience: <%= @job.experience.label %></p>
 <p>Majors: <%= @job.majors %></p>
 <p>Description: <%= @job.description %></p>
 <p>URL: <%= @job.url %></p>
