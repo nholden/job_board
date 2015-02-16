@@ -26,3 +26,11 @@ Feature: Create admin
     Then he should see the job title
     When he clicks "Delete"
     Then he should not see the job title
+
+  Scenario: Create additional admin
+    Given the admin is logged in
+    When he clicks "Manage users"
+    When he clicks "Create new user"
+    When he fills out the create new user form for an admin
+    When he clicks "Create new user"
+    Then he should see "Created new user."

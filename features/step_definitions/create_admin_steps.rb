@@ -15,3 +15,11 @@ Given(/^the admin is logged in$/) do
   click_button('Login')
 end
 
+When(/^he fills out the create new user form for an admin$/) do
+  fill_in('user_email', :with => 'secondadmin@admin.com')
+  fill_in('user_password', :with => 'password')
+  fill_in('user_password_confirmation', :with => 'password')
+  fill_in('user_name', :with => 'Second Admin')
+  fill_in('user_website', :with => 'http://www.admin.com')
+  select('admin', :from => 'user_role')
+end
