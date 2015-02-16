@@ -21,5 +21,21 @@ When(/^he fills out the create new user form for an admin$/) do
   fill_in('user_password_confirmation', :with => 'password')
   fill_in('user_name', :with => 'Second Admin')
   fill_in('user_website', :with => 'http://www.admin.com')
-  select('admin', :from => 'user_role')
+  select('admin', :from => 'user_role_id')
+  click_button('Create account')
+end
+
+When(/^he fills out the create new user form for an employer$/) do
+  fill_in('user_email', :with => 'ceo@raytheon.com')
+  fill_in('user_password', :with => 'password')
+  fill_in('user_password_confirmation', :with => 'password')
+  fill_in('user_name', :with => 'Raytheon')
+  fill_in('user_website', :with => 'http://www.raytheon.com')
+  select('employer', :from => 'user_role_id')
+  click_button('Create account')
+end
+
+Given(/^admin and employer roles exist$/) do
+  FactoryGirl.create(:role, label: 'admin')
+  FactoryGirl.create(:role, label: 'employer')
 end

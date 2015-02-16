@@ -3,25 +3,48 @@ include SessionsHelper
 
 RSpec.describe UsersController, :type => :controller do
   describe "GET #new" do
+    before(:each) do
+      @employer = FactoryGirl.create(:user)
+      @admin = FactoryGirl.create(:admin)
+    end
+    
     context "when not logged in" do
-      it "renders the new template" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => nil)
+        allow(controller).to receive_messages(:logged_in? => false)
         get :new
+      end
+
+      it "renders the new template" do
         expect(response).to render_template("new")
       end
     end
     
-    context "when logged in" do
+    context "when logged in as an employer" do
       before(:each) do
+        allow(controller).to receive_messages(:current_user => @employer)
         allow(controller).to receive_messages(:logged_in? => true)
         get :new
       end
-
+ 
       it "redirects to root_url" do
         expect(response).to redirect_to(root_url)
       end
 
       it "sends a flash message" do
         expect(flash[:error]).to eql("Already logged in.")
+      end
+    end
+
+    context "when logged in as an administrator" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @admin)
+        allow(controller).to receive_messages(:logged_in? => true)
+        get :new
+      end
+
+      it "renders the new template" do
+        expect(response).to render_template("new")
       end
     end
   end
@@ -250,14 +273,37 @@ RSpec.describe UsersController, :type => :controller do
           expect{ post :create, user: @user_attributes}.to change(Role.find_or_create_by(label: 'employer').users,:count).by(1)
         end
 
-        it "redirects to the homepage" do
-          post :create, user: @user_attributes
-          expect(response).to redirect_to root_url
+        context "when user creates new user" do
+          before(:each) do
+            allow(controller).to receive_messages(:is_admin? => false)
+            post :create, user: @user_attributes
+          end
+ 
+          it "redirects to the homepage" do
+            expect(response).to redirect_to root_url
+          end
+
+          it "logs the user in" do
+            expect(logged_in?).to eql(true)
+            expect(is_admin?).to eql(false)
+          end
         end
 
-        it "logs the user in" do
-          post :create, user: @user_attributes
-          expect(logged_in?).to eql(true)
+        context "when admin creates new user" do
+          before(:each) do
+            allow(controller).to receive_messages(:is_admin? => true)
+            @role = FactoryGirl.create(:role)
+            post :create, user:    { :email =>                 "a@b.com",
+                                     :password =>              "password",
+                                     :password_confirmation => "password",
+                                     :name =>                  "x", 
+                                     :website =>               "y",
+                                     :role_id =>               @role.id }
+          end
+
+          it "redirects to the users page" do
+            expect(response).to redirect_to ('/users')
+          end
         end
       end
 

@@ -30,7 +30,20 @@ Feature: Create admin
   Scenario: Create additional admin
     Given the admin is logged in
     When he clicks "Manage users"
+    Then he should not see "Second Admin"
     When he clicks "Create new user"
+    Then he should see "Create new profile"
     When he fills out the create new user form for an admin
+    Then he should see "Created admin account."
+    Then he should see "Second Admin"
+
+  Scenario: Create additional employer
+    Given admin and employer roles exist
+    Given the admin is logged in
+    When he clicks "Manage users"
+    Then he should not see "Raytheon"
     When he clicks "Create new user"
-    Then he should see "Created new user."
+    Then he should see "Create new profile"
+    When he fills out the create new user form for an employer
+    Then he should see "Created employer account."
+    Then he should see "Raytheon"

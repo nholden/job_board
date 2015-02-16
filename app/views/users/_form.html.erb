@@ -1,11 +1,11 @@
 <%= form_for user do |f| %>
   <div class="form">
     <div class="title">
-    <% if admin_exists? %>
-      <h1><%= title_label %> employer profile</h1>
-    <% else %>
-      <h1><%= title_label %> administrator profile</h1>
-    <% end %>
+      <h1><%= title_label%> 
+    <% if is_admin? %>new
+    <% elsif admin_exists? %>employer
+    <% else %>administrator<% end %> 
+    profile</h1>
     </div>
     <div class="field">
       <%= label_tag(:name, "Company name:") %>
@@ -27,6 +27,12 @@
       <%= label_tag(:password_confirmation, "Confirm:") %>
       <%= f.password_field :password_confirmation %><br />
     </div>
+    <% if is_admin? %>
+      <div class="field">
+        <%= label_tag(:role, "User role:") %>
+        <%= f.collection_select(:role_id, Role.all, :id, :label) %>
+      </div>
+    <% end %>
     <div class="trigger">
       <%= submit_tag(submit_label) %>
     </div>

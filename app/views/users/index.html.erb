@@ -18,4 +18,7 @@
       <td><%= user.jobs.count %></td>
     </tr>
   <% end %>
+  <tr>
+    <td colspan=4><%= link_to "Create new user", new_user_path, method: :get %></td>
+  </tr>
 </table>

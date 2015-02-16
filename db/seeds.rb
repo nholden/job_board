@@ -19,3 +19,7 @@ Term.create([
   { label: 'Part time permanent' },
   { label: 'Full time temporary' },
   { label: 'Part time temporary' }])
+
+Role.create([
+  { label: 'admin' },
+  { label: 'employer' }])
