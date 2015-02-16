@@ -22,6 +22,9 @@
           <li class="nav-link">
             <%= link_to "Manage users", users_path, method: :get %>
           </li>
+          <li class="nav-link">
+            <%= link_to "Settings", settings_path, method: :get %>
+          </li>
         <% end %>
         <% if current_user.present? %>
           <li class="nav-link">

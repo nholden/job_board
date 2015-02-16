@@ -51,6 +51,14 @@ div.notice {
     @include span-columns(12);
   }
 
+  .item {
+    @include span-columns(10);
+  }
+
+  .delete {
+    @include span-columns(1);
+  }
+
   .trigger {
     @include span-columns(12);
 

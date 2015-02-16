@@ -1,0 +1,21 @@
+<%= form_tag do %>
+  <div class="form">
+    <div class="title">
+      <h1>Experiences</h1>
+    </div>
+    <% Experience.all.each do |experience| %>
+      <div class="delete">
+        <%= link_to "[X]", '' %>
+      </div>
+      <div class="item">
+        <%= text_field_tag :experience_id, experience.label, id: experience.id %>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= link_to "Add experience", '' %>
+    </div>
+    <div class="trigger">
+      <%= submit_tag("Save") %>
+    </div>
+  </div>
+<% end %>
