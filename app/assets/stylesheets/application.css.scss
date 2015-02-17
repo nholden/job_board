@@ -51,12 +51,16 @@ div.notice {
     @include span-columns(12);
   }
 
-  .item {
-    @include span-columns(10);
+  .removable_item {
+    @include span-columns(12);
   }
 
-  .delete {
+  .removable_item_button {
     @include span-columns(1);
+  }
+
+  .removable_item_field {
+    @include span-columns(10);
   }
 
   .trigger {

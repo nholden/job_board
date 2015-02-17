@@ -1,18 +1,36 @@
 <%= form_tag do %>
   <div class="form">
-    <div class="title">
-      <h1>Experiences</h1>
-    </div>
-    <% Experience.all.each do |experience| %>
-      <div class="delete">
-        <%= link_to "[X]", '' %>
+    <div class="experience">
+      <strong>Experiences</strong>
+      <div class="field">
+        <%= link_to "Add experience", '', class: 'add_field_button' %>
       </div>
-      <div class="item">
-        <%= text_field_tag :experience_id, experience.label, id: experience.id %>
+      <% Experience.all.each do |experience| %>
+      <div class="removable_item">
+        <div class="removable_item_button">
+          <%= link_to "[X]", '', class: 'remove_field' %>
+        </div>
+        <div class="removable_item_field">
+          <%= text_field_tag :experience_id, experience.label, id: experience.id %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <div class="term">
+      <strong>Terms</strong>
+      <div class="field">
+        <%= link_to "Add term", '', class: 'add_field_button' %>
+      </div>
+      <% Term.all.each do |term| %>
+      <div class="removable_item">
+        <div class="removable_item_button">
+          <%= link_to "[X]", '', class: 'remove_field' %>
+        </div>
+        <div class="removable_item_field">
+          <%= text_field_tag :term_id, term.label, id: term.id %>
+        </div>
       </div>
     <% end %>
-    <div class="field">
-      <%= link_to "Add experience", '' %>
     </div>
     <div class="trigger">
       <%= submit_tag("Save") %>
