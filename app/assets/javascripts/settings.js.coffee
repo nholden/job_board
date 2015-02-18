@@ -18,7 +18,7 @@ $(document).ready ->
             <a href="#" class="remove_field">[X]</a>
           </div>
           <div class="removable_item_field">
-            <input type="text" name="new_' + $(this).parent('div').parent('div').attr('class') + '[]"/>
+            <input type="text" id="new_' + $(this).parent('div').parent('div').attr('class') + ' />
           </div>
         </div>'
     return

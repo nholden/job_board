@@ -1,4 +1,5 @@
 When(/^he adds a term$/) do
-  fill_in('term_label', :with => 'Term 3')
+  click_link('Add term')
+  fill_in('new_term', :with => 'Term 3')
   click_button('Save')
 end
