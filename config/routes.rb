@@ -7,12 +7,13 @@ Rails.application.routes.draw do
   root 'jobs#index'
 
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-  get 'login'      => 'sessions#new'
-  post 'login'     => 'sessions#create'
-  delete 'logout'  => 'sessions#destroy'
-  get 'signup'     => 'users#new'
-  get 'settings'   => 'settings#edit'
+  #   get 'products/:id'   => 'catalog#view'
+  get 'login'              => 'sessions#new'
+  post 'login'             => 'sessions#create'
+  delete 'logout'          => 'sessions#destroy'
+  get 'signup'             => 'users#new'
+  get 'settings'           => 'settings#edit'
+  put 'update_experiences' => 'settings#update_experiences'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

@@ -1,6 +1,6 @@
 <div class="settings">
   <div class="option-settings">
-    <%= form_tag do %>
+    <%= form_for :experience, url: {action: "update_experiences"}, html: {method: "put"} do |f| %>
       <div class="title">
         <h1>Experiences</h1>
       </div>
@@ -11,7 +11,7 @@
             <%= link_to "[X]", '' %>
           </div>
           <div class="option">
-            <%= text_field_tag "experience_#{experience.id}", experience.label %>
+            <%= text_field_tag "experience_#{experience.id}", experience.label, name: experience.id %>
           </div>
         </div>
       <% end %>
@@ -21,7 +21,7 @@
             <%= link_to "[X]", '' %>
           </div>
           <div class="option">
-            <%= text_field_tag "new_experience", nil, placeholder: "New experience" %>
+            <%= text_field_tag "new_experiences[]", nil, placeholder: "New experience" %>
           </div>
         </div>
       <% end %>
