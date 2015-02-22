@@ -4,19 +4,29 @@
 
 $(document).ready ->
   $(".new").hide()
+  $(".edit-option").hide()
   $(".options").each ->
     $(this).find(".new").first().show()
     return
-  $(".new input").click ->
+  $(".new input").focus ->
     event.preventDefault()
-    $(this).parent().parent().next().show()
+    blankInputs = $(this).parent().parent().parent().parent().find(".new input").filter ->
+      return $(this).val() == ""
+    blankInputs.first().parent().parent().parent().show()
+    $(this).parent().parent().parent().next().show()
+    return
+  $(".view-option a").click ->
+    event.preventDefault()
+    $(this).parent().hide()
+    $(this).parent().parent().find(".edit-option").show()
     return
   $(".delete a").click ->
     event.preventDefault()
     $(this).parent().parent().hide()
     blankInputs = $(this).parent().parent().parent().find(".new input").filter ->
       return $(this).val() == ""
-    blankInputs.first().parent().parent().show()
+    blankInputs.parent().parent().parent().hide()
+    blankInputs.first().parent().parent().parent().show()
     $(this).parent().parent().find("input").val("")
     return
   return
