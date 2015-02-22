@@ -1,6 +1,6 @@
-<%= form_tag do %>
-  <div class="settings">
-    <div class="option-settings">
+<div class="settings">
+  <div class="option-settings">
+    <%= form_tag do %>
       <div class="title">
         <h1>Experiences</h1>
       </div>
@@ -26,6 +26,11 @@
         </div>
       <% end %>
       </div>
+      <div class="button">
+        <%= submit_tag("Save experiences") %><br /><br />
+      </div>
+    <% end %>
+    <%= form_tag do %>
       <div class="title">
         <h1>Terms</h1>
       </div>
@@ -52,7 +57,7 @@
       <% end %>
       </div>
       <div class="button">
-        <%= submit_tag("Save") %>
+        <%= submit_tag("Save terms") %>
       </div>
     </div>
   </div>
