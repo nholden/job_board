@@ -4,22 +4,53 @@
       <div class="title">
         <h1>Experiences</h1>
       </div>
+      <div class="options">
       <% Experience.all.each do |experience| %>
-        <div class="delete">
-          <%= link_to "[X]", '' %>
-        </div>
-        <div class="option">
-          <%= text_field_tag "experience_#{experience.id}", experience.label %>
+        <div class="existing">
+          <div class="delete">
+            <%= link_to "[X]", '' %>
+          </div>
+          <div class="option">
+            <%= text_field_tag "experience_#{experience.id}", experience.label %>
+          </div>
         </div>
       <% end %>
       <% (10 - Experience.count).times do %>
-        <div class="delete">
-          <%= link_to "[X]", '' %>
-        </div>
-        <div class="option">
-          <%= text_field_tag "new_experience" %>
+        <div class="new">
+          <div class="delete">
+            <%= link_to "[X]", '' %>
+          </div>
+          <div class="option">
+            <%= text_field_tag "new_experience", nil, placeholder: "New experience" %>
+          </div>
         </div>
       <% end %>
+      </div>
+      <div class="title">
+        <h1>Terms</h1>
+      </div>
+      <div class="options">
+      <% Term.all.each do |term| %>
+        <div class="existing">
+          <div class="delete">
+            <%= link_to "[X]", '' %>
+          </div>
+          <div class="option">
+            <%= text_field_tag "term_#{term.id}", term.label %>
+          </div>
+        </div>
+      <% end %>
+      <% (10 - Term.count).times do %>
+        <div class="new">
+          <div class="delete">
+            <%= link_to "[X]", '' %>
+          </div>
+          <div class="option">
+            <%= text_field_tag "new_term", nil, placeholder: "New term" %>
+          </div>
+        </div>
+      <% end %>
+      </div>
       <div class="button">
         <%= submit_tag("Save") %>
       </div>
