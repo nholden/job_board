@@ -1,21 +1,28 @@
 <%= form_tag do %>
-  <div class="form">
-    <div class="title">
-      <h1>Experiences</h1>
-    </div>
-    <% Experience.all.each do |experience| %>
-      <div class="delete">
-        <%= link_to "[X]", '' %>
+  <div class="settings">
+    <div class="option-settings">
+      <div class="title">
+        <h1>Experiences</h1>
       </div>
-      <div class="item">
-        <%= text_field_tag :experience_id, experience.label, id: experience.id %>
+      <% Experience.all.each do |experience| %>
+        <div class="delete">
+          <%= link_to "[X]", '' %>
+        </div>
+        <div class="option">
+          <%= text_field_tag "experience_#{experience.id}", experience.label %>
+        </div>
+      <% end %>
+      <% (10 - Experience.count).times do %>
+        <div class="delete">
+          <%= link_to "[X]", '' %>
+        </div>
+        <div class="option">
+          <%= text_field_tag "new_experience" %>
+        </div>
+      <% end %>
+      <div class="button">
+        <%= submit_tag("Save") %>
       </div>
-    <% end %>
-    <div class="field">
-      <%= link_to "Add experience", '' %>
-    </div>
-    <div class="trigger">
-      <%= submit_tag("Save") %>
     </div>
   </div>
 <% end %>

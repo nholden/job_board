@@ -51,14 +51,6 @@ div.notice {
     @include span-columns(12);
   }
 
-  .item {
-    @include span-columns(10);
-  }
-
-  .delete {
-    @include span-columns(1);
-  }
-
   .trigger {
     @include span-columns(12);
 
@@ -71,7 +63,33 @@ div.notice {
   }
 }
   
+.settings {
 
+  $login-form-border-color: $base-border-color;
+  $login-form-background: lighten($login-form-border-color, 10%);
+
+  @include clearfix;
+  @include outer-container;
+  background: $login-form-background;
+  border-radius: $base-border-radius;
+  border: 1px solid $login-form-border-color;
+  padding: $gutter / 2;
+  max-width: 600px;
+
+  .option-settings {
+    .delete {
+      @include span-columns(1);
+    }
+
+    .option {
+      @include span-columns(10);
+    } 
+
+    .button {
+      @include span-columns(12);
+    }
+  }
+}
 
 .search-tools {  
   ///////////////////////////////////////////////////////////////////////////////////
