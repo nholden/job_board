@@ -14,8 +14,9 @@ $(document).ready ->
   $(".delete a").click ->
     event.preventDefault()
     $(this).parent().parent().hide()
-    blankInputs = $(this).parent().parent().parent().find("input").filter ->
+    blankInputs = $(this).parent().parent().parent().find(".new input").filter ->
       return $(this).val() == ""
     blankInputs.first().parent().parent().show()
+    $(this).parent().parent().find("input").val("")
     return
   return
