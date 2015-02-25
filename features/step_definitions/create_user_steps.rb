@@ -46,6 +46,10 @@ Then(/^he should not see "(.*?)"$/) do |text|
   page.should_not have_content(text)
 end
 
+Then(/^he should not see a textbox filled in with "(.*?)"$/) do |arg1|
+  page.should_not have_selector("input[value='#{text}']")
+end
+
 When(/^he logs out$/) do
   click_link("Log out")
 end
