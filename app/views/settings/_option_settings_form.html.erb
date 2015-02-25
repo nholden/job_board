@@ -4,17 +4,18 @@
     <h1><%= option.capitalize %>s</h1>
   </div>
   <div class="options">
-  <% model.all.each do |option| %>
+  <% model.all.each do |this_option| %>
     <div class="existing">
       <div class="delete">
         <%= link_to "[X]", '' %>
       </div>
       <div class="option">
         <div class="view-option">
-          <%= option.label %> <%= link_to "(Edit)", '' %>
+          <%= this_option.label %> <%= link_to "(Edit)", '' %>
         </div>
         <div class="edit-option">
-          <%= text_field_tag option, option.label %>
+          <% this_option_identifier = option + "_" + this_option.id.to_s %>
+          <%= text_field_tag this_option_identifier, this_option.label %>
         </div>
       </div>
     </div>

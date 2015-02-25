@@ -20,27 +20,27 @@ Feature: Manage terms and experiences
     Given job terms and experiences exist
     When he clicks "Settings"
     When he edits an experience
-    Then he should not see a textbox filled in with "Experience 1"
-    Then he should see a textbox filled in with "Edited experience 1"
+    Then he should not see a textbox filled in with "Experience A"
+    Then he should see a textbox filled in with "Edited experience A"
 
   Scenario: Edit a term
     Given the admin is logged in
     Given job terms and experiences exist
     When he clicks "Settings"
     When he edits a term
-    Then he should not see a textbox filled in with "Term 1"
-    Then he should see a textbox filled in with "Edited term 1"
+    Then he should not see a textbox filled in with "Term A"
+    Then he should see a textbox filled in with "Edited term A"
 
   Scenario: Delete an experience
     Given the admin is logged in
     Given job terms and experiences exist
     When he clicks "Settings"
     When he deletes an experience
-    Then he should not see a textbox filled in with "Experience 1" 
+    Then he should not see a textbox filled in with "Experience A" 
     
   Scenario: Delete a term
     Given the admin is logged in
     Given job terms and experiences exist
     When he clicks "Settings"
     When he deletes a term
-    Then he should not see a textbox filled in with "Term 1"
+    Then he should not see a textbox filled in with "Term A"
