@@ -93,10 +93,18 @@ end
       it "creates the new experience" do
         expect{ 
           put :update_experiences,
-              @experience1.id.to_s => @experience1.label,
-              @experience2.id.to_s => @experience2.label,
+              "experience_" + @experience1.id.to_s => @experience1.label,
+              "experience_" + @experience2.id.to_s => @experience2.label,
               :new_experiences => ["Experience 3", "", "", "", ""] 
         }.to change(Experience.all, :count).by(1)
+      end
+
+      it "updates an existing experience" do
+        put :update_experiences,
+            "experience_" + @experience1.id.to_s => "Edited experience 1",
+            "experience_" + @experience2.id.to_s => @experience2.label, 
+            :new_experiences => [""]
+        expect(Experience.find_by label: "Edited experience 1").to_not be_nil
       end
     end
   end
@@ -144,10 +152,18 @@ end
       it "creates the new term" do
         expect{ 
           put :update_terms,
-              @term1.id.to_s => @term1.label,
-              @term2.id.to_s => @term2.label,
+              "term_" + @term1.id.to_s => @term1.label,
+              "term_" + @term2.id.to_s => @term2.label,
               :new_terms => ["Term 3", "", "", "", ""] 
         }.to change(Term.all, :count).by(1)
+      end
+
+      it "updates an existing term" do
+        put :update_terms,
+            "term_" + @term1.id.to_s => "Edited term 1",
+            "term_" + @term2.id.to_s => @term2.label, 
+            :new_terms => [""]
+        expect(Term.find_by label: "Edited term 1").to_not be_nil
       end
     end
   end

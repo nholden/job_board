@@ -19,10 +19,12 @@ When(/^he edits a term$/) do
 end
 
 When(/^he deletes an experience$/) do
-  pending # express the regexp above with the code you wish you had
+  find("a[class='delete_experience_1']").click
+  click_button('Save experiences')
 end
 
 When(/^he deletes a term$/) do
-  pending # express the regexp above with the code you wish you had
+  find("a[class='delete_term_1']").click
+  click_button('Save terms')
 end
 

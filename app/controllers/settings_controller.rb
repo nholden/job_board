@@ -14,6 +14,16 @@ class SettingsController < ApplicationController
         Experience.create(label: experience) unless experience.blank?
       end
     end
+    params.each do |key, value|
+      if key.to_s.match(/experience_(.*)/)
+        existing_experience_id = key.to_s.match(/experience_(.*)/)[1].to_i
+        existing_experience = Experience.find(existing_experience_id)
+        if existing_experience.label != value
+          existing_experience.label = value
+          existing_experience.save
+        end
+      end    
+    end
     redirect_to '/settings'
   end
 
@@ -25,6 +35,16 @@ class SettingsController < ApplicationController
       params[:new_terms].each do |term|
         Term.create(label: term) unless term.blank?
       end
+    end
+    params.each do |key, value|
+      if key.to_s.match(/term_(.*)/)
+        existing_term_id = key.to_s.match(/term_(.*)/)[1].to_i
+        existing_term = Term.find(existing_term_id)
+        if existing_term.label != value
+          existing_term.label = value
+          existing_term.save
+        end
+      end    
     end
     redirect_to '/settings'
   end

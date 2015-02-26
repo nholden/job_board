@@ -5,16 +5,16 @@
   </div>
   <div class="options">
   <% model.all.each do |this_option| %>
+    <% this_option_identifier = option + "_" + this_option.id.to_s %>
     <div class="existing">
       <div class="delete">
-        <%= link_to "[X]", '' %>
+        <%= link_to "[X]", '', class: "delete_" + this_option_identifier %>
       </div>
       <div class="option">
         <div class="view-option">
           <%= this_option.label %> <%= link_to "(Edit)", '' %>
         </div>
         <div class="edit-option">
-          <% this_option_identifier = option + "_" + this_option.id.to_s %>
           <%= text_field_tag this_option_identifier, this_option.label %>
         </div>
       </div>
