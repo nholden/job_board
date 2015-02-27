@@ -18,7 +18,9 @@ class SettingsController < ApplicationController
       if key.to_s.match(/experience_(.*)/)
         existing_experience_id = key.to_s.match(/experience_(.*)/)[1].to_i
         existing_experience = Experience.find(existing_experience_id)
-        if existing_experience.label != value
+        if value.blank?
+          existing_experience.destroy
+        elsif existing_experience.label != value
           existing_experience.label = value
           existing_experience.save
         end
@@ -40,7 +42,9 @@ class SettingsController < ApplicationController
       if key.to_s.match(/term_(.*)/)
         existing_term_id = key.to_s.match(/term_(.*)/)[1].to_i
         existing_term = Term.find(existing_term_id)
-        if existing_term.label != value
+        if value.blank?
+          existing_term.destroy
+        elsif existing_term.label != value
           existing_term.label = value
           existing_term.save
         end

@@ -8,7 +8,7 @@
     <% this_option_identifier = option + "_" + this_option.id.to_s %>
     <div class="existing">
       <div class="delete">
-        <%= link_to "[X]", '', class: "delete_" + this_option_identifier %>
+        <%= link_to "[X]", {controller: "settings", :action => "update_#{option}s", "#{this_option_identifier}".to_sym => ""}, method: :put %>
       </div>
       <div class="option">
         <div class="view-option">

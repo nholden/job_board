@@ -106,6 +106,15 @@ end
             :new_experiences => [""]
         expect(Experience.find_by label: "Edited experience 1").to_not be_nil
       end
+
+      it "deletes blank experiences" do
+        expect{ 
+          put :update_experiences,
+              "experience_" + @experience1.id.to_s => "",
+              "experience_" + @experience2.id.to_s => @experience2.label,
+              :new_experiences => ["", "", "", "", ""] 
+        }.to change(Experience.all, :count).by(-1)
+      end
     end
   end
 
@@ -164,6 +173,15 @@ end
             "term_" + @term2.id.to_s => @term2.label, 
             :new_terms => [""]
         expect(Term.find_by label: "Edited term 1").to_not be_nil
+      end
+
+      it "deletes blank terms" do
+        expect{ 
+          put :update_terms,
+              "term_" + @term1.id.to_s => "",
+              "term_" + @term2.id.to_s => @term2.label,
+              :new_terms => ["", "", "", "", ""] 
+        }.to change(Term.all, :count).by(-1)
       end
     end
   end
