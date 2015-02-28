@@ -8,7 +8,7 @@
     <% this_option_identifier = option + "_" + this_option.id.to_s %>
     <div class="existing">
       <div class="delete">
-        <%= button_to "[X]", {controller: "settings", :action => "destroy_#{option}", :id => "#{this_option.id}"}, method: :delete %>
+        <%= label_tag "delete_#{this_option_identifier}", "[X]" %>
       </div>
       <div class="option">
         <div class="view-option">
@@ -23,12 +23,11 @@
   <% (10 - model.count).times do %>
     <div class="new">
       <div class="delete">
-        <%= button_tag "[X]", type: "button" %>
+        <%= label_tag "delete_new_#{option}", "[X]" %>
       </div>
       <div class="option">
         <div class="new-option">
           <%= text_field_tag "new_#{option}s[]", nil, placeholder: "New #{option}" %>
-
         </div>
       </div>
     </div>
@@ -37,4 +36,14 @@
   <div class="button">
     <%= submit_tag("Save #{option}s") %><br /><br />
   </div>
+<% end %>
+<% model.all.each do |this_option| %>
+  <% this_option_identifier = option + "_" + this_option.id.to_s %>
+  <%= button_to "[X]",
+      { :controller => "settings", 
+        :action     => "destroy_#{option}",
+        :id => "#{this_option.id}" },
+      method: :delete, 
+      id: "delete_#{this_option_identifier}", 
+      style: "display: none;" %>
 <% end %>

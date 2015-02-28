@@ -4,6 +4,7 @@
 
 $(document).ready ->
   $(".new").hide()
+  $(".view-option").show()
   $(".edit-option").hide()
   $(".options").each ->
     $(this).find(".new").first().show()
@@ -20,7 +21,7 @@ $(document).ready ->
     $(this).parent().hide()
     $(this).parent().parent().find(".edit-option").show()
     return
-  $(".delete a").click ->
+  $(".delete label").click ->
     event.preventDefault()
     $(this).parent().parent().hide()
     blankInputs = $(this).parent().parent().parent().find(".new input").filter ->
