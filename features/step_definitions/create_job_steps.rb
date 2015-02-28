@@ -32,8 +32,8 @@ Given(/^a job exists$/) do
   FactoryGirl.create(:job,
                      title: 'Aerospace engineer intern',
                      location: 'Seattle, WA',
-                     experience: FactoryGirl.create(:experience),
-                     term: FactoryGirl.create(:term),
+                     experience: FactoryGirl.create(:experience, label: 'Experience A'),
+                     term: FactoryGirl.create(:term, label: 'Term A'),
                      majors: 'Aero/Astro',
                      description: 'This is a great position in which the
                                    intern will build some incredible stuff

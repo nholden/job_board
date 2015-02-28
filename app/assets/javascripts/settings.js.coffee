@@ -9,25 +9,25 @@ $(document).ready ->
   $(".options").each ->
     $(this).find(".new").first().show()
     return
-  $(".new input").focus ->
+  $(".new-option input").focus ->
     event.preventDefault()
-    blankInputs = $(this).parent().parent().parent().parent().find(".new input").filter ->
+    blankInputs = $(this).closest(".options").find(".new.new-option input").filter ->
       return $(this).val() == ""
-    blankInputs.first().parent().parent().parent().show()
-    $(this).parent().parent().parent().next().show()
+    blankInputs.first().closest(".new").show()
+    $(this).closest(".new").next().show()
     return
   $(".view-option a").click ->
     event.preventDefault()
     $(this).parent().hide()
-    $(this).parent().parent().find(".edit-option").show()
+    $(this).closest(".existing").find(".edit-option").show()
     return
   $(".delete label").click ->
     event.preventDefault()
     $(this).parent().parent().hide()
-    blankInputs = $(this).parent().parent().parent().find(".new input").filter ->
+    blankInputs = $(this).closest(".options").find(".new.new-option input").filter ->
       return $(this).val() == ""
-    blankInputs.parent().parent().parent().hide()
-    blankInputs.first().parent().parent().parent().show()
+    blankInputs.closest(".new").hide()
+    blankInputs.first().closest(".new").show()
     $(this).parent().parent().find("input").val("")
     return
   return

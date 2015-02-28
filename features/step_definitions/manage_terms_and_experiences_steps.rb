@@ -19,10 +19,16 @@ When(/^he edits a term$/) do
 end
 
 When(/^he deletes an experience$/) do
-  find("label[for='delete_Experience_A']").click
+  find("label[for='delete_experience_a']").click
+  click_button('Save experiences')
 end
 
 When(/^he deletes a term$/) do
-  find("label[for='delete_Experience_B']").click
+  find("label[for='delete_term_a']").click
+  click_button('Save terms')
+end
+
+Then(/^show me the page$/) do
+  save_and_open_page
 end
 

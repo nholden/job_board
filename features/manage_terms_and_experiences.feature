@@ -35,12 +35,33 @@ Feature: Manage terms and experiences
     Given the admin is logged in
     Given job terms and experiences exist
     When he clicks "Settings"
+    Then he should see a textbox filled in with "Experience A"
     When he deletes an experience
+    Then show me the page
     Then he should not see a textbox filled in with "Experience A" 
     
   Scenario: Delete a term
     Given the admin is logged in
     Given job terms and experiences exist
     When he clicks "Settings"
+    Then he should see a textbox filled in with "Term A"
     When he deletes a term
     Then he should not see a textbox filled in with "Term A"
+
+  Scenario: View job with deleted experience
+    Given the admin is logged in
+    Given a job exists
+    When he clicks "Settings"
+    When he deletes an experience
+    When he visits the jobs page
+    Then he should not see "Experience A"
+    Then he should see "Unspecified"
+
+  Scenario: View job with deleted term
+    Given the admin is logged in
+    Given a job exists
+    When he clicks "Settings"
+    When he deletes a term 
+    When he visits the jobs page
+    Then he should not see "Term A"
+    Then he should see "Unspecified"
