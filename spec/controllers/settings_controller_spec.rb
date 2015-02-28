@@ -118,6 +118,56 @@ end
     end
   end
 
+  describe "DELETE destroy_experience" do
+    before(:each) do
+      @term1 = FactoryGirl.create(:term, label: "Term 1")
+      @term2 = FactoryGirl.create(:term, label: "Term 2")
+      @experience1 = FactoryGirl.create(:experience, label: "Experience 1")
+      @experience2 = FactoryGirl.create(:experience, label: "Experience 2")
+    end
+
+    context "when not logged in" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => nil)
+        delete :destroy_experience, id: @experience1.id
+      end
+
+      it "redirects to the login page" do
+        expect(response).to redirect_to("/login")
+      end
+
+      it "sends a flash" do
+        expect(flash[:error]).to eql("You must be logged in as an administrator to edit settings.")
+      end
+    end
+
+    context "when logged in as an employer" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @employer)
+        delete :destroy_experience, id: @experience1.id
+      end
+
+      it "redirects to the jobs page" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "sends a flash" do
+        expect(flash[:error]).to eql("You must be logged in as an administrator to edit settings.")
+      end
+    end
+
+    context "when logged in as an admin" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @admin)
+      end
+
+      it "deletes the experience" do
+        expect{ delete :destroy_experience, id: @experience1.id }.to change( 
+          Experience.all, :count).by(-1)
+      end
+    end
+  end
+
   describe "PUT update_terms" do
     context "when not logged in" do
       before(:each) do
@@ -182,6 +232,56 @@ end
               "term_" + @term2.id.to_s => @term2.label,
               :new_terms => ["", "", "", "", ""] 
         }.to change(Term.all, :count).by(-1)
+      end
+    end
+  end
+
+  describe "DELETE destroy_term" do
+    before(:each) do
+      @term1 = FactoryGirl.create(:term, label: "Term 1")
+      @term2 = FactoryGirl.create(:term, label: "Term 2")
+      @experience1 = FactoryGirl.create(:experience, label: "Experience 1")
+      @experience2 = FactoryGirl.create(:experience, label: "Experience 2")
+    end
+
+    context "when not logged in" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => nil)
+        delete :destroy_term, id: @term1.id
+      end
+
+      it "redirects to the login page" do
+        expect(response).to redirect_to("/login")
+      end
+
+      it "sends a flash" do
+        expect(flash[:error]).to eql("You must be logged in as an administrator to edit settings.")
+      end
+    end
+
+    context "when logged in as an employer" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @employer)
+        delete :destroy_term, id: @term1.id
+      end
+
+      it "redirects to the jobs page" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "sends a flash" do
+        expect(flash[:error]).to eql("You must be logged in as an administrator to edit settings.")
+      end
+    end
+
+    context "when logged in as an admin" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @admin)
+      end
+
+      it "deletes the term" do
+        expect{ delete :destroy_term, id: @term1.id }.to change( 
+          Term.all, :count).by(-1)
       end
     end
   end

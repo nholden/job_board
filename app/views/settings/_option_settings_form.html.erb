@@ -8,7 +8,7 @@
     <% this_option_identifier = option + "_" + this_option.id.to_s %>
     <div class="existing">
       <div class="delete">
-        <%= link_to "[X]", {controller: "settings", :action => "update_#{option}s", "#{this_option_identifier}".to_sym => ""}, method: :put %>
+        <%= button_to "[X]", {controller: "settings", :action => "destroy_#{option}", :id => "#{this_option.id}"}, method: :delete %>
       </div>
       <div class="option">
         <div class="view-option">
@@ -23,7 +23,7 @@
   <% (10 - model.count).times do %>
     <div class="new">
       <div class="delete">
-        <%= link_to "[X]", '' %>
+        <%= button_tag "[X]", type: "button" %>
       </div>
       <div class="option">
         <div class="new-option">

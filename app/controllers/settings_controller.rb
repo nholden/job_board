@@ -29,6 +29,17 @@ class SettingsController < ApplicationController
     redirect_to '/settings'
   end
 
+  def destroy_experience
+    experience = Experience.find(params[:id])
+    flash[:error] = "You must be logged in as an administrator to edit settings." unless is_admin?
+    redirect_to '/login' and return unless logged_in?
+    redirect_to root_url and return unless is_admin?
+    if experience.destroy
+      flash[:notice] = "Experience deleted."
+      redirect_to '/settings'
+    end
+  end
+
   def update_terms
     flash[:error] = "You must be logged in as an administrator to edit settings." unless is_admin?
     redirect_to '/login' and return unless logged_in?
@@ -51,5 +62,16 @@ class SettingsController < ApplicationController
       end    
     end
     redirect_to '/settings'
+  end
+
+  def destroy_term
+    term = Term.find(params[:id])
+    flash[:error] = "You must be logged in as an administrator to edit settings." unless is_admin?
+    redirect_to '/login' and return unless logged_in?
+    redirect_to root_url and return unless is_admin?
+    if term.destroy
+      flash[:notice] = "Term deleted."
+      redirect_to '/settings'
+    end
   end
 end

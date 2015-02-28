@@ -79,6 +79,16 @@ div.notice {
   .option-settings {
     .delete {
       @include span-columns(1);
+
+      input[type='submit'], button {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0px;
+        padding: 0px 0px 0px 0px;
+        text-decoration: none;
+        background-color: transparent;
+        color: #477dca;
+      }
     }
 
     .option {
