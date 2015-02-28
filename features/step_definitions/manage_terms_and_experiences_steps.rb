@@ -19,10 +19,10 @@ When(/^he edits a term$/) do
 end
 
 When(/^he deletes an experience$/) do
-  find("label[for='delete_experience_1']").click
+  find("label[for='delete_Experience_A']").click
 end
 
 When(/^he deletes a term$/) do
-  find("label[for='delete_term_1']").click
+  find("label[for='delete_Experience_B']").click
 end
 

@@ -8,7 +8,7 @@
     <% this_option_identifier = option + "_" + this_option.id.to_s %>
     <div class="existing">
       <div class="delete">
-        <%= label_tag "delete_#{this_option_identifier}", "[X]" %>
+        <%= label_tag "delete_#{this_option.label}", "[X]" %>
       </div>
       <div class="option">
         <div class="view-option">
@@ -44,6 +44,6 @@
         :action     => "destroy_#{option}",
         :id => "#{this_option.id}" },
       method: :delete, 
-      id: "delete_#{this_option_identifier}", 
+      id: "delete_#{this_option.label}", 
       style: "display: none;" %>
 <% end %>
