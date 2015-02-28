@@ -26,6 +26,7 @@ class SettingsController < ApplicationController
         end
       end    
     end
+    flash[:notice] = "Experiences saved."
     redirect_to '/settings'
   end
 
@@ -61,6 +62,7 @@ class SettingsController < ApplicationController
         end
       end    
     end
+    flash[:notice] = "Terms saved."
     redirect_to '/settings'
   end
 

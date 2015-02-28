@@ -115,6 +115,11 @@ end
               :new_experiences => ["", "", "", "", ""] 
         }.to change(Experience.all, :count).by(-1)
       end
+
+      it "sends a flash" do
+        put :update_experiences
+        expect(flash[:notice]).to eql("Experiences saved.")
+      end
     end
   end
 
@@ -232,6 +237,11 @@ end
               "term_" + @term2.id.to_s => @term2.label,
               :new_terms => ["", "", "", "", ""] 
         }.to change(Term.all, :count).by(-1)
+      end
+
+      it "sends a flash" do
+        put :update_terms
+        expect(flash[:notice]).to eql("Terms saved.")
       end
     end
   end
