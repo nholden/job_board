@@ -37,7 +37,6 @@ Feature: Manage terms and experiences
     When he clicks "Settings"
     Then he should see a textbox filled in with "Experience A"
     When he deletes an experience
-    Then show me the page
     Then he should not see a textbox filled in with "Experience A" 
     
   Scenario: Delete a term
