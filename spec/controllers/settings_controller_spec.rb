@@ -87,6 +87,8 @@ end
         @term2 = FactoryGirl.create(:term, label: "Term 2")
         @experience1 = FactoryGirl.create(:experience, label: "Experience 1")
         @experience2 = FactoryGirl.create(:experience, label: "Experience 2")
+        @unspecified_exp = FactoryGirl.create(:experience, label: "Unspecified")
+        @job1 = FactoryGirl.create(:job, experience: @experience1, term: @term1)
         allow(controller).to receive_messages(:current_user => @admin)
       end
 
@@ -113,8 +115,17 @@ end
               "experience_" + @experience1.id.to_s => "",
               "experience_" + @experience2.id.to_s => @experience2.label,
               :new_experiences => ["", "", "", "", ""] 
-        }.to change(Experience.all, :count).by(-1)
+        }.to change(Experience.where(label: "Experience 1"), :count).by(-1)
       end
+
+      it "reassigns jobs with deleted experiences" do
+        expect{ 
+          put :update_experiences,
+              "experience_" + @experience1.id.to_s => "",
+              "experience_" + @experience2.id.to_s => @experience2.label,
+              :new_experiences => ["", "", "", "", ""] 
+        }.to change(Job.where(experience: @unspecified_exp), :count).by(1) 
+      end  
 
       it "sends a flash" do
         put :update_experiences
@@ -129,6 +140,8 @@ end
       @term2 = FactoryGirl.create(:term, label: "Term 2")
       @experience1 = FactoryGirl.create(:experience, label: "Experience 1")
       @experience2 = FactoryGirl.create(:experience, label: "Experience 2")
+      @unspecified_exp = FactoryGirl.create(:experience, label: "Unspecified")
+      @job1 = FactoryGirl.create(:job, experience: @experience1, term: @term1)
     end
 
     context "when not logged in" do
@@ -168,8 +181,13 @@ end
 
       it "deletes the experience" do
         expect{ delete :destroy_experience, id: @experience1.id }.to change( 
-          Experience.all, :count).by(-1)
+          Experience.where(label: "Experience 1"), :count).by(-1)
       end
+
+      it "reassigns jobs with deleted experiences" do
+        expect{ delete :destroy_experience, id: @experience1.id }.to change(
+          Job.where(experience: @unspecified_exp), :count).by(1) 
+      end  
     end
   end
 

@@ -19,7 +19,7 @@ class SettingsController < ApplicationController
         existing_experience_id = key.to_s.match(/experience_(.*)/)[1].to_i
         existing_experience = Experience.find(existing_experience_id)
         if value.blank?
-          existing_experience.destroy
+          existing_experience.destroy_and_reassign_jobs
         elsif existing_experience.label != value
           existing_experience.label = value
           existing_experience.save
@@ -35,7 +35,7 @@ class SettingsController < ApplicationController
     flash[:error] = "You must be logged in as an administrator to edit settings." unless is_admin?
     redirect_to '/login' and return unless logged_in?
     redirect_to root_url and return unless is_admin?
-    if experience.destroy
+    if experience.destroy_and_reassign_jobs
       flash[:notice] = "Experience deleted."
       redirect_to '/settings'
     end

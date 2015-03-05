@@ -16,7 +16,7 @@ RSpec.describe Experience, :type => :model do
     end
 
     it "reassigns the the jobs' experience" do
-      expect(@user.jobs.first.experience.label).to eql("Unassigned")
+      expect(@user.jobs.first.experience.label).to eql("Unspecified")
     end
   end
 end
