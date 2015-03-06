@@ -228,6 +228,8 @@ end
         @term2 = FactoryGirl.create(:term, label: "Term 2")
         @experience1 = FactoryGirl.create(:experience, label: "Experience 1")
         @experience2 = FactoryGirl.create(:experience, label: "Experience 2")
+        @unspecified_term = FactoryGirl.create(:term, label: "Unspecified")
+        @job1 = FactoryGirl.create(:job, experience: @experience1, term: @term1)
         allow(controller).to receive_messages(:current_user => @admin)
       end
 
@@ -254,8 +256,17 @@ end
               "term_" + @term1.id.to_s => "",
               "term_" + @term2.id.to_s => @term2.label,
               :new_terms => ["", "", "", "", ""] 
-        }.to change(Term.all, :count).by(-1)
+        }.to change(Term.where(label: "Term 1"), :count).by(-1)
       end
+
+      it "reassigns jobs with deleted terms" do
+        expect{ 
+          put :update_terms,
+              "term_" + @term1.id.to_s => "",
+              "term_" + @term2.id.to_s => @term2.label,
+              :new_terms => ["", "", "", "", ""] 
+        }.to change(Job.where(term: @unspecified_term), :count).by(1) 
+      end  
 
       it "sends a flash" do
         put :update_terms
@@ -270,6 +281,8 @@ end
       @term2 = FactoryGirl.create(:term, label: "Term 2")
       @experience1 = FactoryGirl.create(:experience, label: "Experience 1")
       @experience2 = FactoryGirl.create(:experience, label: "Experience 2")
+      @unspecified_term = FactoryGirl.create(:term, label: "Unspecified")
+      @job1 = FactoryGirl.create(:job, experience: @experience1, term: @term1)
     end
 
     context "when not logged in" do
@@ -310,6 +323,11 @@ end
       it "deletes the term" do
         expect{ delete :destroy_term, id: @term1.id }.to change( 
           Term.all, :count).by(-1)
+      end
+
+      it "reassigns jobs with deleted terms" do
+        expect{ delete :destroy_term, id: @term1.id }.to change( 
+          Job.where(term: @unspecified_term), :count).by(1) 
       end
     end
   end

@@ -43,7 +43,7 @@
     <th>Job title</th>
     <th>Employer</th>
     <th>Experience level</th>
-    <th>Deadline</th>
+    <th>Position term</th>
   </tr>
   <% @jobs.each do |job| %>
     <tr>  
@@ -56,7 +56,7 @@
       </td>
       <td><%= job.user.name %></td>
       <td><%= job.experience.label %></td>
-      <td><%= job.deadline %></td>
+      <td><%= job.term.label %></td>
     </tr>
   <% end %>
 </table>

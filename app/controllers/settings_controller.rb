@@ -55,7 +55,7 @@ class SettingsController < ApplicationController
         existing_term_id = key.to_s.match(/term_(.*)/)[1].to_i
         existing_term = Term.find(existing_term_id)
         if value.blank?
-          existing_term.destroy
+          existing_term.destroy_and_reassign_jobs
         elsif existing_term.label != value
           existing_term.label = value
           existing_term.save
@@ -71,7 +71,7 @@ class SettingsController < ApplicationController
     flash[:error] = "You must be logged in as an administrator to edit settings." unless is_admin?
     redirect_to '/login' and return unless logged_in?
     redirect_to root_url and return unless is_admin?
-    if term.destroy
+    if term.destroy_and_reassign_jobs
       flash[:notice] = "Term deleted."
       redirect_to '/settings'
     end
