@@ -64,3 +64,34 @@ Feature: Manage terms and experiences
     When he visits the jobs page
     Then he should not see "Term A"
     Then he should see "Unspecified"
+
+  Scenario: Delete the unspecified experience
+    Given the admin is logged in
+    Given the unspecified experience exists
+    When he clicks "Settings"
+    When he deletes the unspecified experience
+    When he visits the jobs page
+    Then he should not see "Unspecified"
+
+  Scenario: Fail to delete the unspecified experience
+    Given the admin is logged in
+    Given a job with the unspecified experience exists
+    When he clicks "Settings"
+    When he deletes the unspecified experience
+    Then he should see "You must delete or reassign the jobs with unspecified experiences."
+
+  Scenario: Delete the unspecified term
+    Given the admin is logged in
+    Given the unspecified term exists
+    When he clicks "Settings"
+    When he deletes the unspecified term
+    When he visits the jobs page
+    Then he should not see "Unspecified"
+
+  Scenario: Fail to delete the unspecified term
+    Given the admin is logged in
+    Given a job with the unspecified term exists
+    When he clicks "Settings"
+    When he deletes the unspecified term
+    Then he should see "You must delete or reassign the jobs with unspecified terms."
+    

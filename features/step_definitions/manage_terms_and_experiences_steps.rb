@@ -27,3 +27,32 @@ When(/^he deletes a term$/) do
   find("input[id='delete_term_a']", visible: false).click
   click_button('Save terms')
 end
+
+Given(/^a job with the unspecified experience exists$/) do
+  @unspecified_exp = FactoryGirl.create(:experience, label: "Unspecified")
+  FactoryGirl.create(:job, experience: @unspecified_exp)
+end
+
+When(/^he deletes the unspecified experience$/) do
+  find("input[class='destroy_experience'][id='delete_unspecified']", visible: false).click
+  click_button('Save terms')
+end
+
+Given(/^a job with the unspecified term exists$/) do
+  @unspecified_term = FactoryGirl.create(:term, label: "Unspecified")
+  FactoryGirl.create(:job, term: @unspecified_term)
+end
+
+When(/^he deletes the unspecified term$/) do
+  find("input[class='destroy_term'][id='delete_unspecified']", visible: false).click
+  click_button('Save terms')
+end
+
+Given(/^the unspecified experience exists$/) do
+  FactoryGirl.create(:experience, label: "Unspecified")
+end
+
+Given(/^the unspecified term exists$/) do
+  FactoryGirl.create(:term, label: "Unspecified")
+end
+

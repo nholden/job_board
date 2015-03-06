@@ -45,5 +45,6 @@
         :id => "#{this_option.id}" },
       method: :delete, 
       id: "delete_#{this_option.label.squish.downcase.tr(" ","_")}", 
-      style: "display: none;" %>
+      style: "display: none;",
+      class: "destroy_#{option}" %>
 <% end %>
