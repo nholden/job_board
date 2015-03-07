@@ -38,6 +38,9 @@ class SettingsController < ApplicationController
     if experience.destroy_and_reassign_jobs
       flash[:notice] = "Experience deleted."
       redirect_to '/settings'
+    else
+      flash[:error] = experience.errors.full_messages[0]
+      redirect_to '/settings'
     end
   end
 

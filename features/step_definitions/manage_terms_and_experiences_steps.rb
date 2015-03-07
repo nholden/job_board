@@ -20,12 +20,10 @@ end
 
 When(/^he deletes an experience$/) do
   find("input[id='delete_experience_a']", visible: false).click
-  click_button('Save experiences')
 end
 
 When(/^he deletes a term$/) do
   find("input[id='delete_term_a']", visible: false).click
-  click_button('Save terms')
 end
 
 Given(/^a job with the unspecified experience exists$/) do
@@ -35,7 +33,6 @@ end
 
 When(/^he deletes the unspecified experience$/) do
   find("input[class='destroy_experience'][id='delete_unspecified']", visible: false).click
-  click_button('Save terms')
 end
 
 Given(/^a job with the unspecified term exists$/) do
@@ -45,7 +42,6 @@ end
 
 When(/^he deletes the unspecified term$/) do
   find("input[class='destroy_term'][id='delete_unspecified']", visible: false).click
-  click_button('Save terms')
 end
 
 Given(/^the unspecified experience exists$/) do

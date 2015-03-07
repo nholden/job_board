@@ -127,6 +127,21 @@ end
         }.to change(Job.where(experience: @unspecified_exp), :count).by(1) 
       end  
 
+      it "deletes the unassigned experience with no jobs" do
+        expect{ 
+          put :update_experiences,
+              "experience_" + @unspecified_exp.id.to_s => ""
+        }.to change(Experience.where(label: "Unspecified"), :count).by(-1)
+      end
+
+      it "fails to delete the unassigned experience with jobs" do
+        FactoryGirl.create(:job, experience: @unspecified_exp)
+        expect{ 
+          put :update_experiences,
+              "experience_" + @unspecified_exp.id.to_s => ""
+        }.to change(Experience.where(label: "Unspecified"), :count).by(0)
+      end
+
       it "sends a flash" do
         put :update_experiences
         expect(flash[:notice]).to eql("Experiences saved.")
@@ -188,6 +203,17 @@ end
         expect{ delete :destroy_experience, id: @experience1.id }.to change(
           Job.where(experience: @unspecified_exp), :count).by(1) 
       end  
+
+      it "deletes the unassigned experience with no jobs" do
+        expect{ delete :destroy_experience, id: @unspecified_exp.id }.to change( 
+          Experience.where(label: "Unspecified"), :count).by(-1)
+      end
+
+      it "fails to delete the unassigned experience with jobs" do
+        FactoryGirl.create(:job, experience: @unspecified_exp)
+        expect{ delete :destroy_experience, id: @unspecified_exp.id }.to change( 
+          Experience.where(label: "Unspecified"), :count).by(0)
+      end
     end
   end
 

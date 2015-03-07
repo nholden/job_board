@@ -6,6 +6,11 @@ class Experience < ActiveRecord::Base
       job.experience = Experience.find_or_create_by(label: 'Unspecified')
       job.save
     end
-    self.destroy
+    if self.label == "Unspecified" && self.jobs.count != 0
+      self.errors.add(:base, "You must delete or reassign the jobs with unspecified experiences.")
+      false
+    else
+      self.destroy
+    end
   end
 end
