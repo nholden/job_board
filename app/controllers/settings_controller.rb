@@ -19,7 +19,13 @@ class SettingsController < ApplicationController
         existing_experience_id = key.to_s.match(/experience_(.*)/)[1].to_i
         existing_experience = Experience.find(existing_experience_id)
         if value.blank?
-          existing_experience.destroy_and_reassign_jobs
+          if existing_experience.destroy_and_reassign_jobs
+            flash[:notice] = "Experiences saved."
+            redirect_to '/settings' and return
+          else
+            flash[:error] = existing_experience.errors.full_messages[0]
+            redirect_to '/settings' and return
+          end
         elsif existing_experience.label != value
           existing_experience.label = value
           existing_experience.save
