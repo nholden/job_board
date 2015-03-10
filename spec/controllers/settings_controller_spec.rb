@@ -293,6 +293,21 @@ end
               :new_terms => ["", "", "", "", ""] 
         }.to change(Job.where(term: @unspecified_term), :count).by(1) 
       end  
+ 
+      it "deletes the unassigned term with no jobs" do
+        expect{ 
+          put :update_terms,
+              "term_" + @unspecified_term.id.to_s => ""
+        }.to change(Term.where(label: "Unspecified"), :count).by(-1)
+      end
+
+      it "fails to delete the unassigned term with jobs" do
+        FactoryGirl.create(:job, term: @unspecified_term)
+        expect{ 
+          put :update_terms,
+              "term_" + @unspecified_term.id.to_s => ""
+        }.to change(Term.where(label: "Unspecified"), :count).by(0)
+      end
 
       it "sends a flash" do
         put :update_terms
@@ -354,6 +369,17 @@ end
       it "reassigns jobs with deleted terms" do
         expect{ delete :destroy_term, id: @term1.id }.to change( 
           Job.where(term: @unspecified_term), :count).by(1) 
+      end
+
+      it "deletes the unassigned term with no jobs" do
+        expect{ delete :destroy_term, id: @unspecified_term.id }.to change( 
+          Term.where(label: "Unspecified"), :count).by(-1)
+      end
+
+      it "fails to delete the unassigned experience with jobs" do
+        FactoryGirl.create(:job, term: @unspecified_term)
+        expect{ delete :destroy_term, id: @unspecified_term.id }.to change( 
+          Term.where(label: "Unspecified"), :count).by(0)
       end
     end
   end

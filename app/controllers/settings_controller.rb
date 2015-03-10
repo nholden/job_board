@@ -64,7 +64,13 @@ class SettingsController < ApplicationController
         existing_term_id = key.to_s.match(/term_(.*)/)[1].to_i
         existing_term = Term.find(existing_term_id)
         if value.blank?
-          existing_term.destroy_and_reassign_jobs
+          if existing_term.destroy_and_reassign_jobs
+            flash[:notice] = "Terms saved."
+            redirect_to '/settings' and return
+          else
+            flash[:error] = existing_term.errors.full_messages[0]
+            redirect_to '/settings' and return
+          end
         elsif existing_term.label != value
           existing_term.label = value
           existing_term.save
@@ -82,6 +88,9 @@ class SettingsController < ApplicationController
     redirect_to root_url and return unless is_admin?
     if term.destroy_and_reassign_jobs
       flash[:notice] = "Term deleted."
+      redirect_to '/settings'
+    else
+      flash[:error] = term.errors.full_messages[0]
       redirect_to '/settings'
     end
   end
