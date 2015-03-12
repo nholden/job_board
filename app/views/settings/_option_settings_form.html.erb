@@ -18,11 +18,6 @@
           <%= text_field_tag this_option_identifier, this_option.label %>
         </div>
       </div>
-      <div class="position">
-        <%= select_tag(
-              "#{this_option.label.squish.downcase.tr(" ","_")}_position",
-              options_for_select((0..10).to_a)) %>
-      </div>
     </div>
   <% end %>
   <% (10 - model.count).times do %>
@@ -34,11 +29,6 @@
         <div class="new-option">
           <%= text_field_tag "new_#{option}s[]", nil, placeholder: "New #{option}" %>
         </div>
-      </div>
-      <div class="position">
-        <%= select_tag(
-              "new_#{option}_position",
-              options_for_select((0..10).to_a)) %>
       </div>
     </div>
   <% end %>

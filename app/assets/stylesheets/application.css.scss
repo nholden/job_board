@@ -92,12 +92,8 @@ div.notice {
     }
 
     .option {
-      @include span-columns(9);
+      @include span-columns(11);
     } 
-
-    .position {
-      @include span-columns(2);
-    }
 
     .button {
       @include span-columns(12);
