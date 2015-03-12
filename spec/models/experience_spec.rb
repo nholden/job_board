@@ -15,6 +15,15 @@ RSpec.describe Experience, :type => :model do
     expect(@experience).to respond_to(:position)
   end
 
+  it "must have a label" do
+    expect{FactoryGirl.create(:experience, label: nil)}.to change(Experience, :count).by(0)
+  end
+
+  it "must be assigned a position" do
+    @experience = FactoryGirl.create(:experience)
+    expect(@experience.position).to_not be_nil
+  end
+
   describe "destroy_and_reassign_jobs" do
     context "on a specified experience" do
       before(:each) do
