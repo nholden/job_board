@@ -5,6 +5,16 @@ RSpec.describe Experience, :type => :model do
     expect(Experience.reflect_on_association(:jobs).macro).to eq(:has_many)
   end
 
+  it "should respond to label" do
+    @experience = FactoryGirl.create(:experience)
+    expect(@experience).to respond_to(:label)
+  end
+
+  it "should respond to position" do
+    @experience = FactoryGirl.create(:experience)
+    expect(@experience).to respond_to(:position)
+  end
+
   describe "destroy_and_reassign_jobs" do
     context "on a specified experience" do
       before(:each) do
