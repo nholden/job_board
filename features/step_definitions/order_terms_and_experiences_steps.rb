@@ -13,3 +13,7 @@ When(/^he moves "(.*?)" to the top experience$/) do |experience|
   page.find(:css, "select[id='#{experience.squish.downcase.tr(" ","_")}_position']").find("option[value='0']").click
 end
 
+Then(/^"(.*?)" should be selected in the "(.*?)" dropdown$/) do |option, select|
+  page.find(:css, "select[id='#{select.squish.downcase.tr(" ","_")}_position']").value.should eq(option)
+#  expect(page).to have_select("#{select.squish.downcase.tr(' ','_')}_position", selected: option)
+end

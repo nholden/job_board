@@ -19,9 +19,16 @@
         </div>
       </div>
       <div class="position">
+        <% if this_option.respond_to?(:position) %>
         <%= select_tag(
               "#{this_option.label.squish.downcase.tr(" ","_")}_position",
-              options_for_select((0..10).to_a)) %>
+              options_for_select((0..10).to_a, this_option.position))  %>
+        <% # DELETE ALL OF THIS ONCE I IMPLEMENT POSITION FOR TERM %>
+        <% else %>
+        <%= select_tag(
+              "#{this_option.label.squish.downcase.tr(" ","_")}_position",
+              options_for_select((0..10).to_a))  %>
+        <% end %>
       </div>
     </div>
   <% end %>
