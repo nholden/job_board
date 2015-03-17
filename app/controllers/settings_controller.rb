@@ -15,8 +15,8 @@ class SettingsController < ApplicationController
       end
     end
     params.each do |key, value|
-      if key.to_s.match(/experience_(.*)/)
-        existing_experience_id = key.to_s.match(/experience_(.*)/)[1].to_i
+      if key.to_s.match(/\Aexperience_[0-9](.*)/)
+        existing_experience_id = key.to_s.match(/\Aexperience_(.*)/)[1].to_i
         existing_experience = Experience.find(existing_experience_id)
         if value.blank?
           if existing_experience.destroy_and_reassign_jobs
@@ -60,8 +60,8 @@ class SettingsController < ApplicationController
       end
     end
     params.each do |key, value|
-      if key.to_s.match(/term_(.*)/)
-        existing_term_id = key.to_s.match(/term_(.*)/)[1].to_i
+      if key.to_s.match(/\Aterm_[0-9](.*)/)
+        existing_term_id = key.to_s.match(/\Aterm_(.*)/)[1].to_i
         existing_term = Term.find(existing_term_id)
         if value.blank?
           if existing_term.destroy_and_reassign_jobs
