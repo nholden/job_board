@@ -16,7 +16,8 @@ RSpec.describe Experience, :type => :model do
   end
 
   it "must have a label" do
-    expect{FactoryGirl.create(:experience, label: nil)}.to change(Experience, :count).by(0)
+    @experience = FactoryGirl.build(:experience, label: nil)
+    expect(@experience).to be_invalid
   end
 
   it "must be assigned a position" do
