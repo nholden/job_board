@@ -7,14 +7,14 @@ Feature: Order terms and experiences
     Given job terms and experiences exist
     Given the admin is logged in
     When he clicks "Settings"
-    Then "1" should be selected in the "Experience A" dropdown
-    Then "2" should be selected in the "Experience B" dropdown
+    Then "1" should be selected in the "experience_1" dropdown
+    Then "2" should be selected in the "experience_2" dropdown
 
   Scenario: Successfully order experience
     Given job terms and experiences exist
     Given the admin is logged in
     When he clicks "Settings"
-    Then the first experience should be "Experience A"
-    When he moves "Experience B" to the top experience
+    Then the first experience should be "experience_1"
+    When he moves "experience_2" to the top experience
     When he saves experiences
-    Then the first experience should be "Experience B"
+    Then the first experience should be "experience_2"
