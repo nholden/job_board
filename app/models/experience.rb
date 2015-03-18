@@ -24,4 +24,11 @@ class Experience < ActiveRecord::Base
       self.destroy
     end
   end
+
+  def self.reposition(hash)
+    hash.each do |id, position|
+      Experience.find(id).position = position
+      Experience.find(id).save
+    end
+  end
 end

@@ -64,4 +64,19 @@ RSpec.describe Experience, :type => :model do
       end
     end
   end
+
+  describe "reposition" do
+    before(:each) do
+      @experience_1 = FactoryGirl.create(:experience, id: 1, position: 1)
+      @experience_2 = FactoryGirl.create(:experience, id: 2, position: 2)
+      @experience_3 = FactoryGirl.create(:experience, id: 3, position: 3)
+    end
+
+    it "repositions the experiences" do
+      Experience.reposition({1=>3, 2=>1, 3=>2})
+      expect(@experience_1.position).to eql(3)
+      expect(@experience_2.position).to eql(1)
+      expect(@experience_3.position).to eql(2)
+    end
+  end
 end
