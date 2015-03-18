@@ -74,9 +74,9 @@ RSpec.describe Experience, :type => :model do
 
     it "repositions the experiences" do
       Experience.reposition({1=>3, 2=>1, 3=>2})
-      expect(@experience_1.position).to eql(3)
-      expect(@experience_2.position).to eql(1)
-      expect(@experience_3.position).to eql(2)
+      expect(Experience.find(1).position).to eql(3)
+      expect(Experience.find(2).position).to eql(1)
+      expect(Experience.find(3).position).to eql(2)
     end
   end
 end
