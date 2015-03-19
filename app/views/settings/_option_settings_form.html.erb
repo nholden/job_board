@@ -4,7 +4,13 @@
     <h1><%= option.capitalize %>s</h1>
   </div>
   <div class="options">
-  <% model.all.each do |this_option| %>
+  <% # REFACTOR THIS ONCE I'VE ADDED THE POSITION COLUMN TO TERM %>
+  <% if model.first.respond_to?(:position) %>
+    <% model_all = model.order("position") %>
+  <% else %>
+    <% model_all = model.all %>
+  <% end %>
+  <% model_all.each do |this_option| %>
     <% this_option_identifier = option + "_" + this_option.id.to_s %>
     <div class="existing">
       <div class="delete">

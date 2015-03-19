@@ -14,6 +14,7 @@ class SettingsController < ApplicationController
         Experience.create(label: experience) unless experience.blank?
       end
     end
+    positions = {}
     params.each do |key, value|
       if key.to_s.match(/\Aexperience_\d*\Z/)
         existing_experience_id = key.to_s.match(/\Aexperience_(.*)/)[1].to_i
@@ -30,8 +31,12 @@ class SettingsController < ApplicationController
           existing_experience.label = value
           existing_experience.save
         end
-      end    
+      elsif key.to_s.match(/\Aexperience_\d*_position\Z/)
+        existing_experience_id = key.to_s.match(/\Aexperience_(.*)_position\Z/)[1].to_i
+        positions[existing_experience_id] = value
+      end
     end
+    Experience.reposition(positions)
     flash[:notice] = "Experiences saved."
     redirect_to '/settings'
   end

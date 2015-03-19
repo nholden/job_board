@@ -142,6 +142,17 @@ end
         }.to change(Experience.where(label: "Unspecified"), :count).by(0)
       end
 
+      it "repositions experiences" do
+        put :update_experiences,
+            "experience_" + @experience1.id.to_s => @experience1.label,
+            "experience_" + @experience1.id.to_s + "_position" => "2",
+            "experience_" + @experience2.id.to_s => @experience2.label, 
+            "experience_" + @experience2.id.to_s + "_position" => "1",
+            :new_experiences => [""]
+        expect(Experience.find_by(position: 1).id).to eql(2)
+        expect(Experience.find_by(position: 2).id).to eql(1)
+      end
+
       it "sends a flash" do
         put :update_experiences
         expect(flash[:notice]).to eql("Experiences saved.")
