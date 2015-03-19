@@ -26,10 +26,10 @@ class Experience < ActiveRecord::Base
   end
 
   def self.reposition(hash)
-    hash.each do |id, position|
-      experience = Experience.find(id)
-      experience.position = position
-      experience.save
+    Experience.update_all position: nil
+    new_order = hash.sort_by { |id, position| position }
+    new_order.each do |id_position_pair|
+      Experience.find(id_position_pair[0]).save
     end
   end
 end
