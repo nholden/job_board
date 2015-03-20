@@ -10,7 +10,7 @@ Then(/^the first experience should be "(.*?)"$/) do |experience|
 end
 
 When(/^he moves "(.*?)" to the top experience$/) do |experience|
-  page.find(:css, "select[id='#{experience}_position']").find("option[value='0']").click
+  page.find(:css, "select[id='#{experience}_position']").find("option[value='0']").select_option
 end
 
 Then(/^"(.*?)" should be selected in the "(.*?)" dropdown$/) do |option, select|
@@ -18,3 +18,8 @@ Then(/^"(.*?)" should be selected in the "(.*?)" dropdown$/) do |option, select|
     page.find(:css, "select[id='#{select}_position']").value
     ).to eql(option)
 end
+
+When(/^he moves "(.*?)" to position "(.*?)"$/) do |experience, position|
+  page.find(:css, "select[id='#{experience}_position']").find("option[value='#{position}']").select_option
+end
+

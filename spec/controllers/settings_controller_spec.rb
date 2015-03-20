@@ -153,6 +153,16 @@ end
         expect(Experience.find_by(position: 2).id).to eql(1)
       end
 
+      it "raises a flash if two experiences are assigned the same position" do
+        put :update_experiences,
+            "experience_" + @experience1.id.to_s => @experience1.label,
+            "experience_" + @experience1.id.to_s + "_position" => "3",
+            "experience_" + @experience2.id.to_s => @experience2.label, 
+            "experience_" + @experience2.id.to_s + "_position" => "3",
+            :new_experiences => [""]
+        expect(flash[:error]).to eql("Multiple experiences can't have the same position.")
+      end
+        
       it "sends a flash" do
         put :update_experiences
         expect(flash[:notice]).to eql("Experiences saved.")

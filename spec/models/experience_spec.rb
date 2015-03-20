@@ -85,5 +85,9 @@ RSpec.describe Experience, :type => :model do
       expect(Experience.find(2).position).to eql(1)
       expect(Experience.find(3).position).to eql(2)
     end
+
+    it "won't let multiple experiences occupy the same position" do
+      expect(Experience.reposition({1=>4, 2=>4, 3=>3})).to eql(false)
+    end
   end
 end

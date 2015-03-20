@@ -26,10 +26,14 @@ class Experience < ActiveRecord::Base
   end
 
   def self.reposition(hash)
-    Experience.update_all position: nil
-    new_order = hash.sort_by { |id, position| position }
-    new_order.each do |id_position_pair|
-      Experience.find(id_position_pair[0]).save
+    if hash.values.uniq.length != hash.values.length
+      false
+    else
+      Experience.update_all position: nil
+      new_order = hash.sort_by { |id, position| position }
+      new_order.each do |id_position_pair|
+        Experience.find(id_position_pair[0]).save
+      end
     end
   end
 end

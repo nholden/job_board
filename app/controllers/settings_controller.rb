@@ -36,8 +36,11 @@ class SettingsController < ApplicationController
         positions[existing_experience_id] = value
       end
     end
-    Experience.reposition(positions)
-    flash[:notice] = "Experiences saved."
+    if Experience.reposition(positions)
+      flash[:notice] = "Experiences saved."
+    else
+      flash[:error] = "Multiple experiences can't have the same position."
+    end
     redirect_to '/settings'
   end
 
