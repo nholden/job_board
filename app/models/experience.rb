@@ -1,7 +1,7 @@
 class Experience < ActiveRecord::Base
   has_many :jobs
   validates :label, presence: true
-
+  default_scope { order('position') }
   after_initialize :defaults
 
   def defaults

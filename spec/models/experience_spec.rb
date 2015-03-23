@@ -79,6 +79,12 @@ RSpec.describe Experience, :type => :model do
       expect(Experience.find(3).position).to eql(2)
     end
 
+    it "sorts by the new positions" do
+      Experience.reposition({1=>3, 2=>1, 3=>2})
+      expect(Experience.first.id).to eql(2)
+      expect(Experience.last.id).to eql(1)
+    end
+
     it "assigns the lowest possible integers while maintaining order" do
       Experience.reposition({1=>9, 2=>4, 3=>7})
       expect(Experience.find(1).position).to eql(3)
