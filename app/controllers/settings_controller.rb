@@ -9,12 +9,17 @@ class SettingsController < ApplicationController
     flash[:error] = "You must be logged in as an administrator to edit settings." unless is_admin?
     redirect_to '/login' and return unless logged_in?
     redirect_to root_url and return unless is_admin?
+    positions = {}
     if !params[:new_experiences].nil?
-      params[:new_experiences].each do |experience|
-        Experience.create(label: experience) unless experience.blank?
+      array_position = 0
+      params[:new_experiences].each do |label|
+        unless label.blank?
+          experience = Experience.create(label: label)
+          positions[experience.id] = params[:new_experience_positions][array_position].to_i
+        end
+        array_position += 1
       end
     end
-    positions = {}
     params.each do |key, value|
       if key.to_s.match(/\Aexperience_\d*\Z/)
         existing_experience_id = key.to_s.match(/\Aexperience_(.*)/)[1].to_i
@@ -33,7 +38,7 @@ class SettingsController < ApplicationController
         end
       elsif key.to_s.match(/\Aexperience_\d*_position\Z/)
         existing_experience_id = key.to_s.match(/\Aexperience_(.*)_position\Z/)[1].to_i
-        positions[existing_experience_id] = value
+        positions[existing_experience_id] = value.to_i
       end
     end
     if Experience.reposition(positions)

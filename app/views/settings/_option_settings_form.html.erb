@@ -44,7 +44,7 @@
       </div>
       <div class="position">
         <%= select_tag(
-              "new_#{option}_position",
+              "new_#{option}_positions[]",
               options_for_select((0..10).to_a, (n+1+model.count))) %>
       </div>
     </div>

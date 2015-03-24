@@ -25,17 +25,17 @@ end
 
 When(/^he adds a new experience with position "(.*?)"$/) do |position|
   find("#new_experiences_", match: :first).set("Experience 3")
-  page.find(:css, "select[id='new_experience_position']", match: :first).find("option[value='#{position}']").select_option
+  page.find(:css, "select[id='new_experience_positions_']", match: :first).find("option[value='#{position}']").select_option
 end
 
 Then(/^the second experience should be "(.*?)"$/) do |experience|
   input_ids = page.first(:css, "form[action='/update_experiences']").
-                     all(:css, ".edit-option").all(:css, "input")[:id]
-  expect(input_ids[1]).to eql(experience)
+                     all(:css, ".edit-option input")
+  expect(input_ids[1][:id]).to eql(experience)
 end
 
 Then(/^the third experience should be "(.*?)"$/) do |experience|
   input_ids = page.first(:css, "form[action='/update_experiences']").
-                     all(:css, ".edit-option").all(:css, "input")[:id]
-  expect(input_ids[2]).to eql(experience)
+                     all(:css, ".edit-option input")
+  expect(input_ids[2][:id]).to eql(experience)
 end

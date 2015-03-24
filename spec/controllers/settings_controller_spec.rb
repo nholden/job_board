@@ -97,8 +97,23 @@ end
           put :update_experiences,
               "experience_" + @experience1.id.to_s => @experience1.label,
               "experience_" + @experience2.id.to_s => @experience2.label,
-              :new_experiences => ["Experience 3", "", "", "", ""] 
+              :new_experiences => ["Experience 3", "", "", "", ""], 
+              :new_experience_positions => ["3", "4", "5", "6", "7"]
         }.to change(Experience.all, :count).by(1)
+      end
+
+      it "assigns the new experience's position" do
+        put :update_experiences,
+            "experience_" + @experience1.id.to_s => @experience1.label,
+            "experience_" + @experience1.id.to_s + "_position" => "5",
+            "experience_" + @experience2.id.to_s => @experience2.label, 
+            "experience_" + @experience2.id.to_s + "_position" => "4",
+            :new_experiences => ["Bottom Experience", "Top Experience", "", "", ""],
+            :new_experience_positions => ["10", "1", "3", "4", "5"]
+        expect(Experience.find_by(position: 1).label).to eql("Top Experience")
+        expect(Experience.find_by(position: 2).label).to eql(@experience2.label)
+        expect(Experience.find_by(position: 3).label).to eql(@experience1.label)
+        expect(Experience.find_by(position: 4).label).to eql("Bottom Experience")
       end
 
       it "updates an existing experience" do
