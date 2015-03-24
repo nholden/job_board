@@ -41,4 +41,8 @@ Feature: Order terms and experiences
     Then the third experience should be "experience_1"
 
   Scenario: Successfully update positions after experience deleted
-    pending
+    Given job terms and experiences exist
+    Given the admin is logged in
+    When he clicks "Settings"
+    When he deletes an experience
+    Then "1" should be selected in the "experience_2" dropdown
