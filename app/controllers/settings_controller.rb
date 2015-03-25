@@ -11,13 +11,11 @@ class SettingsController < ApplicationController
     redirect_to root_url and return unless is_admin?
     positions = {}
     if !params[:new_experiences].nil?
-      array_position = 0
-      params[:new_experiences].each do |label|
+      params[:new_experiences].each_with_index do |label, index|
         unless label.blank?
           experience = Experience.create(label: label)
-          positions[experience.id] = params[:new_experience_positions][array_position].to_i
+          positions[experience.id] = params[:new_experience_positions][index].to_i
         end
-        array_position += 1
       end
     end
     params.each do |key, value|
@@ -25,12 +23,8 @@ class SettingsController < ApplicationController
         existing_experience_id = key.to_s.match(/\Aexperience_(.*)/)[1].to_i
         existing_experience = Experience.find(existing_experience_id)
         if value.blank?
-          if existing_experience.destroy_and_reassign_jobs
-            flash[:notice] = "Experiences saved."
-            redirect_to '/settings' and return
-          else
+          unless existing_experience.destroy_and_reassign_jobs
             flash[:error] = existing_experience.errors.full_messages[0]
-            redirect_to '/settings' and return
           end
         elsif existing_experience.label != value
           existing_experience.label = value
@@ -41,11 +35,10 @@ class SettingsController < ApplicationController
         positions[existing_experience_id] = value.to_i
       end
     end
-    if Experience.reposition(positions)
-      flash[:notice] = "Experiences saved."
-    else
+    unless Experience.reposition(positions)
       flash[:error] = "Multiple experiences can't have the same position."
     end
+    flash[:notice] = "Experiences saved." if flash[:error].blank?
     redirect_to '/settings'
   end
 
