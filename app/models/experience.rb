@@ -1,16 +1,18 @@
 class Experience < ActiveRecord::Base
-  has_many :jobs
-  validates :label, presence: true
-  default_scope { order('position') }
-  after_initialize :defaults
-
-  def defaults
-    if Experience.maximum("position").nil?
-      self.position ||= 1
-    else
-      self.position ||= Experience.maximum("position")+1
-    end
-  end
+#  BEGAN MOVING EVERYTHING INTO MANAGEABLE CONCERN
+#  has_many :jobs
+#  validates :label, presence: true
+#  default_scope { order('position') }
+#  after_initialize :defaults
+#
+#  def defaults
+#    if Experience.maximum("position").nil?
+#      self.position ||= 1
+#    else
+#      self.position ||= Experience.maximum("position")+1
+#    end
+#  end
+  include Manageable
 
   def destroy_and_reassign_jobs
     self.jobs.each do |job|
