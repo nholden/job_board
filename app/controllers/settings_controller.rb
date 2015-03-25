@@ -49,11 +49,11 @@ class SettingsController < ApplicationController
     redirect_to root_url and return unless is_admin?
     if experience.destroy_and_reassign_jobs
       flash[:notice] = "Experience deleted."
-      redirect_to '/settings'
     else
       flash[:error] = experience.errors.full_messages[0]
-      redirect_to '/settings'
     end
+    Experience.refresh_positions
+    redirect_to '/settings'
   end
 
   def update_terms

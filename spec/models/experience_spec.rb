@@ -92,8 +92,30 @@ RSpec.describe Experience, :type => :model do
       expect(Experience.find(3).position).to eql(2)
     end
 
+    it "ignores ids for experiences that don't exist" do
+      Experience.reposition({1=>9, 2=>4, 3=>7, 4=>3, 5=>2, 6=>1})
+      expect(Experience.find(1).position).to eql(3)
+      expect(Experience.find(2).position).to eql(1)
+      expect(Experience.find(3).position).to eql(2)
+    end
+
     it "won't let multiple experiences occupy the same position" do
       expect(Experience.reposition({1=>4, 2=>4, 3=>3})).to eql(false)
+    end
+  end
+
+  describe "refresh_positions" do
+    before(:each) do
+      @experience_1 = FactoryGirl.create(:experience, id: 1, position: 1)
+      @experience_2 = FactoryGirl.create(:experience, id: 2, position: 2)
+      @experience_3 = FactoryGirl.create(:experience, id: 3, position: 3)
+    end
+    
+    it "assigns the lowest possible integers while maintaining order" do
+      @experience_2.destroy
+      Experience.refresh_positions
+      expect(Experience.find(1).position).to eql(1)
+      expect(Experience.find(3).position).to eql(2)
     end
   end
 end
