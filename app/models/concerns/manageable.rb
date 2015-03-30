@@ -22,7 +22,7 @@ module Manageable
       job.save
     end
     if self.label == "Unspecified" && self.jobs.count != 0
-      self.errors.add(:base, "You must delete or reassign the jobs with unspecified experiences.")
+      self.errors.add(:base, "You must delete or reassign the jobs with unspecified #{self.class.name.downcase}s.")
       false
     else
       self.destroy

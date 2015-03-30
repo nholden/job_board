@@ -60,9 +60,13 @@ class SettingsController < ApplicationController
     flash[:error] = "You must be logged in as an administrator to edit settings." unless is_admin?
     redirect_to '/login' and return unless logged_in?
     redirect_to root_url and return unless is_admin?
+    positions = {}
     if !params[:new_terms].nil?
-      params[:new_terms].each do |term|
-        Term.create(label: term) unless term.blank?
+      params[:new_terms].each_with_index do |label, index|
+        unless label.blank?
+          term = Term.create(label: label)
+          positions[term.id] = params[:new_term_positions][index].to_i
+        end
       end
     end
     params.each do |key, value|
@@ -70,20 +74,22 @@ class SettingsController < ApplicationController
         existing_term_id = key.to_s.match(/\Aterm_(.*)/)[1].to_i
         existing_term = Term.find(existing_term_id)
         if value.blank?
-          if existing_term.destroy_and_reassign_jobs
-            flash[:notice] = "Terms saved."
-            redirect_to '/settings' and return
-          else
+          unless existing_term.destroy_and_reassign_jobs
             flash[:error] = existing_term.errors.full_messages[0]
-            redirect_to '/settings' and return
           end
         elsif existing_term.label != value
           existing_term.label = value
           existing_term.save
         end
-      end    
+      elsif key.to_s.match(/\Aterm_\d*_position\Z/)
+        existing_term_id = key.to_s.match(/\Aterm_(.*)_position\Z/)[1].to_i
+        positions[existing_term_id] = value.to_i
+      end
     end
-    flash[:notice] = "Terms saved."
+    unless Term.reposition(positions)
+      flash[:error] = "Multiple terms can't have the same position."
+    end
+    flash[:notice] = "Terms saved." if flash[:error].blank?
     redirect_to '/settings'
   end
 
@@ -94,10 +100,10 @@ class SettingsController < ApplicationController
     redirect_to root_url and return unless is_admin?
     if term.destroy_and_reassign_jobs
       flash[:notice] = "Term deleted."
-      redirect_to '/settings'
     else
       flash[:error] = term.errors.full_messages[0]
-      redirect_to '/settings'
     end
+    Term.refresh_positions
+    redirect_to '/settings'
   end
 end
