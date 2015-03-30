@@ -300,8 +300,23 @@ end
           put :update_terms,
               "term_" + @term1.id.to_s => @term1.label,
               "term_" + @term2.id.to_s => @term2.label,
-              :new_terms => ["Term 3", "", "", "", ""] 
+              :new_terms => ["Term 3", "", "", "", ""], 
+              :new_term_positions => ["3", "4", "5", "6", "7"]
         }.to change(Term.all, :count).by(1)
+      end
+
+      it "assigns the new term's position" do
+        put :update_terms,
+            "term_" + @term1.id.to_s => @term1.label,
+            "term_" + @term1.id.to_s + "_position" => "5",
+            "term_" + @term2.id.to_s => @term2.label, 
+            "term_" + @term2.id.to_s + "_position" => "4",
+            :new_terms => ["Bottom Term", "Top Term", "", "", ""],
+            :new_term_positions => ["10", "1", "3", "4", "5"]
+        expect(Term.find_by(position: 1).label).to eql("Top Term")
+        expect(Term.find_by(position: 2).label).to eql(@term2.label)
+        expect(Term.find_by(position: 3).label).to eql(@term1.label)
+        expect(Term.find_by(position: 4).label).to eql("Bottom Term")
       end
 
       it "updates an existing term" do
@@ -329,7 +344,7 @@ end
               :new_terms => ["", "", "", "", ""] 
         }.to change(Job.where(term: @unspecified_term), :count).by(1) 
       end  
- 
+
       it "deletes the unassigned term with no jobs" do
         expect{ 
           put :update_terms,
@@ -345,6 +360,27 @@ end
         }.to change(Term.where(label: "Unspecified"), :count).by(0)
       end
 
+      it "repositions terms" do
+        put :update_terms,
+            "term_" + @term1.id.to_s => @term1.label,
+            "term_" + @term1.id.to_s + "_position" => "2",
+            "term_" + @term2.id.to_s => @term2.label, 
+            "term_" + @term2.id.to_s + "_position" => "1",
+            :new_terms => [""]
+        expect(Term.find_by(position: 1).id).to eql(2)
+        expect(Term.find_by(position: 2).id).to eql(1)
+      end
+
+      it "raises a flash if two experiences are assigned the same position" do
+        put :update_terms,
+            "term_" + @term1.id.to_s => @term1.label,
+            "term_" + @term1.id.to_s + "_position" => "3",
+            "term_" + @term2.id.to_s => @term2.label, 
+            "term_" + @term2.id.to_s + "_position" => "3",
+            :new_terms => [""]
+        expect(flash[:error]).to eql("Multiple terms can't have the same position.")
+      end
+        
       it "sends a flash" do
         put :update_terms
         expect(flash[:notice]).to eql("Terms saved.")
@@ -399,20 +435,20 @@ end
 
       it "deletes the term" do
         expect{ delete :destroy_term, id: @term1.id }.to change( 
-          Term.all, :count).by(-1)
+          Term.where(label: "Term 1"), :count).by(-1)
       end
 
       it "reassigns jobs with deleted terms" do
-        expect{ delete :destroy_term, id: @term1.id }.to change( 
+        expect{ delete :destroy_term, id: @term1.id }.to change(
           Job.where(term: @unspecified_term), :count).by(1) 
-      end
+      end  
 
       it "deletes the unassigned term with no jobs" do
         expect{ delete :destroy_term, id: @unspecified_term.id }.to change( 
           Term.where(label: "Unspecified"), :count).by(-1)
       end
 
-      it "fails to delete the unassigned experience with jobs" do
+      it "fails to delete the unassigned term with jobs" do
         FactoryGirl.create(:job, term: @unspecified_term)
         expect{ delete :destroy_term, id: @unspecified_term.id }.to change( 
           Term.where(label: "Unspecified"), :count).by(0)
