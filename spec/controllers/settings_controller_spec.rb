@@ -164,8 +164,8 @@ end
             "experience_" + @experience2.id.to_s => @experience2.label, 
             "experience_" + @experience2.id.to_s + "_position" => "1",
             :new_experiences => [""]
-        expect(Experience.find_by(position: 1).id).to eql(2)
-        expect(Experience.find_by(position: 2).id).to eql(1)
+        expect(Experience.find_by(position: 1).id).to eql(@experience2.id)
+        expect(Experience.find_by(position: 2).id).to eql(@experience1.id)
       end
 
       it "raises a flash if two experiences are assigned the same position" do
@@ -367,8 +367,8 @@ end
             "term_" + @term2.id.to_s => @term2.label, 
             "term_" + @term2.id.to_s + "_position" => "1",
             :new_terms => [""]
-        expect(Term.find_by(position: 1).id).to eql(2)
-        expect(Term.find_by(position: 2).id).to eql(1)
+        expect(Term.find_by(position: 1).id).to eql(@term2.id)
+        expect(Term.find_by(position: 2).id).to eql(@term1.id)
       end
 
       it "raises a flash if two experiences are assigned the same position" do
