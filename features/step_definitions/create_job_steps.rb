@@ -22,10 +22,10 @@ When(/^he visits the create job page$/) do
 end
 
 Given(/^job terms and experiences exist$/) do
-  FactoryGirl.create(:term, label: 'Term A', id: 1)
-  FactoryGirl.create(:term, label: 'Term B', id: 2)
-  FactoryGirl.create(:experience, label: 'Experience A', id: 1)
-  FactoryGirl.create(:experience, label: 'Experience B', id: 2)
+  FactoryGirl.create(:term, label: 'Term A')
+  FactoryGirl.create(:term, label: 'Term B')
+  FactoryGirl.create(:experience, label: 'Experience A')
+  FactoryGirl.create(:experience, label: 'Experience B')
 end
 
 Given(/^a job exists$/) do
