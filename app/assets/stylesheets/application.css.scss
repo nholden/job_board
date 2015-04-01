@@ -81,6 +81,11 @@ div.notice {
   max-width: 600px;
 
   .option-settings {
+
+    .ui-sortable-handle {
+      @include span-columns(12);
+    }
+
     .delete {
       @include span-columns(1);
 
