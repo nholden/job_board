@@ -4,6 +4,14 @@
 
 $(document).ready ->
   $(".options").sortable()
+  $(".options").on 'sortstop', (event, ui) ->
+    sortedIDs = $(".options").sortable("toArray")
+    $(this).find("select").each -> 
+      position = sortedIDs.indexOf(this.id) + 1
+      $(this).val(position)
+      return
+    return
+  $(".position").hide()
   $(".new").hide()
   $(".view-option").show()
   $(".edit-option").hide()

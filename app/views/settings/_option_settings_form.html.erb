@@ -6,7 +6,7 @@
   <div class="options">
   <% model.all.each do |this_option| %>
     <% this_option_identifier = option + "_" + this_option.id.to_s %>
-    <div class="existing">
+    <%= content_tag(:div, class: "existing", id: "#{this_option_identifier}_position") do %>
       <div class="delete">
         <%= label_tag "delete_#{this_option.label.squish.downcase.tr(" ","_")}", "[X]" %>
       </div>
@@ -21,12 +21,12 @@
       <div class="position">
         <%= select_tag(
               "#{this_option_identifier}_position",
-              options_for_select((0..10).to_a, this_option.position))  %>
+              options_for_select((0..10).to_a, this_option.position,))  %>
       </div>
-    </div>
+    <% end %>
   <% end %>
   <% (10 - model.count).times do |n| %>
-    <div class="new">
+    <%= content_tag(:div, class: "new", id: "new_#{option}") do %>
       <div class="delete">
         <%= label_tag "delete_new_#{option}", "[X]" %>
       </div>
@@ -40,9 +40,9 @@
               "new_#{option}_positions[]",
               options_for_select((0..10).to_a, (n+1+model.count))) %>
       </div>
-    </div>
+    <% end %>
   <% end %>
-  </div>
+</div>
   <div class="button">
     <%= submit_tag("Save #{option}s") %><br /><br />
   </div>
