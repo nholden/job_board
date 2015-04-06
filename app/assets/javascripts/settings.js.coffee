@@ -5,7 +5,7 @@
 $(document).ready ->
   $(".options").sortable()
   $(".options").on 'sortstop', (event, ui) ->
-    sortedIDs = $(".options").sortable("toArray")
+    sortedIDs = $(this).sortable("toArray")
     $(this).find("select").each -> 
       position = sortedIDs.indexOf(this.id) + 1
       $(this).val(position)

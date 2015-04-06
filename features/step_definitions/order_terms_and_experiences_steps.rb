@@ -29,7 +29,7 @@ end
 
 When(/^he adds a new "(.*?)" with position "(.*?)"$/) do |managed, position|
   find("#new_#{managed}s_", match: :first).set("#{managed.capitalize} C")
-  page.find(:css, "select[id='new_#{managed}_positions_']", match: :first).find("option[value='#{position}']").select_option
+  page.find(:css, "select[name='new_#{managed}_positions[]']", match: :first).find("option[value='#{position}']").select_option
 end
 
 Then(/^the second "(.*?)" should be "(.*?)"$/) do |managed, label|

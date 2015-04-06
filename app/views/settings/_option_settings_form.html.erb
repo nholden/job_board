@@ -26,7 +26,7 @@
     <% end %>
   <% end %>
   <% (10 - model.count).times do |n| %>
-    <%= content_tag(:div, class: "new", id: "new_#{option}") do %>
+    <%= content_tag(:div, class: "new", id: "new_#{option}_#{n}_position") do %>
       <div class="delete">
         <%= label_tag "delete_new_#{option}", "[X]" %>
       </div>
@@ -36,9 +36,9 @@
         </div>
       </div>
       <div class="position">
-        <%= select_tag(
-              "new_#{option}_positions[]",
-              options_for_select((0..10).to_a, (n+1+model.count))) %>
+        <select id="<%= "new_#{option}_#{n}_position" %>" name="new_<%= option %>_positions[]">
+          <%= options_for_select((0..10).to_a, (n+1+model.count)) %>
+        </select>
       </div>
     <% end %>
   <% end %>
