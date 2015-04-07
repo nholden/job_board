@@ -8,17 +8,20 @@
     <% this_option_identifier = option + "_" + this_option.id.to_s %>
     <%= content_tag(:div, class: "existing", id: "#{this_option_identifier}_position") do %>
       <div class="delete">
-        <%= label_tag "delete_#{this_option.label.squish.downcase.tr(" ","_")}", "[X]" %>
+        <label for="<%= this_option.label.squish.downcase.tr(" ","_") %>">
+          <i class="fa fa-trash-o"></i>
+        </label>
       </div>
       <div class="option">
         <div class="view-option">
-          <%= this_option.label %> <%= link_to "(Edit)", '' %>
+          <a href><i class="fa fa-pencil"></i></a> <%= this_option.label %>
         </div>
         <div class="edit-option">
           <%= text_field_tag this_option_identifier, this_option.label %>
         </div>
       </div>
       <div class="position">
+        <i class="fa fa-sort"></i>
         <%= select_tag(
               "#{this_option_identifier}_position",
               options_for_select((0..10).to_a, this_option.position,))  %>
@@ -28,7 +31,9 @@
   <% (10 - model.count).times do |n| %>
     <%= content_tag(:div, class: "new", id: "new_#{option}_#{n}_position") do %>
       <div class="delete">
-        <%= label_tag "delete_new_#{option}", "[X]" %>
+        <label for="<%= "delete_new_#{option}" %>">
+          <i class="fa fa-trash-o"></i>
+        </label>
       </div>
       <div class="option">
         <div class="new-option">
@@ -36,6 +41,7 @@
         </div>
       </div>
       <div class="position">
+        <i class="fa fa-sort"></i>
         <select id="<%= "new_#{option}_#{n}_position" %>" name="new_<%= option %>_positions[]">
           <%= options_for_select((0..10).to_a, (n+1+model.count)) %>
         </select>

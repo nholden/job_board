@@ -89,10 +89,13 @@ div.notice {
     }
 
     .delete {
-      @include span-columns(1);
+      @include span-columns(0.5);
+      line-height: 2em;
+      text-align: left;
+      vertical-align: middle;
 
       label {
-        color: #477dca;
+        color: #333;
         cursor: pointer;
         margin-bottom: 0;
       }
@@ -103,11 +106,24 @@ div.notice {
     }
 
     .option {
-      @include span-columns(9);
+      @include span-columns(11);
+      line-height: 2em;
+      vertical-align: middle;
+      
+      a {
+        color: #333;
+      }
     } 
 
     .position {
-      @include span-columns(2);
+      @include span-columns(0.5);
+      line-height: 2em;
+      vertical-align: middle;
+
+      .fa-sort {
+        display: none;
+        color: #333;
+      }
     }
 
     .button {

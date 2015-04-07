@@ -11,7 +11,8 @@ $(document).ready ->
       $(this).val(position)
       return
     return
-  $(".position").hide()
+  $(".position select").hide()
+  $(".position .fa-sort").show()
   $(".new").hide()
   $(".view-option").show()
   $(".edit-option").hide()
