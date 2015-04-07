@@ -16,6 +16,7 @@ gem 'factory_girl_rails'
 gem 'bcrypt'
 gem 'unicorn'
 gem 'ransack'
+gem 'font-awesome-sass'
 
 group :development, :test do
   gem 'sqlite3'
