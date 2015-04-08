@@ -8,7 +8,7 @@
     <% this_option_identifier = option + "_" + this_option.id.to_s %>
     <%= content_tag(:div, class: "existing", id: "#{this_option_identifier}_position") do %>
       <div class="delete">
-        <label for="<%= this_option.label.squish.downcase.tr(" ","_") %>">
+        <label for="delete_<%= this_option.label.squish.downcase.tr(" ","_") %>">
           <i class="fa fa-trash-o"></i>
         </label>
       </div>
