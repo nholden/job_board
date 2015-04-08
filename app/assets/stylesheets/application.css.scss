@@ -106,7 +106,7 @@ div.notice {
     }
 
     .option {
-      @include span-columns(11);
+      @include span-columns(10.75);
       line-height: 2em;
       vertical-align: middle;
       
@@ -116,13 +116,22 @@ div.notice {
     } 
 
     .position {
-      @include span-columns(0.5);
+      @include span-columns(0.75);
       line-height: 2em;
+      text-align: center;
       vertical-align: middle;
 
       .fa-sort {
         display: none;
         color: #333;
+      }
+    
+      select {
+        -webkit-appearance: none;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        width: 100px;
       }
     }
 
