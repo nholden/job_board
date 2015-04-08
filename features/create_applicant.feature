@@ -1,0 +1,14 @@
+Feature: Create applicant
+  As an applicant
+  In order to save my information
+  I want to sign up
+
+  Scenario: Successful signup
+    Given the user is not logged in
+    When he visits the jobs page
+    When he clicks "Sign up"
+    When he clicks "Applicant"
+    When he fills in the form
+    When he clicks save
+    Then he should see "Applicant account successfully created"
+    Then he should see "Log out"

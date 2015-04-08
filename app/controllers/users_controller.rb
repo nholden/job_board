@@ -84,6 +84,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def roles
+  end
+
   private
     def user_params
       if is_admin?

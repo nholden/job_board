@@ -141,6 +141,40 @@ div.notice {
   }
 }
 
+.roles {
+  @include clearfix;
+  @include outer-container;
+  max-width: 600px;
+
+  a {
+    color: #000;
+  }
+
+  .role {
+    @include span-columns(12);
+    background-color: #eee;
+    border-radius: 5em;
+    margin: 10px 0px;
+
+    .icon{
+      @include span-columns(4);
+      text-align: center;
+      font-size: 300%;
+    }
+    
+    .description{
+      @include span-columns(8);
+      font-size: 300%;
+      text-align: left;
+    }
+  }
+
+  .role:hover {
+    background-color: #ccc;
+    cursor: pointer;
+  }
+}
+
 .search-tools {  
   ///////////////////////////////////////////////////////////////////////////////////
   $base-border-color: gainsboro !default;
