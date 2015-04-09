@@ -50,7 +50,7 @@
 </header>
 
 <% unless admin_exists? %>
-  <div class="error">This job board has no administrator. Please <%= link_to "create an account.", 'signup', method: :get %></div>
+  <div class="error">This job board has no administrator. Please <%= link_to "create an account.", 'signup-employer', method: :get %></div>
 <% end %>
 <% flash.each do |name, msg| -%>
   <%= content_tag :div, msg, class: name %>
