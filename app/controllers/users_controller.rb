@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def new_applicant
-    @user = User.new
+    @user = User.new(role: Role.find_or_create_by(label: 'applicant'))
   end
 
   def create

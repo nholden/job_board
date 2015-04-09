@@ -32,4 +32,14 @@ FactoryGirl.define do
     website "http://www.jobboard.com"
     association :role, label: 'admin'
   end
+
+  factory :applicant, :class => 'User' do
+    email "applicant@jobseeker.net"
+    password "applicantpassword"
+    password_confirmation "applicantpassword"
+    name nil
+    description nil
+    website nil
+    association :role, label: 'applicant'
+  end
 end

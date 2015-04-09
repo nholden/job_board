@@ -61,6 +61,10 @@ RSpec.describe UsersController, :type => :controller do
     it "sets @user" do
       expect(assigns(:user)).to_not be_nil
     end
+
+    it "assigns @user the 'applicant' role" do
+      expect(assigns(:user).role.label).to eql('applicant')
+    end
   end
 
   describe "GET #edit" do
@@ -269,6 +273,7 @@ RSpec.describe UsersController, :type => :controller do
   describe "POST #create" do
     before(:each) do
       @user_attributes = FactoryGirl.attributes_for(:user)
+      @applicant_attributes = FactoryGirl.attributes_for(:applicant)
     end
 
     context "when there is no admin acccount" do
@@ -283,6 +288,12 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       context "with valid information" do
+        it "creates a new applicant" do
+          expect{ post :create, user: @applicant_attributes}.to change(
+            Role.find_or_create_by(label: 'applicant').users, :count
+            ).by(1)
+        end
+
         it "creates a new employer" do
           expect{ post :create, user: @user_attributes}.to change(Role.find_or_create_by(label: 'employer').users,:count).by(1)
         end
