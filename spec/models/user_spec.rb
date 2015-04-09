@@ -11,4 +11,20 @@ RSpec.describe User, :type => :model do
   it "is invalid without a role" do
     expect(FactoryGirl.build(:user, role: nil)).to_not be_valid
   end
+
+  it "is invalid without an email" do
+    expect(FactoryGirl.build(:user, email: nil)).to_not be_valid
+  end
+
+  it "is invalid without a password" do
+    expect(FactoryGirl.build(:user, password: nil)).to_not be_valid
+  end
+
+  it "is valid without a name" do
+    expect(FactoryGirl.build(:user, name: nil)).to be_valid
+  end
+
+  it "is valid without a website" do
+    expect(FactoryGirl.build(:user, website: nil)).to be_valid
+  end
 end

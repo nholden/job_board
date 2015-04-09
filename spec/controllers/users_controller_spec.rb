@@ -360,26 +360,6 @@ RSpec.describe UsersController, :type => :controller do
           expect(response).not_to redirect_to root_url 
         end
       end
-
-      context "without a company name" do
-        it "does not create a new user" do
-          expect{ post :create, user:     { :email =>                 "a@b.com",
-                                            :password =>              "password",
-                                            :password_confirmation => "password",
-                                            :name =>                  "",
-                                            :website =>               "y" 
-          }}.to change(User,:count).by(0)
-        end
-
-        it "does not redirect to the homepage" do
-          post :create, user:     { :email =>                 "a@b.com",
-                                    :password =>              "password",
-                                    :password_confirmation => "password",
-                                    :name =>                  "", 
-                                    :website =>               "y" }
-          expect(response).not_to redirect_to root_url 
-        end
-      end
     end
   end
 
