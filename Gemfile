@@ -17,6 +17,7 @@ gem 'bcrypt'
 gem 'unicorn'
 gem 'ransack'
 gem 'font-awesome-sass'
+gem 'pry'
 
 group :development, :test do
   gem 'sqlite3'
