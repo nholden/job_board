@@ -1,0 +1,26 @@
+<%= form_for @user do |f| %>
+  <div class="form">
+    <div class="title">
+      <h1>Create new applicant</h1>
+    </div>
+    <div class="field">
+      <%= label_tag(:email, "Email:") %>
+      <%= f.text_field :email %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:password, "Password:") %>
+      <%= f.password_field :password  %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:password_confirmation, "Confirm:") %>
+      <%= f.password_field :password_confirmation %><br />
+    </div>
+    <div class="field">
+      <%= label_tag(:role, "User role:") %>
+      <%= f.collection_select(:role_id, Role.all, :id, :label) %>
+    </div>
+    <div class="trigger">
+      <%= submit_tag("Create account") %>
+    </div>
+  </div>
+<% end %>

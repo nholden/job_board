@@ -8,6 +8,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def new_applicant
+    @user = User.new
+  end
+
   def create
     @user = User.new(user_params)
 

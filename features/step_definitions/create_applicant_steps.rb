@@ -1,4 +1,4 @@
-When(/^he submits the create applicant form$/) do
+When(/^he fills in the signup applicant form$/) do
   visit('/signup-applicant')
   fill_in('user_email', :with => 'job@seeker.net')
   fill_in('user_password', :with => 'password1')

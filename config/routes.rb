@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post 'login'                => 'sessions#create'
   delete 'logout'             => 'sessions#destroy'
   get 'signup'                => 'users#roles'
-  get 'signup-applicant'      => 'users#signup-applicant'
+  get 'signup-applicant'      => 'users#new_applicant'
   get 'signup-employer'       => 'users#new'
   get 'settings'              => 'settings#edit'
   put 'update_experiences'    => 'settings#update_experiences'
