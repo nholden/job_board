@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if !is_admin?
+    if @user.role_id.nil?
       if admin_exists?
         @user.role_id = Role.find_or_create_by(label: 'employer').id
         flash_role = "employer"
@@ -93,10 +93,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      if is_admin?
-        params.require(:user).permit(:email, :password, :password_confirmation, :name, :website, :role_id)
-      else
-        params.require(:user).permit(:email, :password, :password_confirmation, :name, :website)
-      end
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :website, :role_id)
     end
 end

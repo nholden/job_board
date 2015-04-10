@@ -273,7 +273,6 @@ RSpec.describe UsersController, :type => :controller do
   describe "POST #create" do
     before(:each) do
       @user_attributes = FactoryGirl.attributes_for(:user)
-      @applicant_attributes = FactoryGirl.attributes_for(:applicant)
     end
 
     context "when there is no admin acccount" do
@@ -289,9 +288,12 @@ RSpec.describe UsersController, :type => :controller do
 
       context "with valid information" do
         it "creates a new applicant" do
-          expect{ post :create, user: @applicant_attributes}.to change(
-            Role.find_or_create_by(label: 'applicant').users, :count
-            ).by(1)
+          @applicant_role = FactoryGirl.create(:role, label: 'applicant')
+          expect{ post :create, user: {:email =>                "a@b.com",
+                                       :password =>              "password",
+                                       :password_confirmation => "password",
+                                       :role_id =>               @applicant_role.id}
+            }.to change(Role.find_or_create_by(label: 'applicant').users, :count).by(1)
         end
 
         it "creates a new employer" do
