@@ -9,6 +9,7 @@ Feature: Create applicant
     When he visits the jobs page
     When he clicks "Sign up"
     When he clicks "Applicant"
+    Then "applicant" should be selected in the "user_role_id" dropdown 
     When he fills in the signup applicant form
     Then he should see "Created applicant account"
     Then he should see "Log out"
