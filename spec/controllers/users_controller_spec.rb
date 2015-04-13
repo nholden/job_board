@@ -335,7 +335,7 @@ RSpec.describe UsersController, :type => :controller do
 
         context "when logged out user tries to create an admin" do
           before(:each) do
-            @admin_role = FactoryGirl.create(:role, label: 'admin')
+            @admin_role = Role.find_or_create_by(label: 'admin')
           end
 
           it "does not create a new user" do

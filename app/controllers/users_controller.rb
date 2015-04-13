@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+
     if @user.role_id.nil?
       if admin_exists?
         @user.role_id = Role.find_or_create_by(label: 'employer').id
@@ -23,6 +24,9 @@ class UsersController < ApplicationController
         @user.role_id = Role.find_or_create_by(label: 'admin').id
         flash_role = "administrator"
       end
+    elsif @user.role_id == Role.find_or_create_by(label:'admin').id and !is_admin?
+      flash[:error] = "You must be logged in as an administrator to create a new administrator."
+      redirect_to '/login' and return
     else
       flash_role = Role.find(@user.role_id).label
     end
