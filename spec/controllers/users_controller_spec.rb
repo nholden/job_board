@@ -332,6 +332,28 @@ RSpec.describe UsersController, :type => :controller do
             expect(response).to redirect_to ('/users')
           end
         end
+
+        context "when logged out user tries to create an admin" do
+          before(:each) do
+            @admin_role = FactoryGirl.create(:role, label: 'admin')
+          end
+
+          it "does not create a new user" do
+            expect{ post :create, user:    { :email =>                 "a@b.com",
+                                             :password =>              "password",
+                                             :password_confirmation => "password",
+                                             :role_id =>               @admin_role.id
+            }}.to change(User,:count).by(0)
+          end
+
+          it "does not redirect to the homepage" do
+            post :create, user:    { :email =>                 "a@b.com",
+                                     :password =>              "password",
+                                     :password_confirmation => "password",
+                                     :role_id =>               @admin_role.id}
+            expect(response).not_to redirect_to root_url
+          end
+        end
       end
 
       context "with non-macthing passwords" do
