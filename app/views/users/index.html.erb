@@ -19,6 +19,8 @@
     </tr>
   <% end %>
   <tr>
-    <td colspan=4><%= link_to "Create new user", new_user_path, method: :get %></td>
+    <td colspan=4><%= link_to "Create new applicant", signup_applicant_path, method: :get %></td>
+    <td colspan=4><%= link_to "Create new employer", signup_employer_path, method: :get %></td>
+    <td colspan=4><%= link_to "Create new admin", signup_admin_path, method: :get %></td>
   </tr>
 </table>

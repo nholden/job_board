@@ -1,8 +1,18 @@
 <%= form_for @user do |f| %>
   <div class="form">
     <div class="title">
-      <h1>Create new <%= @role  %></h1>
+      <h1>Create new <%= @role %></h1>
     </div>
+    <% if @role == "employer" %>
+      <div class="field">
+        <%= label_tag(:name, "Company name:") %>
+        <%= f.text_field :name %><br />
+      </div>
+      <div class="field">
+        <%= label_tag(:website, "Website:") %>
+        <%= f.text_field :website %><br />
+      </div>
+    <% end %>
     <div class="field">
       <%= label_tag(:email, "Email:") %>
       <%= f.text_field :email %><br />

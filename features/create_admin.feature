@@ -15,7 +15,7 @@ Feature: Create admin
     Given the user is not logged in
     Given there is no admin
     When he submits the create admin form
-    Then he should see "Created administrator account."
+    Then he should see "Created admin account."
     Then he should see "Log out"
     Then he should see "Manage users"
 
@@ -31,19 +31,19 @@ Feature: Create admin
     Given the admin is logged in
     When he clicks "Manage users"
     Then he should not see "Second Admin"
-    When he clicks "Create new user"
-    Then he should see "Create new profile"
+    When he clicks "Create new admin"
+    Then he should see "Create new admin"
     When he fills out the create new user form for an admin
     Then he should see "Created admin account."
-    Then he should see "Second Admin"
+    Then he should see "secondadmin@admin.com"
 
   Scenario: Create additional employer
     Given admin and employer roles exist
     Given the admin is logged in
     When he clicks "Manage users"
     Then he should not see "Raytheon"
-    When he clicks "Create new user"
-    Then he should see "Create new profile"
+    When he clicks "Create new employer"
+    Then he should see "Create new employer"
     When he fills out the create new user form for an employer
     Then he should see "Created employer account."
     Then he should see "Raytheon"
