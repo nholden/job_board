@@ -9,7 +9,7 @@ Feature: Create admin
     When he visits the jobs page
     Then he should see "This job board has no administrator. Please create an account."
     When he clicks "create an account"
-    Then he should see "Create administrator profile"
+    Then he should see "Create new admin"
 
   Scenario: Create valid admin
     Given the user is not logged in
