@@ -8,16 +8,9 @@ class UsersController < ApplicationController
 #    end
 #  end
 
-  def new_applicant
-    @user = User.new(role: Role.find_or_create_by(label: 'applicant'))
-    @role = "applicant"
-    render 'new'
-  end
-
-  def new_employer
-    @user = User.new(role: Role.find_or_create_by(label: 'employer'))
-    @role = "employer"
-    render 'new'
+  def new
+    @role = request.url.split('/')[-1]
+    @user = User.new(role: Role.find_or_create_by(label: @role))
   end
 
   def create
