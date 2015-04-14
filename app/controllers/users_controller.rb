@@ -1,21 +1,16 @@
 class UsersController < ApplicationController
-#  def new
-#    if logged_in? && !is_admin?
-#      flash[:error] = "Already logged in."
-#      redirect_to root_url
-#    else
-#      @user = User.new
-#    end
-#  end
-
   def new
-    @role = request.url.split('/')[-1]
-    @user = User.new(role: Role.find_or_create_by(label: @role))
+    if logged_in? && !is_admin?
+      flash[:error] = "Already logged in."
+      redirect_to root_url
+    else
+      @role = request.url.split('/')[-1]
+      @user = User.new(role: Role.find_or_create_by(label: @role))
+    end
   end
 
   def create
     @user = User.new(user_params)
-
 
     if @user.role_id.nil?
       if admin_exists?

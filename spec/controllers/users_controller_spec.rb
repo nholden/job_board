@@ -49,24 +49,6 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
-  describe "GET #new_applicant" do
-    before(:each) do
-      get :new_applicant
-    end
-
-    it "renders the new_applicant template" do
-      expect(response).to render_template("new_applicant")
-    end
-
-    it "sets @user" do
-      expect(assigns(:user)).to_not be_nil
-    end
-
-    it "assigns @user the 'applicant' role" do
-      expect(assigns(:user).role.label).to eql('applicant')
-    end
-  end
-
   describe "GET #edit" do
     before(:each) do
       @user = FactoryGirl.create(:user)
