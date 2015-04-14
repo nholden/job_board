@@ -257,20 +257,15 @@ RSpec.describe UsersController, :type => :controller do
       @user_attributes = FactoryGirl.attributes_for(:user)
     end
 
-    context "when there is no admin acccount" do
-      it "creates a new admin" do
-        expect{ post :create, user: @user_attributes}.to change(Role.find_or_create_by(label: 'admin').users,:count).by(1)
-      end
-    end
-
     context "when there is an admin account" do
       before(:each) do
         FactoryGirl.build(:admin).save
+        @applicant_role = FactoryGirl.create(:role, label: 'applicant')
+        @employer_role = FactoryGirl.create(:role, label: 'employer')
       end
 
       context "with valid information" do
         it "creates a new applicant" do
-          @applicant_role = FactoryGirl.create(:role, label: 'applicant')
           expect{ post :create, user: {:email =>                "a@b.com",
                                        :password =>              "password",
                                        :password_confirmation => "password",
@@ -279,13 +274,20 @@ RSpec.describe UsersController, :type => :controller do
         end
 
         it "creates a new employer" do
-          expect{ post :create, user: @user_attributes}.to change(Role.find_or_create_by(label: 'employer').users,:count).by(1)
+          expect{ post :create, user: {:email =>                "a@b.com",
+                                       :password =>              "password",
+                                       :password_confirmation => "password",
+                                       :role_id =>               @employer_role.id}
+            }.to change(Role.find_or_create_by(label: 'employer').users, :count).by(1)
         end
 
-        context "when user creates new user" do
+        context "when non-logged-in user creates new user" do
           before(:each) do
             allow(controller).to receive_messages(:is_admin? => false)
-            post :create, user: @user_attributes
+            post :create, user: {:email =>                "a@b.com",
+                                 :password =>              "password",
+                                 :password_confirmation => "password",
+                                 :role_id =>               @applicant_role.id}
           end
  
           it "redirects to the homepage" do
