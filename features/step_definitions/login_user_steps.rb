@@ -16,8 +16,8 @@ When(/^he submits the login form with bad credentials$/) do
   click_button('Login')
 end
 
-When(/^he visits the signup page$/) do
-  visit('users/new')
+When(/^he visits the signup employer page$/) do
+  visit('signup/employer')
 end
 
 Given(/^the user is logged in$/) do

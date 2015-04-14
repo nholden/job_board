@@ -9,7 +9,7 @@ Feature: Create admin
     When he visits the jobs page
     Then he should see "This job board has no administrator. Please create an account."
     When he clicks "create an account"
-    Then he should see "Create new admin"
+    Then he should see "Create admin"
 
   Scenario: Create valid admin
     Given the user is not logged in
@@ -32,7 +32,7 @@ Feature: Create admin
     When he clicks "Manage users"
     Then he should not see "Second Admin"
     When he clicks "Create new admin"
-    Then he should see "Create new admin"
+    Then he should see "Create admin"
     When he fills out the create new user form for an admin
     Then he should see "Created admin account."
     Then he should see "secondadmin@admin.com"
@@ -43,7 +43,7 @@ Feature: Create admin
     When he clicks "Manage users"
     Then he should not see "Raytheon"
     When he clicks "Create new employer"
-    Then he should see "Create new employer"
+    Then he should see "Create employer"
     When he fills out the create new user form for an employer
     Then he should see "Created employer account."
     Then he should see "Raytheon"

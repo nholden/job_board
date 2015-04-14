@@ -1,9 +1,9 @@
-<%= form_for @user do |f| %>
+<%= form_for user do |f| %>
   <div class="form">
     <div class="title">
-      <h1>Create new <%= @role %></h1>
+      <h1><%= action %> <%= role %></h1>
     </div>
-    <% if @role == "employer" %>
+    <% if role == "employer" %>
       <div class="field">
         <%= label_tag(:name, "Company name:") %>
         <%= f.text_field :name %><br />
@@ -30,7 +30,7 @@
       <%= f.collection_select(:role_id, Role.all, :id, :label) %>
     </div>
     <div class="trigger">
-      <%= submit_tag("Create account") %>
+      <%= submit_tag("#{action} account") %>
     </div>
   </div>
 <% end %>

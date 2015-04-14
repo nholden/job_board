@@ -1,1 +1,1 @@
-<%= render partial: "form", locals: {user: @user, title_label: "Edit", submit_label: "Save profile"} %>
+<%= render partial: "users_form", locals: {user: @user, role: @user.role.label, action: "Update"} %>

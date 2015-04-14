@@ -10,12 +10,12 @@ Given(/^an employer exists$/) do
   FactoryGirl.build(:user).save
 end
 
-When(/^he visits the create user page$/) do
-  visit('users/new')
+When(/^he visits the create employer page$/) do
+  visit('/signup/employer')
 end
 
-When(/^he submits the create user form$/) do
-  visit('/users/new')
+When(/^he submits the create employer form$/) do
+  visit('/signup/employer')
   fill_in('user_email', :with => 'ceo@boeing.com')
   fill_in('user_password', :with => 'password')
   fill_in('user_password_confirmation', :with => 'password')
@@ -32,8 +32,8 @@ When(/^he submits the create admin form$/) do
   click_button('Create account')
 end
 
-When(/^he submits the create user form without valid password confirmation$/) do
-  visit('/users/new')
+When(/^he submits the create employer form without valid password confirmation$/) do
+  visit('/signup/employer')
   fill_in('user_email', :with => 'ceo@boeing.com')
   fill_in('user_password', :with => 'password')
   fill_in('user_password_confirmation', :with => 'different_password')

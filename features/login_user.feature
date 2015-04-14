@@ -5,7 +5,7 @@ Feature: Login employer
 
   Scenario: Login successfully
     Given the user is not logged in
-    When he submits the create user form
+    When he submits the create employer form
     When he logs out
     When he submits the login form
     Then he should see "Logged in successfully." 
@@ -14,11 +14,11 @@ Feature: Login employer
 
   Scenario: Fail to login
     Given the user is not logged in
-    When he submits the create user form
+    When he submits the create employer form
     When he logs out
     When he submits the login form with bad credentials
     Then he should see "Email and password combination not recognized."
-    When he visits the signup page
+    When he visits the signup employer page
     Then he should not see "Email and password combination not recognized."
     Then he should not see "Log out"
     Then he should not see "Post new job"
