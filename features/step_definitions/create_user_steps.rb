@@ -24,6 +24,14 @@ When(/^he submits the create user form$/) do
   click_button('Create account')
 end
 
+When(/^he submits the create admin form$/) do
+  visit('/signup/admin')
+  fill_in('user_email', :with => 'admin@admin.org')
+  fill_in('user_password', :with => 'password1')
+  fill_in('user_password_confirmation', :with => 'password1')
+  click_button('Create account')
+end
+
 When(/^he submits the create user form without valid password confirmation$/) do
   visit('/users/new')
   fill_in('user_email', :with => 'ceo@boeing.com')

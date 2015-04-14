@@ -255,13 +255,26 @@ RSpec.describe UsersController, :type => :controller do
   describe "POST #create" do
     before(:each) do
       @user_attributes = FactoryGirl.attributes_for(:user)
+      @applicant_role = FactoryGirl.create(:role, label: 'applicant')
+      @employer_role = FactoryGirl.create(:role, label: 'employer')
+      @admin_role = FactoryGirl.create(:role, label: 'admin')
+    end
+
+    context "when there is no admin account" do
+      context "with valid information" do
+        it "creates a new admin" do
+          expect{ post :create, user: {:email =>                "a@b.com",
+                                       :password =>              "password",
+                                       :password_confirmation => "password",
+                                       :role_id =>               @admin_role.id}
+            }.to change(Role.find_or_create_by(label: 'admin').users, :count).by(1)
+        end
+      end  
     end
 
     context "when there is an admin account" do
       before(:each) do
-        FactoryGirl.build(:admin).save
-        @applicant_role = FactoryGirl.create(:role, label: 'applicant')
-        @employer_role = FactoryGirl.create(:role, label: 'employer')
+        FactoryGirl.create(:admin, role: @admin_role)
       end
 
       context "with valid information" do
@@ -318,10 +331,6 @@ RSpec.describe UsersController, :type => :controller do
         end
 
         context "when logged out user tries to create an admin" do
-          before(:each) do
-            @admin_role = Role.find_or_create_by(label: 'admin')
-          end
-
           it "does not create a new user" do
             expect{ post :create, user:    { :email =>                 "a@b.com",
                                              :password =>              "password",

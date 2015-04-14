@@ -14,7 +14,7 @@ Feature: Create admin
   Scenario: Create valid admin
     Given the user is not logged in
     Given there is no admin
-    When he submits the create user form
+    When he submits the create admin form
     Then he should see "Created administrator account."
     Then he should see "Log out"
     Then he should see "Manage users"
