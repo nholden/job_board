@@ -108,9 +108,26 @@ RSpec.describe JobsController, :type => :controller do
       end
     end
 
-    context "when logged in" do
+    context "when logged in as an applicant" do
       before(:each) do
-        allow(controller).to receive_messages(:logged_in? => true)
+        @applicant = FactoryGirl.create(:applicant)
+        allow(controller).to receive_messages(:current_user => @applicant)
+        get :new 
+      end
+
+      it "redirects to the root url" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "sends a flash message" do
+        expect(flash[:error]).to eql("Applicants can't create jobs.")
+      end
+    end
+
+    context "when logged in as an employer" do
+      before(:each) do
+        @employer = FactoryGirl.create(:user)
+        allow(controller).to receive_messages(:current_user => @employer)
         get :new
       end
 

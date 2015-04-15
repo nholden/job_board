@@ -27,9 +27,11 @@
           </li>
         <% end %>
         <% if current_user.present? %>
-          <li class="nav-link">
-            <%= link_to "Post new job", new_job_path, method: :get %>
-          </li>
+          <% unless current_user.role.label == "applicant" %>
+            <li class="nav-link">
+              <%= link_to "Post new job", new_job_path, method: :get %>
+            </li>
+          <% end %>
           <li class="nav-link">
             <%= link_to "Edit profile", edit_user_path(current_user), method: :get %>
           </li>

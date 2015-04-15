@@ -12,3 +12,4 @@ Feature: Create applicant
     When he fills in the signup applicant form
     Then he should see "Created applicant account"
     Then he should see "Log out"
+    Then he should not see "Post new job"

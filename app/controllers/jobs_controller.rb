@@ -12,7 +12,12 @@ class JobsController < ApplicationController
 
   def new
     if logged_in?
-      @job = Job.new
+      if current_user.role.label == "applicant"
+        flash[:error] = "Applicants can't create jobs."
+        redirect_to root_url
+      else
+        @job = Job.new
+      end
     else
       flash[:error] = "You must be logged in to create a job."
       redirect_to '/login'

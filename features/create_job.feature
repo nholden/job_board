@@ -16,3 +16,8 @@ Feature: Post a job
     Given the user is not logged in
     When he visits the create job page
     Then he should see "You must be logged in to create a job."
+
+  Scenario: Logged in as applicant
+    Given an applicant is logged in
+    When he visits the create job page
+    Then he should see "Applicants can't create jobs."
