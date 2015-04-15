@@ -1,5 +1,6 @@
 <%= form_for user do |f| %>
   <div class="form">
+    <%= f.hidden_field(:role_id) %>
     <div class="title">
       <h1><%= action %> <%= role %></h1>
     </div>
@@ -24,10 +25,6 @@
     <div class="field">
       <%= label_tag(:password_confirmation, "Confirm:") %>
       <%= f.password_field :password_confirmation %><br />
-    </div>
-    <div class="field">
-      <%= label_tag(:role, "User role:") %>
-      <%= f.collection_select(:role_id, Role.all, :id, :label) %>
     </div>
     <div class="trigger">
       <%= submit_tag("#{action} account") %>
