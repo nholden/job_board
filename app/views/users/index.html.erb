@@ -18,9 +18,16 @@
       <td><%= user.jobs.count %></td>
     </tr>
   <% end %>
-  <tr>
-    <td colspan=4><%= link_to "Create new applicant", signup_applicant_path, method: :get %></td>
-    <td colspan=4><%= link_to "Create new employer", signup_employer_path, method: :get %></td>
-    <td colspan=4><%= link_to "Create new admin", signup_admin_path, method: :get %></td>
-  </tr>
 </table>
+
+<div class="new_links">
+  <div class="link">
+    <a href="<%= signup_applicant_path %>"><i class='fa fa-user'></i> Create new applicant</a>
+  </div>
+  <div class="link">
+    <a href="<%= signup_employer_path %>"><i class='fa fa-building'></i> Create new employer</a>
+  </div>
+  <div class="link">
+    <a href="<%= signup_admin_path %>"><i class='fa fa-cogs'></i> Create new admin</a>
+  </div>
+</div>
