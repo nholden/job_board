@@ -1,3 +1,14 @@
+Given(/^an applicant is logged in$/) do
+  @applicant = User.new(:email    => "applicant@gmail.com",
+                        :password => "applicant",
+                        :role_id  => Role.find_or_create_by(label: 'applicant').id)
+  @applicant.save
+  visit('login')
+  fill_in('session_email', :with => 'applicant@gmail.com')
+  fill_in('session_password', :with => 'applicant')
+  click_button('Login')
+end
+
 When(/^he fills in the signup applicant form$/) do
   visit('/signup/applicant')
   fill_in('user_email', :with => 'job@seeker.net')

@@ -10,6 +10,19 @@ Given(/^an employer exists$/) do
   FactoryGirl.build(:user).save
 end
 
+Given(/^an employer is logged in$/) do
+  @employer = User.new(:email    => "employee@employer.com",
+                       :password => "employer",
+                       :name     => "Employer",
+                       :website  => "www.employer.com",
+                       :role_id  => Role.find_or_create_by(label: 'employer').id)
+  @employer.save
+  visit('login')
+  fill_in('session_email', :with => 'employee@employer.com')
+  fill_in('session_password', :with => 'employer')
+  click_button('Login')
+end
+
 When(/^he visits the create employer page$/) do
   visit('/signup/employer')
 end

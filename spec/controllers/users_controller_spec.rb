@@ -140,6 +140,7 @@ RSpec.describe UsersController, :type => :controller do
     before(:each) do
       @employer = FactoryGirl.create(:user)
       @admin = FactoryGirl.create(:admin)
+      @applicant = FactoryGirl.create(:applicant)
     end
 
     context "when logged in as an administrator" do
@@ -156,6 +157,21 @@ RSpec.describe UsersController, :type => :controller do
     context "when logged in as an employer" do
       before(:each) do
         allow(controller).to receive_messages(:current_user => @employer)
+        get :index
+      end
+
+      it "redirects to the jobs page" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "sends a flash" do
+        expect(flash[:error]).to eql("You must be logged in as an administrator to manage users.")
+      end
+    end
+
+    context "when logged in as an applicant" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @applicant)
         get :index
       end
 
