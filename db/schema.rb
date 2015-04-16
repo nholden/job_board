@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330110303) do
+ActiveRecord::Schema.define(version: 20150416003359) do
+
+  create_table "applications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "job_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "applications", ["job_id"], name: "index_applications_on_job_id"
+  add_index "applications", ["user_id"], name: "index_applications_on_user_id"
 
   create_table "experiences", force: true do |t|
     t.text     "label"
