@@ -10,3 +10,9 @@
 <p>Instructions: <%= @job.instructions %></p>
 <p>Deadline: <%= @job.deadline %></p>
 <p>Salary: <%= @job.salary %></p>
+<p>
+<%= form_for Application.new do |f| %>
+  <%= f.hidden_field(:user_id, value: current_user.id) %>
+  <%= f.hidden_field(:job_id, value: @job.id) %>
+  <%= submit_tag("Apply") %>
+<% end %>
