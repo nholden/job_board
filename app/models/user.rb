@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
   validates :role, presence: true
   belongs_to :role
   has_many :jobs, dependent: :destroy
+  has_many :applications
 end

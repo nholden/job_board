@@ -8,6 +8,10 @@ RSpec.describe User, :type => :model do
     expect(User.reflect_on_association(:role).macro).to eq(:belongs_to)
   end
 
+  it "should have many applications" do
+    expect(User.reflect_on_association(:applications).macro).to eq(:has_many)
+  end
+
   it "is invalid without a role" do
     expect(FactoryGirl.build(:user, role: nil)).to_not be_valid
   end

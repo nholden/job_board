@@ -33,6 +33,10 @@ RSpec.describe Job, :type => :model do
     expect(Job.reflect_on_association(:term).macro).to eq(:belongs_to)
   end
 
+  it "should have many applications" do
+    expect(Job.reflect_on_association(:applications).macro).to eq(:has_many)
+  end
+
   subject { FactoryGirl.create(:job) }
   its(:title) { should == 'Aerospace engineer intern' }
 end
