@@ -40,3 +40,7 @@ end
 When(/^he clicks "(.*?)"$/) do |text|
   click_link(text)
 end
+
+When(/^he clicks the "(.*?)" button$/) do |text|
+  click_button(text)
+end

@@ -8,5 +8,5 @@ Feature: Apply for a job
     Given a job exists
     When he visits the jobs page
     When he clicks "Aerospace engineer intern"
-    When he clicks "Apply"
+    When he clicks the "Apply" button
     Then he should see "Application successfully submitted"
