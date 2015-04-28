@@ -7,7 +7,11 @@ RSpec.describe ApplicationsController, :type => :controller do
     end
 
     it "creates a new application" do
-      expect{post :create}.to change(Application.all, :count).by(1)
+      expect{post :create, application: @application_attributes}.
+        to change(Application.where(job_id: @application_attributes[:job_id], 
+                                    user_id: @application_attributes[:user_id],
+                                    status: "Submitted"
+                                   ), :count).by(1)
     end
 
     it "redirects to root_url" do

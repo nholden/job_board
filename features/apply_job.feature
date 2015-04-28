@@ -9,4 +9,4 @@ Feature: Apply for a job
     When he visits the jobs page
     When he clicks "Aerospace engineer intern"
     When he clicks the "Apply" button
-    Then he should see "Application successfully submitted"
+    Then he should see "Application to 'Aerospace engineer intern' successfully submitted"
