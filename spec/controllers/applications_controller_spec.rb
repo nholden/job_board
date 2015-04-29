@@ -2,26 +2,26 @@ require 'rails_helper'
 
 RSpec.describe ApplicationsController, :type => :controller do
   describe "POST #create" do
-    before (:each) do
-      @application_attributes = FactoryGirl.attributes_for(:application)
+    before(:each) do
+      @applicant = FactoryGirl.create(:applicant)
+      @job = FactoryGirl.create(:job)
     end
 
     it "creates a new application" do
-      expect{post :create, application: @application_attributes}.
-        to change(Application.where(job_id: @application_attributes[:job_id], 
-                                    user_id: @application_attributes[:user_id],
-                                    status: "Submitted"
+      expect{post :create, application: {user_id: @applicant.id, job_id: @job.id}}.
+        to change(Application.where(user_id: @applicant.id, 
+                                    job_id: @job.id
                                    ), :count).by(1)
     end
 
     it "redirects to root_url" do
-      post :create
+      post :create, application: {user_id: @applicant.id, job_id: @job.id}
       expect(response).to redirect_to(root_url)
     end
 
     it "sends a flash" do
-      post :create
-      expect(flash[:notice]).to eql("Application successfully submitted.")
+      post :create, application: {user_id: @applicant.id, job_id: @job.id}
+      expect(flash[:notice]).to eql("Application to '#{@job.title}' successfully submitted.")
     end
   end 
 end
