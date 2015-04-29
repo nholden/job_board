@@ -11,8 +11,12 @@
 <p>Deadline: <%= @job.deadline %></p>
 <p>Salary: <%= @job.salary %></p>
 <p>
-<%= form_for Application.new do |f| %>
-  <%= f.hidden_field(:user_id, value: current_user.id) %>
-  <%= f.hidden_field(:job_id, value: @job.id) %>
-  <%= submit_tag("Apply") %>
+<% if !logged_in? %>
+  <p><%= link_to "Sign up", signup_path, method: :get %> or <%= link_to "log in", login_path, method: :get %> to apply.</p>
+<% elsif current_user.role.label == "applicant" %>
+  <%= form_for Application.new do |f| %>
+    <%= f.hidden_field(:user_id, value: current_user.id) %>
+    <%= f.hidden_field(:job_id, value: @job.id) %>
+    <%= submit_tag("Apply") %>
+  <% end %>
 <% end %>
