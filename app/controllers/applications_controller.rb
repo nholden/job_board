@@ -3,7 +3,10 @@ class ApplicationsController < ApplicationController
     if !logged_in?
       flash[:error] = "You must be logged in to apply."
       redirect_to login_path
-    elsif current_user.role.label == "applicant"
+    elsif current_user.role.label != "applicant"
+      flash[:error] = "You must be an applicant to apply."
+      redirect_to root_url
+    else
       @application = Application.new(application_params)
       job_title = Job.find(application_params[:job_id]).title
       if @application.save

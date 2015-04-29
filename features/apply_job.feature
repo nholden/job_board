@@ -16,3 +16,11 @@ Feature: Apply for a job
     When he visits the jobs page
     When he clicks "Aerospace engineer intern"
     Then he should see "Sign up or log in to apply."
+
+  Scenario: Logged in as an employer
+    Given an employer is logged in
+    Given a job exists
+    When he visits the jobs page
+    When he clicks "Aerospace engineer intern"
+    Then he should not see "Apply"
+    Then he should not see "Sign up or log in to apply."
