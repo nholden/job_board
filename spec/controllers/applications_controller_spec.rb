@@ -36,14 +36,14 @@ RSpec.describe ApplicationsController, :type => :controller do
           to change(Application.all, :count).by(0)
       end
 
-      it "redirects to login" do
+      it "redirects to root_url" do
         post :create, application: {user_id: @applicant.id, job_id: @job.id}
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(root_url)
       end
 
       it "sends a flash" do
         post :create, application: {user_id: @applicant.id, job_id: @job.id}
-        expect(flash[:error]).to eql("You must be logged in to apply.")
+        expect(flash[:error]).to eql("You must be logged in as an applicant to apply.")
       end
     end
 
@@ -65,7 +65,7 @@ RSpec.describe ApplicationsController, :type => :controller do
 
       it "sends a flash" do
         post :create, application: {user_id: @applicant.id, job_id: @job.id}
-        expect(flash[:error]).to eql("You must be an applicant to apply.")
+        expect(flash[:error]).to eql("You must be logged in as an applicant to apply.")
       end
     end  
   end 
