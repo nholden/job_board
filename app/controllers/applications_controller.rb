@@ -1,4 +1,7 @@
 class ApplicationsController < ApplicationController
+  def index
+  end
+
   def create
     if logged_in? and current_user.id == application_params[:user_id].to_i
       @application = Application.new(application_params)

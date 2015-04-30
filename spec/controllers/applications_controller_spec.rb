@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationsController, :type => :controller do
+  describe "GET #index" do
+    it "returns a 200 status" do
+      get :index
+      expect(response.status).to eql(200)
+    end
+  end
+
   describe "POST #create" do
     before(:each) do
       @applicant = FactoryGirl.create(:applicant)
