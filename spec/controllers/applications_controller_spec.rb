@@ -9,8 +9,9 @@ RSpec.describe ApplicationsController, :type => :controller do
   end
 
   describe "GET #index" do
-    context "with a specified job" do
+    context "when logged in" do
       before(:each) do
+        allow(controller).to receive_messages(:current_user => @employer)
         get :index, job_id: @job.id
       end
  
@@ -20,6 +21,51 @@ RSpec.describe ApplicationsController, :type => :controller do
 
       it "assigns @applications" do
         expect(assigns(:applications)).to eq(Application.where(job_id: @job.id))
+      end
+    end
+
+    context "with no specified job" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @employer)
+        get :index
+      end
+
+      it "redirects to root_url" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "sends a flash" do
+        expect(flash[:error]).to eql("You are not authorized to view these applications.")
+      end
+    end
+
+    context "when not logged in" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => nil)
+        get :index, job_id: @job.id
+      end
+
+      it "redirects to root_url" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "sends a flash" do
+        expect(flash[:error]).to eql("You are not authorized to view these applications.")
+      end
+    end
+
+    context "when logged in as another employer" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => FactoryGirl.create(:user))
+        get :index, job_id: @job.id
+      end
+
+      it "redirects to root_url" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "sends a flash" do
+        expect(flash[:error]).to eql("You are not authorized to view these applications.")
       end
     end
   end
