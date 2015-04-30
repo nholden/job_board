@@ -1,18 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationsController, :type => :controller do
+  before(:each) do
+    @employer = FactoryGirl.create(:user)
+    @applicant = FactoryGirl.create(:applicant)
+    @job = FactoryGirl.create(:job, user: @employer)
+  end
+
   describe "GET #index" do
-    it "returns a 200 status" do
-      get :index
-      expect(response.status).to eql(200)
+    context "with a specified job" do
+      before(:each) do
+        @application = FactoryGirl.create(:application, user: @applicant, job: @job)
+        get :index, job_id: @job.id
+      end
+ 
+      it "renders the index template" do
+        expect(response).to render_template(:index)
+      end
+
+      it "assigns @applications" do
+        expect(assigns(:applications)).to eq(Application.where(job_id: @job.id))
+      end
     end
   end
 
   describe "POST #create" do
-    before(:each) do
-      @applicant = FactoryGirl.create(:applicant)
-      @job = FactoryGirl.create(:job)
-    end
 
     context "when logged in as an applicant" do
       before(:each) do

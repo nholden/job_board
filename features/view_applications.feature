@@ -7,5 +7,5 @@ Feature: View applications
     Given an employer with a job and an application is logged in
     When he visits the jobs page
     When he clicks "View applications"
-    When he clicks "applicant@applicant.com"
+    When he clicks "applicant@jobseeker.net"
     Then he should see "Submitted"

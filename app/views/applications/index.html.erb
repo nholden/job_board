@@ -1,1 +1,3 @@
-Applications index view
+<% @applications.each do |application| %>
+  <%= link_to "#{application.user.email}", root_url %>
+<% end %>

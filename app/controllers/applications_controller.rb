@@ -1,5 +1,6 @@
 class ApplicationsController < ApplicationController
   def index
+    @applications = Application.where(job_id: params[:job_id])
   end
 
   def create
