@@ -5,12 +5,12 @@ RSpec.describe ApplicationsController, :type => :controller do
     @employer = FactoryGirl.create(:user)
     @applicant = FactoryGirl.create(:applicant)
     @job = FactoryGirl.create(:job, user: @employer)
+    @application = FactoryGirl.create(:application, user: @applicant, job: @job)
   end
 
   describe "GET #index" do
     context "with a specified job" do
       before(:each) do
-        @application = FactoryGirl.create(:application, user: @applicant, job: @job)
         get :index, job_id: @job.id
       end
  
@@ -24,8 +24,21 @@ RSpec.describe ApplicationsController, :type => :controller do
     end
   end
 
-  describe "POST #create" do
+  describe "GET #show" do
+    before(:each) do
+      get :show, id: @application.id
+    end
 
+    it "renders the show template" do
+      expect(response).to render_template(:show)
+    end
+
+    it "assigns @application" do
+      expect(assigns(:application)).to eq(Application.find(@application.id))
+    end
+  end
+
+  describe "POST #create" do
     context "when logged in as an applicant" do
       before(:each) do
         allow(controller).to receive_messages(:current_user => @applicant)

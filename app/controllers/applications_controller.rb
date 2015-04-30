@@ -3,6 +3,10 @@ class ApplicationsController < ApplicationController
     @applications = Application.where(job_id: params[:job_id])
   end
 
+  def show
+    @application = Application.find(params[:id])
+  end
+
   def create
     if logged_in? and current_user.id == application_params[:user_id].to_i
       @application = Application.new(application_params)
