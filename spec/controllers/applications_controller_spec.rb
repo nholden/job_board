@@ -9,7 +9,7 @@ RSpec.describe ApplicationsController, :type => :controller do
   end
 
   describe "GET #index" do
-    context "when logged in" do
+    context "when an employer looks up applications for a job" do
       before(:each) do
         allow(controller).to receive_messages(:current_user => @employer)
         get :index, job_id: @job.id
@@ -28,7 +28,22 @@ RSpec.describe ApplicationsController, :type => :controller do
       end
     end
 
-    context "with no specified job" do
+    context "when an applicant looks up applications for himself" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @applicant)
+        get :index, user_id: @applicant.id
+      end
+
+      it "renders the index template" do
+        expect(response).to render_template(:index)
+      end
+
+      it "assigns @applications" do
+        expect(assigns(:applications)).to eq(Application.where(user_id: @applicant.id))
+      end
+    end
+
+    context "with no specified job or user" do
       before(:each) do
         allow(controller).to receive_messages(:current_user => @employer)
         get :index

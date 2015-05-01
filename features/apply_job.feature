@@ -11,6 +11,18 @@ Feature: Apply for a job
     When he clicks the "Apply" button
     Then he should see "Application to 'Aerospace engineer intern' successfully submitted"
 
+  Scenario: View applications
+    Given an applicant is logged in
+    Given a job exists
+    When he visits the jobs page
+    When he clicks "Applications"
+    Then he should not see "Aerospace engineer intern"
+    When he visits the jobs page
+    When he clicks "Aerospace engineer intern"
+    When he clicks the "Apply" button
+    When he clicks "Applications"
+    Then he should see "Aerospace engineer intern"
+
   Scenario: Not logged in
     Given a job exists
     When he visits the jobs page

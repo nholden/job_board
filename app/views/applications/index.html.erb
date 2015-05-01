@@ -1,8 +1,16 @@
 <div class="content">
-  <h1>Applications to <%= @job.title %></h1>  
+  <% if !@job.nil? %>
+    <h1>Applications to <%= @job.title %></h1>  
+  <% else %>
+    <h1>Your applications</h1>
+  <% end %>
   <ul>
     <% @applications.each do |application| %>
-      <li><%= link_to "#{application.user.email}", application_path(application), method: :get %></li>
+      <% if !@job.nil? %>
+        <li><%= link_to "#{application.user.email}", application_path(application), method: :get %></li>
+      <% else %>
+        <li><%= link_to "#{application.job.title}", application_path(application), method: :get %></li>
+      <% end %>
     <% end %>
   </ul>
 </div>
