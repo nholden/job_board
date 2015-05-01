@@ -88,6 +88,14 @@ RSpec.describe ApplicationsController, :type => :controller do
       it "assigns @application" do
         expect(assigns(:application)).to eq(Application.find(@application.id))
       end
+
+      it "assigns @applicant" do
+        expect(assigns(:applicant)).to eq(User.find(@applicant.id))
+      end
+
+      it "assigns @job" do
+        expect(assigns(:job)).to eq(Job.find(@job.id))
+      end
     end
 
     context "when not logged in" do

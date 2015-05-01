@@ -12,6 +12,8 @@ class ApplicationsController < ApplicationController
   def show
     if current_user == Application.find(params[:id]).job.user
       @application = Application.find(params[:id])
+      @applicant = User.find(@application.user)
+      @job = Job.find(@application.job)
     else
       flash[:error] = "You are not authorized to view this application."
       redirect_to(root_url)
