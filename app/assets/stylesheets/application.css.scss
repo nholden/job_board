@@ -13,7 +13,7 @@ body {
   margin: 0;
 }
 
-table, .new_links {
+table, .content, .new_links {
   @include outer-container;
 }
 

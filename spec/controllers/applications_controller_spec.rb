@@ -22,6 +22,10 @@ RSpec.describe ApplicationsController, :type => :controller do
       it "assigns @applications" do
         expect(assigns(:applications)).to eq(Application.where(job_id: @job.id))
       end
+
+      it "assigns @job" do
+        expect(assigns(:job)).to eq(@job)
+      end
     end
 
     context "with no specified job" do
