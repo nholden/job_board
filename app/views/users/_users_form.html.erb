@@ -26,6 +26,12 @@
       <%= label_tag(:password_confirmation, "Confirm:") %>
       <%= f.password_field :password_confirmation %><br />
     </div>
+    <% if role == "applicant" %>
+      <div class="field">
+        <%= label_tag(:resume, "Upload resume:") %>
+        <%= f.file_field :resume %>
+      </div>
+    <% end %>
     <div class="trigger">
       <%= submit_tag("#{action} account") %>
     </div>
