@@ -12,6 +12,10 @@ RSpec.describe User, :type => :model do
     expect(User.reflect_on_association(:applications).macro).to eq(:has_many)
   end
 
+  it "should respond to resume" do
+    expect(FactoryGirl.build(:user)).to respond_to(:resume)
+  end
+
   it "is invalid without a role" do
     expect(FactoryGirl.build(:user, role: nil)).to_not be_valid
   end
