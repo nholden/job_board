@@ -302,6 +302,15 @@ RSpec.describe UsersController, :type => :controller do
             }.to change(Role.find_or_create_by(label: 'applicant').users, :count).by(1)
         end
 
+        it "creates a new applicant with a resume" do
+          expect{ post :create, user: {:email =>                "a@b.com",
+                                       :password =>              "password",
+                                       :password_confirmation => "password",
+                                       :role_id =>               @applicant_role.id,
+                                       :resume =>                File.new(Rails.root.join('features', 'files', 'Example_Resume_v01.pdf'))}
+            }.to change(User.where(resume_file_name: 'Example_Resume_v01.pdf'), :count).by(1)
+        end
+
         it "creates a new employer" do
           expect{ post :create, user: {:email =>                "a@b.com",
                                        :password =>              "password",
