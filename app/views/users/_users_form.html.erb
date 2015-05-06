@@ -30,6 +30,9 @@
       <div class="field">
         <%= label_tag(:resume, "Upload resume:") %>
         <%= f.file_field :resume %>
+        <% if !user.resume.nil? %>
+          <%= link_to "#{user.resume_file_name}", user.resume.url %>
+        <% end %>
       </div>
     <% end %>
     <div class="trigger">

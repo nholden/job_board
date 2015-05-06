@@ -313,6 +313,16 @@ RSpec.describe UsersController, :type => :controller do
             }.to change(User.where(resume_file_name: 'Example_Resume_v01.pdf'), :count).by(1)
         end
 
+        it "does not create a new applicant with a resume in non-PDF format" do
+          expect{ post :create, user: {:email =>                "a@b.com",
+                                       :password =>              "password",
+                                       :password_confirmation => "password",
+                                       :role_id =>               @applicant_role.id,
+                                       :resume => Rack::Test::UploadedFile.new(
+                                                  'features/files/Not_A_PDF.txt', 'text/plain')}
+            }.to change(User.where(resume_file_name: 'Not_A_PDF.txt'), :count).by(0)
+        end
+
         it "creates a new employer" do
           expect{ post :create, user: {:email =>                "a@b.com",
                                        :password =>              "password",
