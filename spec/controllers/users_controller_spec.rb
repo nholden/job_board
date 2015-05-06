@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rack/test'
 include SessionsHelper
 
 RSpec.describe UsersController, :type => :controller do
@@ -307,7 +308,8 @@ RSpec.describe UsersController, :type => :controller do
                                        :password =>              "password",
                                        :password_confirmation => "password",
                                        :role_id =>               @applicant_role.id,
-                                       :resume =>                File.new(Rails.root.join('features', 'files', 'Example_Resume_v01.pdf'))}
+                                       :resume => Rack::Test::UploadedFile.new(
+                                                  'features/files/Example_Resume_v01.pdf', 'application/pdf')}
             }.to change(User.where(resume_file_name: 'Example_Resume_v01.pdf'), :count).by(1)
         end
 
