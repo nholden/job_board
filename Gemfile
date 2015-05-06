@@ -18,6 +18,7 @@ gem 'unicorn'
 gem 'ransack'
 gem 'font-awesome-sass'
 gem 'pry'
+gem 'paperclip', '~> 4.2'
 
 group :development, :test do
   gem 'sqlite3'
