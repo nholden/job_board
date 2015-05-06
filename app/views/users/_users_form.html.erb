@@ -27,13 +27,16 @@
       <%= f.password_field :password_confirmation %><br />
     </div>
     <% if role == "applicant" %>
-      <div class="field">
-        <%= label_tag(:resume, "Upload resume:") %>
+      <div class="field" style="margin-bottom:1em">
+        <%= label_tag(:resume, "Upload resume (must be a PDF under 5 MB):") %>
         <%= f.file_field :resume %>
-        <% if !user.resume.nil? %>
-          <%= link_to "#{user.resume_file_name}", user.resume.url %>
-        <% end %>
       </div>
+      <% if !user.resume.nil? %>
+        <div class="field" style="margin-bottom:1em">
+          <strong>Existing resume:</strong><br /> 
+          <a href="<%= user.resume.url %>" target="_blank"><i class='fa fa-file-pdf-o'></i > <%= user.resume_file_name %></a>
+        </div>
+      <% end %>
     <% end %>
     <div class="trigger">
       <%= submit_tag("#{action} account") %>
