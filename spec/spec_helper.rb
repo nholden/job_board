@@ -38,6 +38,11 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  # Deletes test folder created by paperclip
+  config.after(:suite) do
+    FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
+  end
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
