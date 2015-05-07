@@ -84,7 +84,9 @@ RSpec.describe UsersController, :type => :controller do
 
   describe "PATCH #update" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryGirl.create(:user,
+                                 :resume => Rack::Test::UploadedFile.new(
+                                   'features/files/Example_Resume_v01.pdf', 'application/pdf'))
     end
 
     context "when logged in as the correct user" do
@@ -118,6 +120,7 @@ RSpec.describe UsersController, :type => :controller do
           expect(response).to redirect_to(root_url)
         end
       end
+
     end
  
     context "when not logged in" do
@@ -133,6 +136,38 @@ RSpec.describe UsersController, :type => :controller do
 
       it "redirects to the login page" do
         expect(response).to redirect_to('/login')
+      end
+    end
+  end
+
+  describe "GET #delete_resume" do
+    before(:each) do
+      @user = FactoryGirl.create(:user,
+                                 :resume => Rack::Test::UploadedFile.new(
+                                   'features/files/Example_Resume_v01.pdf', 'application/pdf'))
+    end
+
+    context "when logged in as the correct user" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @user)
+        get :delete_resume, :id => @user.id
+        @user.reload
+      end
+
+      it "sets resume_file_name to nil" do
+        expect(@user.resume_file_name).to eql(nil)
+      end
+
+      it "sets resume_content_type to nil" do
+        expect(@user.resume_content_type).to eql(nil)
+      end
+
+      it "sets resume_file_size to nil" do
+        expect(@user.resume_file_size).to eql(nil)
+      end
+
+      it "sets resume_updated_at to nil" do
+        expect(@user.resume_updated_at).to eql(nil)
       end
     end
   end

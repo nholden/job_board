@@ -31,11 +31,11 @@
         <%= label_tag(:resume, "Upload resume (must be a PDF under 5 MB):") %>
         <%= f.file_field :resume %>
       </div>
-      <% if !user.resume.nil? %>
+      <% if !user.resume_file_name.nil? %>
         <div class="field" style="margin-bottom:1em">
           <strong>Existing resume:</strong><br /> 
           <a href="<%= user.resume.url %>" target="_blank"><i class='fa fa-file-pdf-o'></i > <%= user.resume_file_name %></a>
-          <i class="fa fa-trash-o" alt="Delete resume"></i>
+          <label for="delete_resume"><i class="fa fa-trash-o" alt="Delete resume"></i></label>
         </div>
       <% end %>
     <% end %>
@@ -43,4 +43,11 @@
       <%= submit_tag("#{action} account") %>
     </div>
   </div>
+<% end %>
+<% if !user.resume_file_name.nil? %>
+  <%= button_to "[X]", 
+      { action: "delete_resume", id: user.id }, 
+      method: "get",
+      style: "display: none;", 
+      id: "delete_resume" %> 
 <% end %>

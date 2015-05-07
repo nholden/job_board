@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'signup/applicant'      => 'users#new'
   get 'signup/employer'       => 'users#new'
   get 'signup/admin'          => 'users#new'
+  get 'delete_resume/:id'     => 'users#delete_resume'
   get 'settings'              => 'settings#edit'
   put 'update_experiences'    => 'settings#update_experiences'
   put 'update_terms'          => 'settings#update_terms'

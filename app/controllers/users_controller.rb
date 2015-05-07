@@ -76,6 +76,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def delete_resume
+    @user = User.find(params[:id])
+    @user.resume = nil
+    @user.save
+    redirect_to root_url
+  end
+
   def roles
   end
 

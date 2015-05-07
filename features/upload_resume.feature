@@ -21,7 +21,6 @@ Feature: Upload resume
     When he clicks the "Update account" button
     When he clicks "Edit profile"
     Then he should see "Example_Resume_v01.pdf"
-    When he clicks the "Delete resume" icon 
-    When he clicks the "Update account" button
+    When he deletes his resume 
     When he clicks "Edit profile"
     Then he should not see "Example_Resume_v01.pdf"
