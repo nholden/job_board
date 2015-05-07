@@ -9,5 +9,6 @@ Feature: Edit employer profile (admin)
     When he visits the manage users page
     When he clicks the edit button for Boeing
     When he submits the edit user form
+    When he visits the jobs page
     Then he should not see "Boeing"
     Then he should see "Lockheed Martin"

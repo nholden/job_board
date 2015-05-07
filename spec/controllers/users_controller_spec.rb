@@ -116,8 +116,8 @@ RSpec.describe UsersController, :type => :controller do
           expect(@user.name).to eql("Lockheed Martin")
         end
 
-        it "redirects to the homepage" do
-          expect(response).to redirect_to(root_url)
+        it "redirects to edit_user_path" do
+          expect(response).to redirect_to(edit_user_path(@user.id))
         end
       end
 

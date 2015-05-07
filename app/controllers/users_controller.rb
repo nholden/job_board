@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     if user == current_user or is_admin?
       if user.update(user_params)
         flash[:notice] = "Updated profile."
-        redirect_to root_url
+        redirect_to edit_user_path(user.id)
       else
         flash[:error] = user.errors.full_messages[0]
         redirect_to "/users/#{user.id}/edit" 
