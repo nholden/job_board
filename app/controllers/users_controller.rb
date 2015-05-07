@@ -78,9 +78,16 @@ class UsersController < ApplicationController
 
   def delete_resume
     @user = User.find(params[:id])
-    @user.resume = nil
-    @user.save
-    redirect_to root_url
+    if @user == current_user or is_admin?
+      @user.resume = nil
+      if @user.save
+        flash[:notice] = "Resume deleted."
+        redirect_to edit_user_path(@user.id)
+      end
+    else
+      flash[:error] = "You must be logged into your account to delete your resume."
+      redirect_to '/login'
+    end
   end
 
   def roles

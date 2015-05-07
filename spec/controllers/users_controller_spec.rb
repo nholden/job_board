@@ -169,6 +169,31 @@ RSpec.describe UsersController, :type => :controller do
       it "sets resume_updated_at to nil" do
         expect(@user.resume_updated_at).to eql(nil)
       end
+
+      it "sends a flash" do
+        expect(flash[:notice]).to eql("Resume deleted.")
+      end
+
+      it "redirects to edit_user_path" do
+        expect(response).to redirect_to(edit_user_path(@user.id))
+      end
+    end
+
+    context "when not logged in" do
+      before (:each) do
+        @resume_file_name = @user.resume_file_name
+        allow(controller).to receive_messages(:current_user => nil)
+        get :delete_resume, :id => @user.id
+        @user.reload
+      end
+
+      it "does not change resume_file_name" do
+        expect(@user.resume_file_name).to eql(@resume_file_name)
+      end
+
+      it "redirects to the login page" do
+        expect(response).to redirect_to('/login')
+      end
     end
   end
 
