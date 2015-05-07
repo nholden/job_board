@@ -15,3 +15,6 @@
 /log/*.log
 /tmp
 .env
+
+# Ignore all submitted resumes
+/public/system/users/resumes
