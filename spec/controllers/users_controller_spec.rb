@@ -106,13 +106,13 @@ RSpec.describe UsersController, :type => :controller do
         end
       end  
       
-      context "with valid information" do
+      context "with valid information and a new name" do
         before(:each) do
           patch :update, :id => @user.id, :user => { :name => "Lockheed Martin" }
           @user.reload
         end
 
-        it "updates the job" do
+        it "updates the user" do
           expect(@user.name).to eql("Lockheed Martin")
         end
 
@@ -121,6 +121,36 @@ RSpec.describe UsersController, :type => :controller do
         end
       end
 
+      context "with valid information and delete_resume==1" do
+        before(:each) do
+          patch :update, :id => @user.id, :user => { :delete_resume => "1" }
+          @user.reload
+        end
+
+        it "sets resume_file_name to nil" do
+          expect(@user.resume_file_name).to eql(nil)
+        end
+
+        it "sets resume_content_type to nil" do
+          expect(@user.resume_content_type).to eql(nil)
+        end
+
+        it "sets resume_file_size to nil" do
+          expect(@user.resume_file_size).to eql(nil)
+        end
+
+        it "sets resume_updated_at to nil" do
+          expect(@user.resume_updated_at).to eql(nil)
+        end
+
+        it "sends a flash" do
+          expect(flash[:notice]).to eql("Updated profile.")
+        end
+
+        it "redirects to edit_user_path" do
+          expect(response).to redirect_to(edit_user_path(@user.id))
+        end
+      end
     end
  
     context "when not logged in" do

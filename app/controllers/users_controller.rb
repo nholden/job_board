@@ -42,6 +42,10 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     if user == current_user or is_admin?
+      if params[:user][:delete_resume] == "1"
+        user.resume = nil
+        user.save
+      end
       if user.update(user_params)
         flash[:notice] = "Updated profile."
         redirect_to edit_user_path(user.id)
