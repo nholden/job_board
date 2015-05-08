@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     if user == current_user or is_admin?
-      if params[:user][:del_resume] == "1"
+      if params[:del_resume] == "1"
         user.resume = nil
         user.save
       end
