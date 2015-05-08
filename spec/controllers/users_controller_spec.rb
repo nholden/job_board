@@ -121,9 +121,9 @@ RSpec.describe UsersController, :type => :controller do
         end
       end
 
-      context "with valid information and delete_resume==1" do
+      context "with valid information and del_resume==1" do
         before(:each) do
-          patch :update, :id => @user.id, :user => { :delete_resume => "1" }
+          patch :update, :id => @user.id, :user => { :del_resume => "1" }
           @user.reload
         end
 

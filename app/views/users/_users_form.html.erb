@@ -34,7 +34,8 @@
       <% if !user.resume_file_name.nil? %>
         <div class="field" style="margin-bottom:1em">
           <strong>Existing resume:</strong><br /> 
-          <label for="delete_resume" style="display: inline; cursor: pointer; padding-right: 0.5em;"><i class="fa fa-trash-o" alt="Delete resume"></i></label>
+          <%= hidden_field_tag(:del_resume, "0") %>
+          <label for="delete_resume" class="delete" style="display: inline; cursor: pointer; padding-right: 0.5em;"><i class="fa fa-trash-o" alt="Delete resume"></i></label>
           <a href="<%= user.resume.url %>" target="_blank"><i class='fa fa-file-pdf-o'></i > <%= user.resume_file_name %></a>
         </div>
       <% end %>
