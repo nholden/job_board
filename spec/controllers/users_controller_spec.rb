@@ -524,4 +524,14 @@ RSpec.describe UsersController, :type => :controller do
       expect(response).to render_template('roles')
     end
   end
+
+  describe "GET #show" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+    end
+
+    it "renders the show view" do
+      get :show, id: @user
+    end
+  end
 end

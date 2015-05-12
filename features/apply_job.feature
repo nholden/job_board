@@ -22,6 +22,8 @@ Feature: Apply for a job
     When he clicks the "Apply" button
     When he clicks "Applications"
     Then he should see "Aerospace engineer intern"
+    When he clicks "Aerospace engineer intern"
+    Then he should see "Location: Seattle, WA"
 
   Scenario: Not logged in
     Given a job exists

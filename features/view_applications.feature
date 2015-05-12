@@ -8,4 +8,4 @@ Feature: View applications
     When he visits the jobs page
     When he clicks "View applications"
     When he clicks "applicant@jobseeker.net"
-    Then he should see "applicant@jobseeker.net's profile"
+    Then he should see "Email: applicant@jobseeker.net"
