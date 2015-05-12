@@ -528,10 +528,15 @@ RSpec.describe UsersController, :type => :controller do
   describe "GET #show" do
     before(:each) do
       @user = FactoryGirl.create(:user)
+      get :show, id: @user
     end
 
     it "renders the show view" do
-      get :show, id: @user
+      expect(response).to render_template('show')
+    end
+
+    it "sets @user" do
+      expect(assigns(:user)).to eq(@user)
     end
   end
 end
