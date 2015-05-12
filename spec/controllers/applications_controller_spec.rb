@@ -89,61 +89,6 @@ RSpec.describe ApplicationsController, :type => :controller do
     end
   end
 
-  describe "GET #show" do
-    context "when logged in" do
-      before(:each) do
-        allow(controller).to receive_messages(:current_user => @employer)
-        get :show, id: @application.id
-      end
-
-      it "renders the show template" do
-        expect(response).to render_template(:show)
-      end
-
-      it "assigns @application" do
-        expect(assigns(:application)).to eq(Application.find(@application.id))
-      end
-
-      it "assigns @applicant" do
-        expect(assigns(:applicant)).to eq(User.find(@applicant.id))
-      end
-
-      it "assigns @job" do
-        expect(assigns(:job)).to eq(Job.find(@job.id))
-      end
-    end
-
-    context "when not logged in" do
-      before(:each) do
-        allow(controller).to receive_messages(:current_user => nil)
-        get :show, id: @application.id
-      end
-
-      it "redirects to root_url" do
-        expect(response).to redirect_to(root_url)
-      end
-
-      it "sends a flash" do
-        expect(flash[:error]).to eql("You are not authorized to view this application.")
-      end
-    end
-
-    context "when logged in as another employer" do
-      before(:each) do
-        allow(controller).to receive_messages(:current_user => FactoryGirl.create(:user))
-        get :show, id: @application.id
-      end
-
-      it "redirects to root_url" do
-        expect(response).to redirect_to(root_url)
-      end
-
-      it "sends a flash" do
-        expect(flash[:error]).to eql("You are not authorized to view this application.")
-      end
-    end
-  end
-
   describe "POST #create" do
     context "when logged in as an applicant" do
       before(:each) do
