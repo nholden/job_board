@@ -36,7 +36,7 @@
         <%= label_tag(:resume, "Upload resume (must be a PDF under 5 MB):") %>
         <%= f.file_field :resume %>
       </div>
-      <% if !user.resume_file_name.nil? %>
+      <% if !user.resume_file_name.nil? and !user.id.nil? %>
         <div class="field" style="margin-bottom:1em">
           <strong>Existing resume:</strong><br /> 
           <%= hidden_field_tag(:del_resume, "0") %>
@@ -50,7 +50,7 @@
     </div>
   </div>
 <% end %>
-<% if !user.resume_file_name.nil? %>
+<% if !user.resume_file_name.nil? and !user.id.nil? %>
   <%= button_to "[X]", 
       { action: "delete_resume", id: user.id }, 
       method: "get",
