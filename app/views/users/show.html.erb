@@ -1,4 +1,9 @@
 <h1><%= @user.email %></h1>
 <br />
 <p>Email: <%= @user.email %></p>
-<p>Resume: <a href="<%= @user.resume.url %>" target="_blank"><i class='fa fa-file-pdf-o'></i > <%= @user.resume_file_name %></a></p>
+<p>Resume: 
+<% if !@user.resume_file_name.nil? %>
+  <a href="<%= @user.resume.url %>" target="_blank"><i class='fa fa-file-pdf-o'></i > <%= @user.resume_file_name %></a></p>
+<% else %>
+  (none uploaded)
+<% end %>
