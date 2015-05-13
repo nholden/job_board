@@ -371,6 +371,7 @@ RSpec.describe UsersController, :type => :controller do
       context "with valid information" do
         it "creates a new admin" do
           expect{ post :create, user: {:email =>                "a@b.com",
+                                       :name =>                 "Admin",
                                        :password =>              "password",
                                        :password_confirmation => "password",
                                        :role_id =>               @admin_role.id}
@@ -387,6 +388,7 @@ RSpec.describe UsersController, :type => :controller do
       context "with valid information" do
         it "creates a new applicant" do
           expect{ post :create, user: {:email =>                "a@b.com",
+                                       :name =>                 "Applicant",
                                        :password =>              "password",
                                        :password_confirmation => "password",
                                        :role_id =>               @applicant_role.id}
@@ -395,6 +397,7 @@ RSpec.describe UsersController, :type => :controller do
 
         it "creates a new applicant with a resume" do
           expect{ post :create, user: {:email =>                "a@b.com",
+                                       :name =>                 "Applicant",
                                        :password =>              "password",
                                        :password_confirmation => "password",
                                        :role_id =>               @applicant_role.id,
@@ -405,6 +408,7 @@ RSpec.describe UsersController, :type => :controller do
 
         it "does not create a new applicant with a resume in non-PDF format" do
           expect{ post :create, user: {:email =>                "a@b.com",
+                                       :name =>                 "Applicant",
                                        :password =>              "password",
                                        :password_confirmation => "password",
                                        :role_id =>               @applicant_role.id,
@@ -415,6 +419,7 @@ RSpec.describe UsersController, :type => :controller do
 
         it "creates a new employer" do
           expect{ post :create, user: {:email =>                "a@b.com",
+                                       :name =>                 "Employer",
                                        :password =>              "password",
                                        :password_confirmation => "password",
                                        :role_id =>               @employer_role.id}
@@ -425,6 +430,7 @@ RSpec.describe UsersController, :type => :controller do
           before(:each) do
             allow(controller).to receive_messages(:is_admin? => false)
             post :create, user: {:email =>                "a@b.com",
+                                 :name =>                 "Applicant",
                                  :password =>              "password",
                                  :password_confirmation => "password",
                                  :role_id =>               @applicant_role.id}
@@ -460,6 +466,7 @@ RSpec.describe UsersController, :type => :controller do
         context "when logged out user tries to create an admin" do
           it "does not create a new user" do
             expect{ post :create, user:    { :email =>                 "a@b.com",
+                                             :name =>                  "Admin",
                                              :password =>              "password",
                                              :password_confirmation => "password",
                                              :role_id =>               @admin_role.id
@@ -468,6 +475,7 @@ RSpec.describe UsersController, :type => :controller do
 
           it "does not redirect to the homepage" do
             post :create, user:    { :email =>                 "a@b.com",
+                                     :name =>                  "Admin",
                                      :password =>              "password",
                                      :password_confirmation => "password",
                                      :role_id =>               @admin_role.id}

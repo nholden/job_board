@@ -24,20 +24,20 @@ FactoryGirl.define do
   end
 
   factory :admin, :class => 'User' do
+    name "Job Board Guy"
     email "jobboardguy@jobboard.com"
     password "password"
     password_confirmation "password"
-    name "Job Board"
     description "The best place to post your jobs"
     website "http://www.jobboard.com"
     association :role, label: 'admin'
   end
 
   factory :applicant, :class => 'User' do
+    name "Ima Jobseeker"
     email "applicant@jobseeker.net"
     password "applicantpassword"
     password_confirmation "applicantpassword"
-    name nil
     description nil
     website nil
     association :role, label: 'applicant'

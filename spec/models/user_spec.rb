@@ -28,8 +28,8 @@ RSpec.describe User, :type => :model do
     expect(FactoryGirl.build(:user, password: nil)).to_not be_valid
   end
 
-  it "is valid without a name" do
-    expect(FactoryGirl.build(:user, name: nil)).to be_valid
+  it "is invalid without a name" do
+    expect(FactoryGirl.build(:user, name: nil)).to be_invalid
   end
 
   it "is valid without a website" do

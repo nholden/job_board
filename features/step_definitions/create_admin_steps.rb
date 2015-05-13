@@ -16,6 +16,7 @@ Given(/^the admin is logged in$/) do
 end
 
 When(/^he fills out the create new user form for an admin$/) do
+  fill_in('user_name', :with => 'Second admin')
   fill_in('user_email', :with => 'secondadmin@admin.com')
   fill_in('user_password', :with => 'password')
   fill_in('user_password_confirmation', :with => 'password')

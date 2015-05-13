@@ -4,6 +4,11 @@
     <div class="title">
       <h1><%= action %> <%= role %></h1>
     </div>
+    <% if role == "applicant" or role == "admin" %>
+      <div class="field">
+        <%= label_tag(:name, "Name:") %>
+        <%= f.text_field :name %><br />
+    <% end %>
     <% if role == "employer" %>
       <div class="field">
         <%= label_tag(:name, "Company name:") %>
