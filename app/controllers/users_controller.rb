@@ -4,7 +4,7 @@ class UsersController < ApplicationController
       flash[:error] = "Already logged in."
       redirect_to root_url
     else
-      @role = request.url.split('/')[-1]
+      @role ||= request.url.split('/')[-1]
       @user = User.new(role: Role.find_or_create_by(label: @role))
     end
   end
@@ -25,6 +25,7 @@ class UsersController < ApplicationController
       end
     else
       flash[:error] = @user.errors.full_messages[0]
+      @role = Role.find(params[:user][:role_id]).label
       render :action => 'new'
     end
   end

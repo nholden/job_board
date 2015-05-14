@@ -22,3 +22,4 @@ Feature: Create applicant
     When he clicks "Applicant"
     When he fills in the signup applicant form with no name
     Then he should see "Name can't be blank"
+    Then he should see "Create applicant"

@@ -490,7 +490,8 @@ RSpec.describe UsersController, :type => :controller do
                                            :password =>              "password",
                                            :password_confirmation => "loremipsum",
                                            :name =>                  "x", 
-                                           :website =>               "y"
+                                           :website =>               "y",
+                                           :role_id =>               @employer_role.id
           }}.to change(User,:count).by(0)
         end
 
@@ -499,7 +500,8 @@ RSpec.describe UsersController, :type => :controller do
                                     :password =>              "password",
                                     :password_confirmation => "loremipsum",
                                     :name =>                  "x", 
-                                    :website =>               "y" }
+                                    :website =>               "y",
+                                    :role_id =>               @employer_role.id }
           expect(response).not_to redirect_to root_url 
         end
       end
@@ -510,7 +512,8 @@ RSpec.describe UsersController, :type => :controller do
                                             :password =>              "password",
                                             :password_confirmation => "password",
                                             :name =>                  "x",
-                                            :website =>               "y"
+                                            :website =>               "y",
+                                            :role_id =>               @employer_role.id
           }}.to change(User,:count).by(0)
         end
 
@@ -519,7 +522,8 @@ RSpec.describe UsersController, :type => :controller do
                                     :password =>              "password",
                                     :password_confirmation => "password",
                                     :name =>                  "x", 
-                                    :website =>               "y" }
+                                    :website =>               "y",
+                                    :role_id =>               @employer_role.id } 
           expect(response).not_to redirect_to root_url 
         end
       end
