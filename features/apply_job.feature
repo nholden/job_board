@@ -24,6 +24,7 @@ Feature: Apply for a job
     Then he should see "Aerospace engineer intern"
     When he clicks "Aerospace engineer intern"
     Then he should see "Location: Seattle, WA"
+    Then he should see "You have applied for this job"
 
   Scenario: View applications when no applications
     Given an applicant is logged in
