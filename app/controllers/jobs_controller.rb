@@ -74,6 +74,14 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+    if logged_in?
+      existing_application = Application.where("user_id = ? AND job_id = ?", current_user.id, @job.id).first
+      if existing_application.nil?
+        @application = Application.new
+      else
+        @application = existing_application
+      end
+    end
   end
 
   private

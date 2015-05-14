@@ -24,7 +24,16 @@ Feature: Apply for a job
     Then he should see "Aerospace engineer intern"
     When he clicks "Aerospace engineer intern"
     Then he should see "Location: Seattle, WA"
-    Then he should see "You have applied for this job"
+
+  Scenario: Retract application
+    Given an applicant is logged in
+    Given a job exists
+    When he visits the jobs page
+    When he clicks "Aerospace engineer intern"
+    When he clicks the "Apply" button
+    When he clicks "Aerospace engineer intern"
+    When he clicks the "Retract application" button
+    Then he should see "Application to 'Aerospace engineer intern' successfully retracted"
 
   Scenario: View applications when no applications
     Given an applicant is logged in
@@ -45,3 +54,4 @@ Feature: Apply for a job
     When he clicks "Aerospace engineer intern"
     Then he should not see "Apply"
     Then he should not see "Sign up or log in to apply."
+

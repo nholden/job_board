@@ -24,6 +24,19 @@ class ApplicationsController < ApplicationController
     redirect_to root_url
   end
 
+  def destroy
+    @application = Application.find(params[:id])
+    job_title = Job.find(@application.job_id).title
+    if logged_in? and current_user.id == @application.user_id
+      if @application.destroy
+        flash[:notice] = "Application to '#{job_title}' successfully retracted."
+      end
+    else
+      flash[:error] = "You must be logged in as an applicant to retract an application."
+    end
+    redirect_to root_url
+  end
+
   private
       def application_params
         params.require(:application).permit(:user_id, :job_id)
