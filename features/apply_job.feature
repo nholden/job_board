@@ -25,6 +25,12 @@ Feature: Apply for a job
     When he clicks "Aerospace engineer intern"
     Then he should see "Location: Seattle, WA"
 
+  Scenario: View applications when no applications
+    Given an applicant is logged in
+    Given a job exists
+    When he clicks "Applications"
+    Then he should see "No active applications"
+
   Scenario: Not logged in
     Given a job exists
     When he visits the jobs page

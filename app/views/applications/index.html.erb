@@ -4,13 +4,17 @@
   <% else %>
     <h1>Your applications</h1>
   <% end %>
-  <ul>
-    <% @applications.each do |application| %>
-      <% if !@job.nil? %>
-        <li><%= link_to "#{application.user.email}", user_path(application.user), method: :get %></li>
-      <% else %>
-        <li><%= link_to "#{application.job.title}", job_path(application.job), method: :get %></li>
+  <% if @applications.empty? %>
+    <p>No active applications</p>
+  <% else %>
+    <ul>
+      <% @applications.each do |application| %>
+        <% if !@job.nil? %>
+          <li><%= link_to "#{application.user.email}", user_path(application.user), method: :get %></li>
+        <% else %>
+          <li><%= link_to "#{application.job.title}", job_path(application.job), method: :get %></li>
+        <% end %>
       <% end %>
-    <% end %>
   </ul>
+  <% end %>
 </div>
