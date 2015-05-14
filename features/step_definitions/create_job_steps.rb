@@ -8,7 +8,6 @@ When(/^he submits the create job form$/) do
   fill_in('job_description', :with => 'This is a great position in which the
                                    intern will build some incredible stuff
                                    for the first manned flight to Mars')
-  fill_in('job_url', :with => 'http://www.boeing.com/jobs/intern.php')
   fill_in('job_instructions', :with => 'Send an email to ceo@boeing.com')
   select('2016', :from => 'job_deadline_1i')
   select('December', :from => 'job_deadline_2i')
@@ -38,7 +37,6 @@ Given(/^a job exists$/) do
                      description: 'This is a great position in which the
                                    intern will build some incredible stuff
                                    for the first manned flight to Mars',
-                     url: 'http://www.boeing.com/jobs/intern.php',
                      instructions: 'Send an email to ceo@boeing.com',
                      deadline: '2016-01-01',
                      salary: '$20/hour',

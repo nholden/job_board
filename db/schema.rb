@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506004602) do
+ActiveRecord::Schema.define(version: 20150514112434) do
 
   create_table "applications", force: true do |t|
     t.integer  "user_id"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20150506004602) do
     t.text     "location"
     t.text     "majors"
     t.text     "description"
-    t.text     "url"
     t.text     "instructions"
     t.date     "deadline"
     t.text     "salary"
