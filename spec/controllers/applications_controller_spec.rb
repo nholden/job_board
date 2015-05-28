@@ -4,6 +4,7 @@ RSpec.describe ApplicationsController, :type => :controller do
   before(:each) do
     @employer = FactoryGirl.create(:user)
     @applicant = FactoryGirl.create(:applicant)
+    @admin = FactoryGirl.create(:admin)
     @job = FactoryGirl.create(:job, user: @employer)
     @application = FactoryGirl.create(:application, user: @applicant, job: @job)
   end
@@ -85,6 +86,25 @@ RSpec.describe ApplicationsController, :type => :controller do
 
       it "sends a flash" do
         expect(flash[:error]).to eql("You are not authorized to view these applications.")
+      end
+    end
+
+    context "when logged in as an admin" do
+      before(:each) do
+        allow(controller).to receive_messages(:current_user => @admin)
+        get :index, job_id: @job.id
+      end
+ 
+      it "renders the index template" do
+        expect(response).to render_template(:index)
+      end
+
+      it "assigns @applications" do
+        expect(assigns(:applications)).to eq(Application.where(job_id: @job.id))
+      end
+
+      it "assigns @job" do
+        expect(assigns(:job)).to eq(@job)
       end
     end
   end

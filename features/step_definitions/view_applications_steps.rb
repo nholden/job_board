@@ -8,3 +8,10 @@ Given(/^an employer with a job and an application is logged in$/) do
   fill_in('session_password', with: @employer.password)
   click_button('Login')
 end
+
+Given(/^a job with an application exists$/) do
+  @employer = FactoryGirl.create(:user)
+  @applicant = FactoryGirl.create(:applicant)
+  @job = FactoryGirl.create(:job, user: @employer)
+  @application = FactoryGirl.create(:application, user: @applicant, job: @job)
+end
