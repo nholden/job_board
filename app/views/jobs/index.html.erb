@@ -38,16 +38,16 @@
   </div>
 <% end %>
 
-<table>
+<table class="jobs_table">
   <tr>
-    <th>Job title</th>
-    <th>Employer</th>
-    <th>Experience level</th>
-    <th>Position term</th>
+    <th class="title_column">Job title</th>
+    <th class="employer_column">Employer</th>
+    <th class="experience_column">Experience level</th>
+    <th class="term_column">Position term</th>
   </tr>
   <% @jobs.each do |job| %>
     <tr>  
-      <td><%= link_to job.title, job_path(job) %>
+      <td class="title_column"><%= link_to job.title, job_path(job) %>
         <% if current_user == job.user or is_admin? %> 
           <%= link_to "(Edit)", edit_job_path(job) %> 
           <%= link_to "(Delete)", job, method: :delete, data: { confirm:
@@ -55,9 +55,9 @@
           <%= link_to "(View applications)", applications_path(job_id: job), method: :get %>
         <% end %>
       </td>
-      <td><%= job.user.name %></td>
-      <td><%= job.experience.label %></td>
-      <td><%= job.term.label %></td>
+      <td class="employer_column"><%= job.user.name %></td>
+      <td class="experience_column"><%= job.experience.label %></td>
+      <td class="term_column"><%= job.term.label %></td>
     </tr>
   <% end %>
 </table>

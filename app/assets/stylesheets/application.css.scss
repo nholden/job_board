@@ -35,6 +35,16 @@ div.notice {
 		font:13px Helvetica,  Arial,  sans-serif;
 	}
 
+.jobs_table {
+  $large-screen: em(860) !default;
+
+  .term_column, .experience_column {
+    @include media(max-width $large-screen) {
+      display: none;
+    }
+  }
+}
+
 .form {
 
   $login-form-border-color: $base-border-color;
