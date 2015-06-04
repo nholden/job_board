@@ -1,16 +1,27 @@
-<h1><%= @job.title %></h1>
-<br />
-<p>Employer: <%= @job.user.name %></p>
-<p>Position term: <%= @job.term.label %></p>
-<p>Location: <%= @job.location %></p>
-<p>Experience: <%= @job.experience.label %></p>
-<p>Majors: <%= @job.majors %></p>
-<p>Description: <%= @job.description %></p>
-<p>Deadline: <%= @job.deadline %></p>
-<p>Salary: <%= @job.salary %></p>
-<p>
+<div class="job_description">
+  <h1><%= @job.title %></h1>
+  <div class="at_a_glance">
+    Posted: <%= @job.created_at.strftime("%B %-d, %Y") %><br />  
+    Location: <%= @job.location %><br /> 
+    Majors: <%= @job.majors %><br /> 
+    Term: <%= @job.term.label %><br /> 
+    Experience: <%= @job.experience.label %>
+  </div>
+  <div class="employer">
+    <%= @job.user.name %>
+  </div>
+  <div class="description">
+    <%= @job.description %>
+  </div>
+  <div class="salary">
+    <%= @job.salary %>
+  </div>
+  <div class="deadline">
+    <%= @job.deadline.strftime("%B %-d, %Y") %>
+  </div>
+  <div class="apply">
 <% if !logged_in? %>
-  <p><%= link_to "Sign up", signup_path, method: :get %> or <%= link_to "log in", login_path, method: :get %> to apply.</p>
+  <%= link_to "Sign up", signup_path, method: :get %> or <%= link_to "log in", login_path, method: :get %> to apply.</p>
 <% elsif current_user.role.label == "applicant" %>
   <% if @application.user_id.nil? %>
     <%= form_for Application.new do |f| %>
@@ -24,3 +35,4 @@
         method: "delete" %>
   <% end %>
 <% end %>
+  </div>
