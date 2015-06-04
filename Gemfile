@@ -19,6 +19,7 @@ gem 'ransack'
 gem 'font-awesome-sass'
 gem 'pry'
 gem 'paperclip', '~> 4.2'
+gem 'aws-sdk'
 
 group :development, :test do
   gem 'sqlite3'
