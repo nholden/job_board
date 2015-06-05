@@ -1,25 +1,17 @@
 <div class="job_description">
   <h1><%= @job.title %></h1>
+  <div class="employer"><%= @job.user.name %></div>
   <div class="at_a_glance">
-    Posted: <%= @job.created_at.strftime("%B %-d, %Y") %><br />  
-    Location: <%= @job.location %><br /> 
-    Majors: <%= @job.majors %><br /> 
-    Term: <%= @job.term.label %><br /> 
-    Experience: <%= @job.experience.label %>
-  </div>
-  <div class="employer">
-    <%= @job.user.name %>
+    <div class="attribute">Location: <%= @job.location %></div> 
+    <div class="attribute">Term: <%= @job.term.label %></div> 
+    <div class="attribute">Experience: <%= @job.experience.label %></div>
+    <div class="attribute">Majors: <%= @job.majors %></div> 
+    <div class="attribute">Salary: <%= @job.salary %></div>
+    <div class="attribute">Posted: <%= @job.created_at.strftime("%B %-d, %Y") %></div>  
+    <div class="attribute">Deadline: <%= @job.deadline.strftime("%B %-d, %Y") %></div>
   </div>
   <div class="description">
-    <%= @job.description %>
-  </div>
-  <div class="salary">
-    <%= @job.salary %>
-  </div>
-  <div class="deadline">
-    <%= @job.deadline.strftime("%B %-d, %Y") %>
-  </div>
-  <div class="apply">
+    <%= @job.description %><br /><br />
 <% if !logged_in? %>
   <%= link_to "Sign up", signup_path, method: :get %> or <%= link_to "log in", login_path, method: :get %> to apply.</p>
 <% elsif current_user.role.label == "applicant" %>
@@ -36,3 +28,4 @@
   <% end %>
 <% end %>
   </div>
+</div>

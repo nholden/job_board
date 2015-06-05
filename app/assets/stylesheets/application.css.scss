@@ -185,6 +185,43 @@ div.notice {
   }
 }
 
+.job_description{
+  @include outer-container;
+  @include clearfix;
+
+  .employer {
+    @include media($large-screen) {
+      @include span-columns(12);
+    }
+    font-size: 150%;
+    border-bottom: 1px solid $base-border-color;
+    margin-bottom: 0.5em;
+  }
+
+  .description {
+    @include media($large-screen) { 
+      @include span-columns(8);
+    }
+    margin: 0px;
+    padding: $gutter / 2;
+  }
+
+  .at_a_glance {
+    @include media($large-screen) { 
+      @include span-columns(4);
+    }
+    background-color: lighten($base-border-color, 10%);
+    margin: 0px;
+    border-radius: $base-border-radius;
+    border: 1px solid $base-border-color;
+    padding: $gutter / 2;
+
+    .attribute {
+      margin-bottom: 0.25em;
+    }  
+  } 
+}
+
 .search-tools {  
   ///////////////////////////////////////////////////////////////////////////////////
   $base-border-color: gainsboro !default;
