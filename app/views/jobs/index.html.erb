@@ -47,7 +47,7 @@
   </tr>
   <% @jobs.each do |job| %>
     <tr>  
-      <td class="title_column"><%= link_to job.title, job_path(job) %>
+      <td class="title_column"><%= link_to job.title, job_path(job), method: :get %>
         <% if current_user == job.user or is_admin? %> 
           <%= link_to "(Edit)", edit_job_path(job) %> 
           <%= link_to "(Delete)", job, method: :delete, data: { confirm:
