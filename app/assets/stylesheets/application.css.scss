@@ -185,20 +185,22 @@ div.notice {
   }
 }
 
-.job_description{
+.content_with_sidebar{
   @include outer-container;
   @include clearfix;
 
-  .employer {
+  .title {
     @include media($large-screen) {
       @include span-columns(12);
     }
-    font-size: 150%;
     border-bottom: 1px solid $base-border-color;
     margin-bottom: 0.5em;
+    .sub {
+      font-size: 150%;
+    }
   }
 
-  .description {
+  .main {
     @include media($large-screen) { 
       @include span-columns(8);
     }
@@ -206,7 +208,7 @@ div.notice {
     padding: $gutter / 2;
   }
 
-  .at_a_glance {
+  .sidebar {
     @include media($large-screen) { 
       @include span-columns(4);
     }
@@ -220,6 +222,22 @@ div.notice {
       margin-bottom: 0.25em;
     }  
   } 
+}
+
+.content_no_sidebar{
+  @include outer-container;
+  @include clearfix;
+
+  .title {
+    @include media($large-screen) {
+      @include span-columns(12);
+    }
+    border-bottom: 1px solid $base-border-color;
+    margin-bottom: 0.5em;
+    .sub {
+      font-size: 150%;
+    }
+  }
 }
 
 .search-tools {  
