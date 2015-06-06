@@ -7,7 +7,7 @@ Feature: Edit job
     Given the user is logged in
     Given job terms and experiences exist
     When he submits the create job form
-    When he clicks "(Edit)"
+    When he clicks the edit icon
     When he submits the edit job form
     Then he should not see "Aerospace engineer intern"
     Then he should see "Astronaut"
@@ -15,4 +15,4 @@ Feature: Edit job
   Scenario: Not logged in
     Given the user is not logged in
     When he visits the jobs page
-    Then he should not see "(Edit)"
+    Then he should not see the edit icon

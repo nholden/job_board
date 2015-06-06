@@ -24,7 +24,7 @@ Feature: Create admin
     Given a job exists
     When he visits the jobs page
     Then he should see the job title
-    When he clicks "Delete"
+    When he clicks the delete icon
     Then he should not see the job title
 
   Scenario: Create additional admin

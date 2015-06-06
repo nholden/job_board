@@ -6,7 +6,7 @@ Feature: View applications
   Scenario: Successfully view applicant
     Given an employer with a job and an application is logged in
     When he visits the jobs page
-    When he clicks "View applications"
+    When he clicks the applications icon
     When he clicks "applicant@jobseeker.net"
     Then he should see "Email: applicant@jobseeker.net"
 
@@ -14,6 +14,6 @@ Feature: View applications
     Given a job with an application exists
     Given the admin is logged in
     When he visits the jobs page
-    When he clicks "View applications"
+    When he clicks the applications icon
     When he clicks "applicant@jobseeker.net"
     Then he should see "Email: applicant@jobseeker.net"

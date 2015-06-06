@@ -3,3 +3,6 @@ When(/^he submits the edit job form$/) do
   click_button('Save job')
 end
 
+Then(/^he should not see the edit icon$/) do
+  page.should_not have_css('.fa-pencil')
+end

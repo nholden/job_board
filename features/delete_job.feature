@@ -8,7 +8,7 @@ Feature: Delete job
     Given job terms and experiences exist
     When he submits the create job form
     Then he should see the job title
-    When he clicks "Delete"
+    When he clicks the delete icon
     Then he should not see the job title
 
   Scenario: Not logged in

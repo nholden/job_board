@@ -36,3 +36,15 @@ Given(/^admin and employer roles exist$/) do
   FactoryGirl.create(:role, label: 'admin')
   FactoryGirl.create(:role, label: 'employer')
 end
+
+When(/^he clicks the delete icon$/) do
+  find('.fa-trash-o').find(:xpath, ".//..").click
+end
+
+When(/^he clicks the applications icon$/) do
+  find('.fa-users').find(:xpath, ".//..").click
+end
+
+When(/^he clicks the edit icon$/) do
+  find('.fa-pencil').find(:xpath, ".//..").click
+end
