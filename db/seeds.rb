@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+require 'faker'
+
 Experience.create([
   { label: 'Some college' },
   { label: 'Undergraduate degree' },
@@ -23,3 +25,18 @@ Term.create([
 Role.create([
   { label: 'admin' },
   { label: 'employer' }])
+
+User.create!(name:                  "Administrator",
+             email:                 "admin@admin.com",
+             role:                  Role.find_or_create_by(label: 'admin'),
+             password:              "admin",
+             password_confirmation: "admin")
+
+50.times do |n|
+  name = Faker::Name.name
+  User.create!(name:                  name,
+               email:                 Faker::Internet.free_email(name),
+               role:                  Role.find_or_create_by(label: 'applicant'),
+               password:              "password",
+               password_confirmation: "password")
+end
