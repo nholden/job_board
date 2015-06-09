@@ -25,6 +25,11 @@ div.notice {
   @extend %flash-success;
 }
 
+.pagination {
+  @include outer-container;
+  text-align: left;
+}
+
 #header, #footer {
                 float:right;
 		padding: 0;
