@@ -7,6 +7,6 @@ Feature: View jobs
     Given the user is not logged in
     Given 11 jobs exist
     When he visits the jobs page
-    Then he should not see "Job #10"
-    When he clicks "Page 2"
-    Then he should see "Job #10"
+    Then he should not see "Job #0"
+    When he clicks "Next"
+    Then he should see "Job #0"
