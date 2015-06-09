@@ -7,7 +7,7 @@ class JobsController < ApplicationController
       @checked_terms = (params[:q][:term_id_eq_any] || [])
     end
     @filter = Job.ransack(params[:q])
-    @jobs = @filter.result(distinct: true)
+    @jobs = @filter.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
 
   def new

@@ -6,7 +6,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'rails-html-sanitizer', '1.0.1'
 gem 'sdoc', '~> 0.4.0',          group: :doc
@@ -21,6 +20,7 @@ gem 'pry'
 gem 'paperclip', '~> 4.2'
 gem 'aws-sdk', '< 2.0'
 gem 'faker'
+gem 'will_paginate', '~> 3.0.6'
 
 group :development, :test do
   gem 'sqlite3'
