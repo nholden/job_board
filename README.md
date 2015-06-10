@@ -1,5 +1,5 @@
 # jbbrd
-A simple, responsive job board that's fast and easy for adminstrators, job seekers, and employers.
+A simple, responsive job board that's fast and easy for board adminstrators, job seekers, and employers.
 
 [ ![Codeship Status for nholden/job_board](https://codeship.com/projects/3ce52710-62fc-0132-c183-1a1bd55739b4/status?branch=master)](https://codeship.com/projects/52213)
 
@@ -28,10 +28,10 @@ rails s
 
 Open your browser, navigate to localhost:3000, and follow the instructions to create an administrator account.
 
-## Add sample data
+## Add demo data
 
 ```
-bundle exec rake db:sample
+bundle exec rake db:demo
 ```
 
 ## Testing
