@@ -53,8 +53,11 @@
           <li class="nav-link">
             <%= link_to "Log in", login_path, method: :get %>
           </li>
-          <li class="nav-link">
-            <%= link_to "Sign up", signup_path, method: :get %>
+          <li class="nav-link more"><a href="javascript:void(0)">Sign up</a>
+            <ul class="submenu">
+              <li><%= link_to "Applicant", signup_applicant_path, method: :get %></li>
+              <li><%= link_to "Employer", signup_employer_path, method: :get %></li>
+            </ul>
           </li>
         <% end %>
       </ul>

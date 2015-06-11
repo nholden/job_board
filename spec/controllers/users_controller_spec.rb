@@ -530,13 +530,6 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
-  describe "GET #roles" do
-    it "renders the roles view" do
-      get :roles
-      expect(response).to render_template('roles')
-    end
-  end
-
   describe "GET #show" do
     before(:each) do
       @user = FactoryGirl.create(:user)

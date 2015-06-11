@@ -159,28 +159,27 @@ div.notice {
 .roles {
   @include clearfix;
   @include outer-container;
-  max-width: 600px;
 
   a {
     color: #000;
   }
 
   .role {
-    @include span-columns(12);
+    @include span-columns(6);
     background-color: #eee;
-    border-radius: 5em;
-    margin: 10px 0px;
+    border-radius: 0.5em;
+    margin: 0;
+    padding: 1em;
+    text-align: center;
 
     .icon{
-      @include span-columns(4);
       text-align: center;
       font-size: 300%;
     }
     
     .description{
-      @include span-columns(8);
-      font-size: 300%;
-      text-align: left;
+      font-size: 100%;
+      text-align: center;
     }
   }
 
@@ -567,16 +566,18 @@ div.notice {
   ul.submenu {
     display: none;
     padding-left: 0;
+    border: 1px solid darken($centered-navigation-background, 10%);
+    border-radius: $base-border-radius;
 
     @include media($horizontal-bar-mode) {
       left: -$centered-navigation-submenu-padding;
       position: absolute;
-      top: 1.5em;
+      top: 2em;
     }
 
     .submenu {
       @include media($horizontal-bar-mode) {
-        left: $centered-navigation-submenu-width - 0.2em;
+        left: $centered-navigation-submenu-width;
         top: 0;
       }
     }
@@ -608,10 +609,9 @@ div.notice {
         width: 100%;
 
         @include media($horizontal-bar-mode) {
-          background-color: $centered-navigation-background;
+          background-color: darken($centered-navigation-background, 3%);
           padding-left: $centered-navigation-submenu-padding;
-          text-align: left;
-          width: $centered-navigation-submenu-width;
+          text-align: right;
         }
       }
     }

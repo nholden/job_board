@@ -15,7 +15,7 @@
   <div class="main">
     <%= @job.description %><br /><br />
 <% if !logged_in? %>
-  <%= link_to "Sign up", signup_path, method: :get %> or <%= link_to "log in", login_path, method: :get %> to apply.</p>
+  <%= link_to "Sign up", signup_applicant_path, method: :get %> or <%= link_to "log in", login_path, method: :get %> to apply.</p>
 <% elsif current_user.role.label == "applicant" %>
   <% if @application.user_id.nil? %>
     <%= form_for Application.new do |f| %>

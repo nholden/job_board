@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get 'login'                 => 'sessions#new'
   post 'login'                => 'sessions#create'
   delete 'logout'             => 'sessions#destroy'
-  get 'signup'                => 'users#roles'
   get 'signup/applicant'      => 'users#new'
   get 'signup/employer'       => 'users#new'
   get 'signup/admin'          => 'users#new'
