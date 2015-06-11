@@ -505,26 +505,8 @@ div.notice {
   li.more.nav-link {
     padding-right: 0;
 
-    @include media($large-screen) {
-      padding-right: $centered-navigation-submenu-padding;
-    }
-
     > ul > li:first-child a  {
       padding-top: 1em;
-    }
-
-    a {
-      margin-right: $centered-navigation-submenu-padding;
-    }
-
-    > a {
-      padding-right: 0.6em;
-    }
-
-    > a:after {
-      @include position(absolute, auto -0.4em auto auto);
-      color: $centered-navigation-color;
-      content: "\25BE";
     }
   }
 
@@ -532,33 +514,12 @@ div.notice {
     overflow: visible;
     padding-right: 0;
 
-    a {
-      padding-right: $centered-navigation-submenu-padding;
-    }
-
-    > a {
-      padding-right: 1.6em;
-      position: relative;
-
-      @include media($large-screen) {
-        margin-right: $centered-navigation-submenu-padding;
-      }
-
-      &:after {
-        content: "›";
-        font-size: 1.2em;
-        position: absolute;
-        right: $centered-navigation-submenu-padding / 2;
-      }
-    }
-
     &:focus > .submenu,
     &:hover > .submenu {
       display: block;
     }
 
     @include media($horizontal-bar-mode) {
-      padding-right: $centered-navigation-submenu-padding;
       position: relative;
     }
   }
@@ -607,12 +568,8 @@ div.notice {
         text-align: right;
         text-decoration: none;
         width: 100%;
+        padding-right: $centered-navigation-submenu-padding;
 
-        @include media($horizontal-bar-mode) {
-          background-color: darken($centered-navigation-background, 3%);
-          padding-left: $centered-navigation-submenu-padding;
-          text-align: right;
-        }
       }
     }
   }
