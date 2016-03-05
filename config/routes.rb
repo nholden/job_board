@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :jobs
   resources :users, only: [:create, :edit, :update, :index, :destroy, :show]
   resources :applications, only: [:create, :index, :destroy]
+  resources :user_applications, only: [:index]
 
   # Example resource route with options:
   #   resources :products do

@@ -36,7 +36,7 @@
         <% if current_user.present? %>
           <% if current_user.role.label == "applicant" %>
             <li class="nav-link">
-              <%= link_to "Applications", applications_path(user_id: current_user.id), method: :get %>
+              <%= link_to "Applications", user_applications_path, method: :get %>
             </li>
           <% else %>
             <li class="nav-link">
