@@ -20,12 +20,9 @@ class ApplicationsController < ApplicationController
   end
 
   def destroy
-    @application = Application.find(params[:id])
-    job_title = Job.find(@application.job_id).title
-    if logged_in? and current_user.id == @application.user_id
-      if @application.destroy
-        flash[:notice] = "Application to '#{job_title}' successfully retracted."
-      end
+    application = Application.find(params[:id])
+    if current_user == application.user and application.destroy
+      flash[:notice] = "Application to '#{application.job.title}' successfully retracted."
     else
       flash[:error] = "You must be logged in as an applicant to retract an application."
     end
