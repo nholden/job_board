@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
   def index
-    if (!params[:job_id].nil? and current_user == Job.find(params[:job_id]).user) or is_admin?
+    if current_user == Job.find(params[:job_id]).user or is_admin?
       @applications = Application.where(job_id: params[:job_id])
       @job = Job.find(params[:job_id])
     else

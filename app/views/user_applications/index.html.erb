@@ -1,10 +1,6 @@
 <div class="content_no_sidebar">
   <div class="title">
-    <% if !@job.nil? %>
-      <h1>Applications to <%= @job.title %></h1>  
-    <% else %>
-      <h1>Your applications</h1>
-    <% end %>
+    <h1>Your applications</h1>
   </div>
   <div class="main">
     <% if @applications.empty? %>
@@ -12,12 +8,9 @@
     <% else %>
       <ul>
         <% @applications.each do |application| %>
-          <% if !@job.nil? %>
-            <li><%= link_to "#{application.user.email}", user_path(application.user), method: :get %></li>
-          <% else %>
-            <li><%= link_to "#{application.job.title}", job_path(application.job), method: :get %></li>
-          <% end %>
+          <li><%= link_to "#{application.job.title}", job_path(application.job), method: :get %></li>
         <% end %>
-    </ul>
+      </ul>
     <% end %>
+  </div>
 </div>
