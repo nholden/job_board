@@ -1,8 +1,8 @@
 class ApplicationsController < ApplicationController
   def index
-    if current_user == Job.find(params[:job_id]).user or is_admin?
-      @applications = Application.where(job_id: params[:job_id])
-      @job = Job.find(params[:job_id])
+    @job = Job.find(params[:job_id])
+    if current_user == @job.user or is_admin?
+      @applications = @job.applications
     else
       flash[:error] = "You are not authorized to view these applications."
       redirect_to(root_url)
