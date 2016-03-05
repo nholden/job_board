@@ -11,7 +11,7 @@ RSpec.describe UserApplicationsController, type: :controller do
     context "when an applicant looks up applications for himself" do
       before(:each) do
         allow(controller).to receive_messages(:current_user => @applicant)
-        get :index, user_id: @applicant.id
+        get :index
       end
 
       it "renders the index template" do
@@ -20,6 +20,20 @@ RSpec.describe UserApplicationsController, type: :controller do
 
       it "assigns @applications" do
         expect(assigns(:applications)).to eq(Application.where(user_id: @applicant.id))
+      end
+    end
+
+    context "when not logged in" do
+      before(:each) do
+        get :index
+      end
+
+      it "redirects to root_url" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "sends a flash" do
+        expect(flash[:error]).to eql("You must be logged in to view your applications.")
       end
     end
   end

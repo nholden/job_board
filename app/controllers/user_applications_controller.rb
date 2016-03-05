@@ -3,7 +3,8 @@ class UserApplicationsController < ApplicationController
     if logged_in?
       @applications = Application.where(user_id: current_user.id)
     else
-      flash[:error] = "You are not authorized to view these applications."
+      flash[:error] = "You must be logged in to view your applications."
+      redirect_to root_url
     end
   end
 end
