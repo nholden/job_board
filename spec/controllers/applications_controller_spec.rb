@@ -29,21 +29,6 @@ RSpec.describe ApplicationsController, :type => :controller do
       end
     end
 
-    context "with no specified job or user" do
-      before(:each) do
-        allow(controller).to receive_messages(:current_user => @employer)
-        get :index
-      end
-
-      it "redirects to root_url" do
-        expect(response).to redirect_to(root_url)
-      end
-
-      it "sends a flash" do
-        expect(flash[:error]).to eql("You are not authorized to view these applications.")
-      end
-    end
-
     context "when not logged in" do
       before(:each) do
         allow(controller).to receive_messages(:current_user => nil)
