@@ -1,11 +1,8 @@
 class JobsController < ApplicationController
   def index
-    @checked_experiences = []
-    @checked_terms = []
-    unless params[:q].nil?
-      @checked_experiences = (params[:q][:experience_id_eq_any] || [])
-      @checked_terms = (params[:q][:term_id_eq_any] || [])
-    end
+    params[:q] ||= {}
+    @checked_experiences = params[:q][:experience_id_eq_any] || []
+    @checked_terms = params[:q][:term_id_eq_any] || []
     @filter = Job.ransack(params[:q])
     @jobs = @filter.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
