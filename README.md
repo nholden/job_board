@@ -1,8 +1,6 @@
 # jbbrd
 A simple, responsive job board that's fast and easy for board adminstrators, job seekers, and employers.
 
-[ ![Codeship Status for nholden/job_board](https://codeship.com/projects/3ce52710-62fc-0132-c183-1a1bd55739b4/status?branch=master)](https://codeship.com/projects/52213)
-
 ## Screenshot
 
 ![Screenshot of jbbrd](https://cloud.githubusercontent.com/assets/7942714/8096438/26e993fc-0fa5-11e5-980c-6b843c8e65ed.png)
