@@ -5,9 +5,6 @@ A simple, responsive job board that's fast and easy for board adminstrators, job
 
 ![Screenshot of jbbrd](https://cloud.githubusercontent.com/assets/7942714/8096438/26e993fc-0fa5-11e5-980c-6b843c8e65ed.png)
 
-## Demo
-Try jbbrd out for yourself at [http://jbbrd.nickholden.io](http://jbbrd.nickholden.io). Sign up as an applicant or employer, or try the administrator account with username admin@admin.com and password admin.
-
 ## Installation
 
 ```
